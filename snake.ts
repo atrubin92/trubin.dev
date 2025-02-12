@@ -3,6 +3,53 @@ interface SnakePart {
   y: number;
 }
 
+enum HeadStep {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+function getOffsets(step: HeadStep): [number, number] {
+  switch (step) {
+    case HeadStep.Up:
+      return [0, -1];
+    case HeadStep.Down:
+      return [0, 1];
+    case HeadStep.Left:
+      return [-1, 0];
+    case HeadStep.Right:
+      return [1, 0];
+  }
+}
+
+function changeHeadStep(eventKey: string, currentStep:HeadStep) {
+  switch (eventKey) {
+    case "ArrowUp":
+      if (currentStep !== HeadStep.Down) {
+        return HeadStep.Up;
+      }
+
+    case "ArrowDown":
+      if (currentStep !== HeadStep.Up) {
+        return HeadStep.Down;
+      }
+      break;
+
+    case "ArrowLeft":
+      if (currentStep !== HeadStep.Right) {
+        return HeadStep.Left;
+      }
+
+    case "ArrowRight" :
+      if (currentStep !== HeadStep.Left) {
+        return HeadStep.Right;
+      }
+  }
+
+  return currentStep
+}
+
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const context = canvas.getContext("2d");
 
@@ -11,11 +58,11 @@ const canvasHeight = canvas.height;
 const boxSize = 20;
 
 let snake: SnakePart[] = [{ x: 10, y: 10 }];
-let dx = 0;
-let dy = 0;
 
 let foodX = 15;
 let foodY = 15;
+
+let currentHeadStep = HeadStep.Right;
 
 main();
 
@@ -26,6 +73,8 @@ function main(): void {
 }
 
 function update(): void {
+  const [dx, dy] = getOffsets(currentHeadStep) 
+
   const head: SnakePart = {
     x: snake[0].x + dx,
     y: snake[0].y + dy,
@@ -52,8 +101,6 @@ function update(): void {
   for (let i = 0; i < snake.length; i++) {
     if (snake[i].x === head.x && snake[i].y === head.y) {
       snake = [{ x: 10, y: 10 }];
-      dx = 0;
-      dy = 0;
       placeFood();
       return;
     }
@@ -80,30 +127,5 @@ function draw(): void {
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(event: KeyboardEvent): void {
-  switch (event.key) {
-    case "ArrowUp":
-      if (dy !== 1) {
-        dx = 0;
-        dy = -1;
-      }
-      break;
-    case "ArrowDown":
-      if (dy !== -1) {
-        dx = 0;
-        dy = 1;
-      }
-      break;
-    case "ArrowLeft":
-      if (dx !== 1) {
-        dx = -1;
-        dy = 0;
-      }
-      break;
-    case "ArrowRight":
-      if (dx !== -1) {
-        dx = 1;
-        dy = 0;
-      }
-      break;
-  }
+  currentHeadStep = changeHeadStep(event.key, currentHeadStep)
 }

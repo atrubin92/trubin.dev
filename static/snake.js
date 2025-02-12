@@ -1,117 +1,106 @@
-// snake.ts
-// Get canvas and 2D context
+var HeadStep;
+(function (HeadStep) {
+    HeadStep[HeadStep["Up"] = 0] = "Up";
+    HeadStep[HeadStep["Down"] = 1] = "Down";
+    HeadStep[HeadStep["Left"] = 2] = "Left";
+    HeadStep[HeadStep["Right"] = 3] = "Right";
+})(HeadStep || (HeadStep = {}));
+function getOffsets(step) {
+    switch (step) {
+        case HeadStep.Up:
+            return [0, -1];
+        case HeadStep.Down:
+            return [0, 1];
+        case HeadStep.Left:
+            return [-1, 0];
+        case HeadStep.Right:
+            return [1, 0];
+    }
+}
+function changeHeadStep(eventKey, currentStep) {
+    switch (eventKey) {
+        case "ArrowUp":
+            if (currentStep !== HeadStep.Down) {
+                return HeadStep.Up;
+            }
+        case "ArrowDown":
+            if (currentStep !== HeadStep.Up) {
+                return HeadStep.Down;
+            }
+            break;
+        case "ArrowLeft":
+            if (currentStep !== HeadStep.Right) {
+                return HeadStep.Left;
+            }
+        case "ArrowRight":
+            if (currentStep !== HeadStep.Left) {
+                return HeadStep.Right;
+            }
+    }
+    return currentStep;
+}
 const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-// Dimensions
-const canvasWidth = canvas.width; // 400 (defined in index.html)
-const canvasHeight = canvas.height; // 400
-const boxSize = 20; // Size of each 'cell'
-// Snake initial state
+const context = canvas.getContext("2d");
+const canvasWidth = canvas.width;
+const canvasHeight = canvas.height;
+const boxSize = 20;
 let snake = [{ x: 10, y: 10 }];
-let dx = 0; // horizontal velocity (-1, 0, 1)
-let dy = 0; // vertical velocity   (-1, 0, 1)
-// Food position (randomly placed)
 let foodX = 15;
 let foodY = 15;
-// Start the game
+let currentHeadStep = HeadStep.Right;
 main();
-// Game loop
 function main() {
     update();
     draw();
-    // Call main() again every 100ms
     setTimeout(main, 100);
 }
-// Update the game state: move snake, check collisions, etc.
 function update() {
-    // Calculate new head position
+    const [dx, dy] = getOffsets(currentHeadStep);
     const head = {
         x: snake[0].x + dx,
         y: snake[0].y + dy,
     };
-    // Wrap around if hitting canvas boundary (optional; otherwise "game over")
-    // Horizontal wrap
     if (head.x < 0) {
         head.x = (canvasWidth / boxSize) - 1;
     }
     else if (head.x >= canvasWidth / boxSize) {
         head.x = 0;
     }
-    // Vertical wrap
     if (head.y < 0) {
         head.y = (canvasHeight / boxSize) - 1;
     }
     else if (head.y >= canvasHeight / boxSize) {
         head.y = 0;
     }
-    // Check if snake eats the food
     if (head.x === foodX && head.y === foodY) {
-        // Grow by not popping the tail
         placeFood();
     }
     else {
-        // Remove the last part of the snake body
         snake.pop();
     }
-    // Check collision with snake's own body
     for (let i = 0; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
-            // Game over - reset the snake
             snake = [{ x: 10, y: 10 }];
-            dx = 0;
-            dy = 0;
             placeFood();
             return;
         }
     }
-    // Add new head to the snake
     snake.unshift(head);
 }
-// Randomly place food somewhere on the grid
 function placeFood() {
     foodX = Math.floor(Math.random() * (canvasWidth / boxSize));
     foodY = Math.floor(Math.random() * (canvasHeight / boxSize));
 }
-// Draw everything on the canvas
 function draw() {
-    // Clear canvas
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    // Draw snake
-    ctx.fillStyle = "green";
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    context.fillStyle = "green";
     for (const part of snake) {
-        ctx.fillRect(part.x * boxSize, part.y * boxSize, boxSize, boxSize);
+        context.fillRect(part.x * boxSize, part.y * boxSize, boxSize, boxSize);
     }
-    // Draw food
-    ctx.fillStyle = "red";
-    ctx.fillRect(foodX * boxSize, foodY * boxSize, boxSize, boxSize);
+    context.fillStyle = "red";
+    context.fillRect(foodX * boxSize, foodY * boxSize, boxSize, boxSize);
 }
-// Listen for arrow keys to change snake direction
 document.addEventListener("keydown", changeDirection);
 function changeDirection(event) {
-    switch (event.key) {
-        case "ArrowUp":
-            if (dy !== 1) {
-                dx = 0;
-                dy = -1;
-            }
-            break;
-        case "ArrowDown":
-            if (dy !== -1) {
-                dx = 0;
-                dy = 1;
-            }
-            break;
-        case "ArrowLeft":
-            if (dx !== 1) {
-                dx = -1;
-                dy = 0;
-            }
-            break;
-        case "ArrowRight":
-            if (dx !== -1) {
-                dx = 1;
-                dy = 0;
-            }
-            break;
-    }
+    currentHeadStep = changeHeadStep(event.key, currentHeadStep);
 }

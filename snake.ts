@@ -1,57 +1,12 @@
+import * as SnakeHead from "./SnakeHead";
+
 interface SnakePart {
   x: number;
   y: number;
 }
 
-enum HeadStep {
-  Up,
-  Down,
-  Left,
-  Right
-}
-
-function getOffsets(step: HeadStep): [number, number] {
-  switch (step) {
-    case HeadStep.Up:
-      return [0, -1];
-    case HeadStep.Down:
-      return [0, 1];
-    case HeadStep.Left:
-      return [-1, 0];
-    case HeadStep.Right:
-      return [1, 0];
-  }
-}
-
-function changeHeadStep(eventKey: string, currentStep:HeadStep) {
-  switch (eventKey) {
-    case "ArrowUp":
-      if (currentStep !== HeadStep.Down) {
-        return HeadStep.Up;
-      }
-
-    case "ArrowDown":
-      if (currentStep !== HeadStep.Up) {
-        return HeadStep.Down;
-      }
-      break;
-
-    case "ArrowLeft":
-      if (currentStep !== HeadStep.Right) {
-        return HeadStep.Left;
-      }
-
-    case "ArrowRight" :
-      if (currentStep !== HeadStep.Left) {
-        return HeadStep.Right;
-      }
-  }
-
-  return currentStep
-}
-
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-const context = canvas.getContext("2d");
+const context = canvas.getContext("2d")!;
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
@@ -62,7 +17,7 @@ let snake: SnakePart[] = [{ x: 10, y: 10 }];
 let foodX = 15;
 let foodY = 15;
 
-let currentHeadStep = HeadStep.Right;
+let currentHeadStep = SnakeHead.Step.Right;
 
 main();
 
@@ -73,7 +28,7 @@ function main(): void {
 }
 
 function update(): void {
-  const [dx, dy] = getOffsets(currentHeadStep) 
+  const [dx, dy] = SnakeHead.getOffsets(currentHeadStep) 
 
   const head: SnakePart = {
     x: snake[0].x + dx,
@@ -127,5 +82,5 @@ function draw(): void {
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(event: KeyboardEvent): void {
-  currentHeadStep = changeHeadStep(event.key, currentHeadStep)
+  currentHeadStep = SnakeHead.changeStep(event.key, currentHeadStep)
 }

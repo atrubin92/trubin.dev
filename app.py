@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="compiled_js", static_url_path="/compiled_js")
 
 @app.route('/')
 def index():

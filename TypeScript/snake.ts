@@ -19,6 +19,7 @@ let foodY = 15;
 
 let currentHeadStep = SnakeHead.Step.Right;
 
+placeFood();
 main();
 
 function main(): void {

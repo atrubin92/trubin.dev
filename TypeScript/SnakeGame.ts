@@ -47,6 +47,7 @@ function update(): void {
 
   if (isGameOver(newHead)) {
     startGame();
+    return;
   }
 
   snake.unshift(newHead);

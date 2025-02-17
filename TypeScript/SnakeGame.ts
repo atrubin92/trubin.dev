@@ -26,8 +26,9 @@ startGame();
 main();
 
 function startGame(){
-  snake = [{ x: 10, y: 10 }];
-  placeFood();
+  const [cellX, cellY] = newCell();
+  snake = [{x: cellX, y: cellY}];
+  [foodX, foodY] = newCell();
 }
 
 function main(): void {
@@ -40,7 +41,7 @@ function update(): void {
   const newHead = calcNewHead()
 
   if (newHead.x === foodX && newHead.y === foodY) {
-    placeFood();
+    [foodX, foodY] = newCell();
   } else {
     snake.pop();
   }
@@ -86,9 +87,11 @@ function isGameOver(newHead: SnakePart): boolean {
   return false;
 }
 
-function placeFood(): void {
-  foodX = Math.floor(Math.random() * fieldWidth);
-  foodY = Math.floor(Math.random() * fieldHeight);
+function newCell(): [number, number] {
+  const x = Math.floor(Math.random() * fieldWidth);
+  const y = Math.floor(Math.random() * fieldHeight);
+
+  return [x, y]
 }
 
 function draw(): void {

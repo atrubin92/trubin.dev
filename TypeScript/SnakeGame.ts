@@ -57,24 +57,10 @@ function update(): void {
 function calcNewHead() {
   const [dx, dy] = SnakeHead.getOffsets(currentHeadStep) 
 
-  const newHead: SnakePart = {
-    x: snake[0].x + dx,
-    y: snake[0].y + dy,
-  };
+  const newHeadX = (snake[0].x + dx + fieldWidth) % fieldWidth;
+  const newHeadY = (snake[0].y + dy + fieldHeight) % fieldHeight;
 
-  if (newHead.x < 0) {
-    newHead.x = fieldWidth - 1;
-  } else if (newHead.x >= fieldWidth) {
-    newHead.x = 0;
-  }
-
-  if (newHead.y < 0) {
-    newHead.y = fieldHeight - 1;
-  } else if (newHead.y >= fieldHeight) {
-    newHead.y = 0;
-  }
-
-  return newHead
+  return { x: newHeadX, y: newHeadY };
 }
 
 function isGameOver(newHead: SnakePart): boolean {

@@ -61,13 +61,7 @@ function calcNewHead() {
 }
 
 function isGameOver(newHead: SnakeCell): boolean {
-  for (let i = 0; i < snake.length; i++) {
-    if (snake[i].x === newHead.x && snake[i].y === newHead.y) {
-      return true;
-    }
-  }
-
-  return false;
+  return snake.some(part => part.x === newHead.x && part.y === newHead.y);
 }
 
 function newCell(): SnakeCell {

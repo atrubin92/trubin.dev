@@ -1,6 +1,6 @@
 import * as SnakeHead from "./SnakeHead";
 
-interface SnakePart {
+interface SnakeCell {
   x: number;
   y: number;
 }
@@ -15,10 +15,8 @@ const boxSize = 20;
 const fieldWidth = canvasWidth / boxSize;
 const fieldHeight = canvasHeight / boxSize;
 
-let snake: SnakePart[];
-
-let foodX = 15;
-let foodY = 15;
+let snake: SnakeCell[];
+let food: SnakeCell;
 
 let currentHeadStep = SnakeHead.Step.Right;
 
@@ -26,9 +24,8 @@ startGame();
 main();
 
 function startGame(){
-  const [cellX, cellY] = newCell();
-  snake = [{x: cellX, y: cellY}];
-  [foodX, foodY] = newCell();
+  snake = [newCell()];
+  food = newCell();
 }
 
 function main(): void {
@@ -40,8 +37,8 @@ function main(): void {
 function update(): void {
   const newHead = calcNewHead()
 
-  if (newHead.x === foodX && newHead.y === foodY) {
-    [foodX, foodY] = newCell();
+  if (newHead.x === food.x && newHead.y === food.y) {
+    food = newCell();
   } else {
     snake.pop();
   }
@@ -63,7 +60,7 @@ function calcNewHead() {
   return { x: newHeadX, y: newHeadY };
 }
 
-function isGameOver(newHead: SnakePart): boolean {
+function isGameOver(newHead: SnakeCell): boolean {
   for (let i = 0; i < snake.length; i++) {
     if (snake[i].x === newHead.x && snake[i].y === newHead.y) {
       return true;
@@ -73,11 +70,11 @@ function isGameOver(newHead: SnakePart): boolean {
   return false;
 }
 
-function newCell(): [number, number] {
+function newCell(): SnakeCell {
   const x = Math.floor(Math.random() * fieldWidth);
   const y = Math.floor(Math.random() * fieldHeight);
 
-  return [x, y]
+  return { x: x, y: y }
 }
 
 function draw(): void {
@@ -87,7 +84,7 @@ function draw(): void {
     context.fillRect(part.x * boxSize, part.y * boxSize, boxSize, boxSize);
   }
   context.fillStyle = "red";
-  context.fillRect(foodX * boxSize, foodY * boxSize, boxSize, boxSize);
+  context.fillRect(food.x * boxSize, food.y * boxSize, boxSize, boxSize);
 }
 
 document.addEventListener("keydown", changeDirection);

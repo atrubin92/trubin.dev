@@ -10,6 +10,9 @@
 
         // Where to put the compiled .js files
         "outDir": "compiled_js",
+        
+        // Or "esnext", or a later version.  "dom" is usually needed for browser environments.
+        "lib": ["es2017", "dom"],
 
         // Include source maps for easier debugging (optional)
         "sourceMap": true

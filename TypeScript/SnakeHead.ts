@@ -5,7 +5,8 @@ export enum Step {
   Right
 }
 
-let currentStep = Step.Right;
+const enumValues = Object.values(Step).filter(v => typeof v === 'number'); // Filter for numeric enum values
+let currentStep = enumValues[Math.floor(Math.random() * enumValues.length)] as Step;
 
 export function getOffsets(): [number, number] {
   switch (currentStep) {

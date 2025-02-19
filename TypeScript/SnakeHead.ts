@@ -5,8 +5,10 @@ export enum Step {
   Right
 }
 
-export function getOffsets(step: Step): [number, number] {
-  switch (step) {
+let currentStep = Step.Right;
+
+export function getOffsets(): [number, number] {
+  switch (currentStep) {
     case Step.Up:
       return [0, -1];
     case Step.Down:
@@ -18,29 +20,30 @@ export function getOffsets(step: Step): [number, number] {
   }
 }
 
-export function changeStep(eventKey: string, currentStep:Step) {
+export function changeStep(eventKey: string) {
   switch (eventKey) {
     case "ArrowUp":
       if (currentStep !== Step.Down) {
-        return Step.Up;
+        currentStep = Step.Up;
       }
+      break;
 
     case "ArrowDown":
       if (currentStep !== Step.Up) {
-        return Step.Down;
+        currentStep = Step.Down;
       }
       break;
 
     case "ArrowLeft":
       if (currentStep !== Step.Right) {
-        return Step.Left;
+        currentStep = Step.Left;
       }
+      break;
 
     case "ArrowRight" :
       if (currentStep !== Step.Left) {
-        return Step.Right;
+        currentStep = Step.Right;
       }
+      break;
   }
-
-  return currentStep
 }

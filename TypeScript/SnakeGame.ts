@@ -18,8 +18,6 @@ const fieldHeight = canvasHeight / boxSize;
 let snake: SnakeCell[];
 let food: SnakeCell;
 
-let currentHeadStep = SnakeHead.Step.Right;
-
 startGame();
 main();
 
@@ -52,7 +50,7 @@ function update(): void {
 }
 
 function calcNewHead() {
-  const [dx, dy] = SnakeHead.getOffsets(currentHeadStep) 
+  const [dx, dy] = SnakeHead.getOffsets() 
 
   const newHeadX = (snake[0].x + dx + fieldWidth) % fieldWidth;
   const newHeadY = (snake[0].y + dy + fieldHeight) % fieldHeight;
@@ -84,5 +82,5 @@ function draw(): void {
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(event: KeyboardEvent): void {
-  currentHeadStep = SnakeHead.changeStep(event.key, currentHeadStep)
+  SnakeHead.changeStep(event.key);
 }

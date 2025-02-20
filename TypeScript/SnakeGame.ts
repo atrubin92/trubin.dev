@@ -9,8 +9,8 @@ startGame();
 main();
 
 function startGame() {
-    snake = [newCell()];
-    food = newCell();
+    snake = [createCell()];
+    food = createCell();
 }
 
 function main(): void {
@@ -23,7 +23,7 @@ function update(): void {
     const newHead = calcNewHead()
 
     if (newHead.x === food.x && newHead.y === food.y) {
-        food = newCell();
+        food = createCell();
     } else {
         snake.pop();
     }
@@ -34,6 +34,10 @@ function update(): void {
     }
 
     snake.unshift(newHead);
+}
+
+function createCell(): SnakeCell {
+    return SnakeCell.create(FieldCanvas.fieldWidth, FieldCanvas.fieldHeight);
 }
 
 function calcNewHead() {
@@ -47,13 +51,6 @@ function calcNewHead() {
 
 function isGameOver(newHead: SnakeCell): boolean {
     return snake.some(part => part.x === newHead.x && part.y === newHead.y);
-}
-
-function newCell(): SnakeCell {
-    const x = Math.floor(Math.random() * FieldCanvas.fieldWidth);
-    const y = Math.floor(Math.random() * FieldCanvas.fieldHeight);
-
-    return { x: x, y: y }
 }
 
 document.addEventListener("keydown", changeDirection);

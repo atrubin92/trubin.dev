@@ -2,21 +2,31 @@ import * as SnakeHead from "./SnakeHead";
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./SnakeCell";
 
+const FRAME_DURATION = 100;
+let lastTime = 0;
+
 let snake: SnakeCell[];
 let food: SnakeCell;
 
-startGame();
-main();
+createInitialData();
+requestAnimationFrame(mainCanvasLoop);
 
-function startGame() {
+function createInitialData() {
     snake = [createCell()];
     food = createCell();
 }
 
-function main(): void {
-    update();
-    FieldCanvas.draw(snake, food);
-    setTimeout(main, 100);
+function mainCanvasLoop(timestamp: number): void {
+    const timeSinceLastFrame = timestamp - lastTime;
+
+    if (timeSinceLastFrame >= FRAME_DURATION) {
+        update();
+        FieldCanvas.draw(snake, food);
+
+        lastTime += FRAME_DURATION;
+    }
+
+    requestAnimationFrame(mainCanvasLoop);
 }
 
 function update(): void {
@@ -29,7 +39,7 @@ function update(): void {
     }
 
     if (isGameOver(newHead)) {
-        startGame();
+        createInitialData();
         return;
     }
 

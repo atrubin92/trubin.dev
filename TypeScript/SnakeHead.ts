@@ -41,7 +41,7 @@ export function changeStep(eventKey: string) {
       }
       break;
 
-    case "ArrowRight" :
+    case "ArrowRight":
       if (currentStep !== Step.Left) {
         currentStep = Step.Right;
       }

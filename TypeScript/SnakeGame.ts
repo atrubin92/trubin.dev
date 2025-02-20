@@ -1,19 +1,6 @@
 import * as SnakeHead from "./SnakeHead";
-
-interface SnakeCell {
-  x: number;
-  y: number;
-}
-
-const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-const context = canvas.getContext("2d")!;
-
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
-const boxSize = 20;
-
-const fieldWidth = canvasWidth / boxSize;
-const fieldHeight = canvasHeight / boxSize;
+import * as FieldCanvas from "./FieldCanvas";
+import { SnakeCell } from "./SnakeCell";
 
 let snake: SnakeCell[];
 let food: SnakeCell;
@@ -21,66 +8,56 @@ let food: SnakeCell;
 startGame();
 main();
 
-function startGame(){
-  snake = [newCell()];
-  food = newCell();
+function startGame() {
+    snake = [newCell()];
+    food = newCell();
 }
 
 function main(): void {
-  update();
-  draw();
-  setTimeout(main, 100);
+    update();
+    FieldCanvas.draw(snake, food);
+    setTimeout(main, 100);
 }
 
 function update(): void {
-  const newHead = calcNewHead()
+    const newHead = calcNewHead()
 
-  if (newHead.x === food.x && newHead.y === food.y) {
-    food = newCell();
-  } else {
-    snake.pop();
-  }
+    if (newHead.x === food.x && newHead.y === food.y) {
+        food = newCell();
+    } else {
+        snake.pop();
+    }
 
-  if (isGameOver(newHead)) {
-    startGame();
-    return;
-  }
+    if (isGameOver(newHead)) {
+        startGame();
+        return;
+    }
 
-  snake.unshift(newHead);
+    snake.unshift(newHead);
 }
 
 function calcNewHead() {
-  const [dx, dy] = SnakeHead.getOffsets() 
+    const [dx, dy] = SnakeHead.getOffsets()
 
-  const newHeadX = (snake[0].x + dx + fieldWidth) % fieldWidth;
-  const newHeadY = (snake[0].y + dy + fieldHeight) % fieldHeight;
+    const newHeadX = (snake[0].x + dx + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
+    const newHeadY = (snake[0].y + dy + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;
 
-  return { x: newHeadX, y: newHeadY };
+    return { x: newHeadX, y: newHeadY };
 }
 
 function isGameOver(newHead: SnakeCell): boolean {
-  return snake.some(part => part.x === newHead.x && part.y === newHead.y);
+    return snake.some(part => part.x === newHead.x && part.y === newHead.y);
 }
 
 function newCell(): SnakeCell {
-  const x = Math.floor(Math.random() * fieldWidth);
-  const y = Math.floor(Math.random() * fieldHeight);
+    const x = Math.floor(Math.random() * FieldCanvas.fieldWidth);
+    const y = Math.floor(Math.random() * FieldCanvas.fieldHeight);
 
-  return { x: x, y: y }
-}
-
-function draw(): void {
-  context.clearRect(0, 0, canvasWidth, canvasHeight);
-  context.fillStyle = "green";
-  for (const part of snake) {
-    context.fillRect(part.x * boxSize, part.y * boxSize, boxSize, boxSize);
-  }
-  context.fillStyle = "red";
-  context.fillRect(food.x * boxSize, food.y * boxSize, boxSize, boxSize);
+    return { x: x, y: y }
 }
 
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(event: KeyboardEvent): void {
-  SnakeHead.changeStep(event.key);
+    SnakeHead.changeStep(event.key);
 }

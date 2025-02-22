@@ -33,7 +33,12 @@ function update(): void {
     const newHead = calcNewHead()
 
     if (newHead.x === food.x && newHead.y === food.y) {
-        food = createCell();
+        while (
+            snake.some(part => part.x === food.x && part.y === food.y) ||
+            newHead.x === food.x && newHead.y === food.y
+        ) {
+            food = createCell();
+        }
     } else {
         snake.pop();
     }

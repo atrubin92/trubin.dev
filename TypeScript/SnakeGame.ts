@@ -2,7 +2,7 @@ import * as SnakeHead from "./SnakeHead";
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./SnakeCell";
 
-const FRAME_DURATION = 100;
+const FRAME_DURATION = 300;
 let lastTime = 0;
 
 let snake: SnakeCell[];
@@ -23,7 +23,7 @@ function mainCanvasLoop(timestamp: number): void {
         update();
         FieldCanvas.draw(snake, food);
 
-        lastTime += FRAME_DURATION;
+        lastTime = Math.floor(timestamp / FRAME_DURATION) * FRAME_DURATION
     }
 
     requestAnimationFrame(mainCanvasLoop);

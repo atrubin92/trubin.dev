@@ -20,16 +20,19 @@ function mainCanvasLoop(timestamp: number): void {
     const timeSinceLastFrame = timestamp - lastTime;
 
     if (timeSinceLastFrame >= FRAME_DURATION) {
-        update();
-        FieldCanvas.draw(snake, food);
+        updateHeadPosition();
+        FieldCanvas.draw(snake, food, 0);
 
         lastTime = Math.floor(timestamp / FRAME_DURATION) * FRAME_DURATION
+    } else {
+        const stepPercentage = timeSinceLastFrame / FRAME_DURATION;
+        FieldCanvas.draw(snake, food, stepPercentage);
     }
 
     requestAnimationFrame(mainCanvasLoop);
 }
 
-function update(): void {
+function updateHeadPosition(): void {
     const newHead = calcNewHead()
 
     if (newHead.x === food.x && newHead.y === food.y) {
@@ -56,10 +59,10 @@ function createCell(): SnakeCell {
 }
 
 function calcNewHead() {
-    const [dx, dy] = SnakeHead.getOffsets()
+    const [stepX, stepY] = SnakeHead.getOffsets()
 
-    const newHeadX = (snake[0].x + dx + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
-    const newHeadY = (snake[0].y + dy + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;
+    const newHeadX = (snake[0].x + stepX + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
+    const newHeadY = (snake[0].y + stepY + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;
 
     return { x: newHeadX, y: newHeadY };
 }

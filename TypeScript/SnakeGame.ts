@@ -21,7 +21,7 @@ function mainCanvasLoop(timestamp: number): void {
 
     if (timeSinceLastFrame >= FRAME_DURATION) {
         updateHeadPosition();
-        FieldCanvas.draw(snake, food, 0);
+        FieldCanvas.draw(snake, food);
 
         lastTime = Math.floor(timestamp / FRAME_DURATION) * FRAME_DURATION
     } else {
@@ -60,6 +60,7 @@ function createCell(): SnakeCell {
 
 function calcNewHead() {
     const [stepX, stepY] = SnakeHead.getOffsets()
+    SnakeHead.updateCurrentStep();
 
     const newHeadX = (snake[0].x + stepX + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
     const newHeadY = (snake[0].y + stepY + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;

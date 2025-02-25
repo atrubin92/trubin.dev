@@ -24,12 +24,17 @@ export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
         drawPartSnake(snake[partSnakeIndex], stepPercentage)
+        drawPartSnake(
+            snake[partSnakeIndex], stepPercentage,
+            -snake[partSnakeIndex].dir.x * fieldWidth,
+            -snake[partSnakeIndex].dir.y * fieldHeight
+        )
     }
 }
 
-function drawPartSnake(snakeCell: SnakeCell, stepPercentage: number) {
-    const partX = snakeCell.x + snakeCell.dir.x * stepPercentage;
-    const partY = snakeCell.y + snakeCell.dir.y * stepPercentage;
+function drawPartSnake(snakeCell: SnakeCell, stepPercentage: number, outsideX: number = 0, outsideY: number = 0) {
+    const partX = snakeCell.x + snakeCell.dir.x * stepPercentage + outsideX;
+    const partY = snakeCell.y + snakeCell.dir.y * stepPercentage + outsideY;
 
     ctx.fillStyle = "green";
     ctx.fillRect(partX * boxWidth, partY * boxHeight, boxWidth, boxHeight);

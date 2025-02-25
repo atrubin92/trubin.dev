@@ -1,5 +1,4 @@
 import { SnakeCell } from "./SnakeCell";
-import * as SnakeHead from "./SnakeHead";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -23,23 +22,14 @@ export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number
     ctx.fillStyle = "red";
     ctx.fillRect(food.x * boxWidth, food.y * boxHeight, boxWidth, boxHeight);
 
-    for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 1; partSnakeIndex--) {
-        const stepX = snake[partSnakeIndex - 1].x - snake[partSnakeIndex].x
-        const stepY = snake[partSnakeIndex - 1].y - snake[partSnakeIndex].y
-
-        drawPartSnake(snake[partSnakeIndex], stepX, stepY, stepPercentage)
+    for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
+        drawPartSnake(snake[partSnakeIndex], stepPercentage)
     }
-
-    const [stepX, stepY] = SnakeHead.getOffsets();
-    drawPartSnake(snake[0], stepX, stepY, stepPercentage);
 }
 
-function drawPartSnake(snakeCell: SnakeCell, stepX: number, stepY: number, stepPercentage: number) {
-    const newHeadX = (snakeCell.x + stepX + fieldWidth) % fieldWidth;
-    const newHeadY = (snakeCell.y + stepY + fieldHeight) % fieldHeight;
-
-    const partX = newHeadX * stepPercentage + snakeCell.x * (1 - stepPercentage);
-    const partY = newHeadY * stepPercentage + snakeCell.y * (1 - stepPercentage);
+function drawPartSnake(snakeCell: SnakeCell, stepPercentage: number) {
+    const partX = snakeCell.x + snakeCell.dir.x * stepPercentage;
+    const partY = snakeCell.y + snakeCell.dir.y * stepPercentage;
 
     ctx.fillStyle = "green";
     ctx.fillRect(partX * boxWidth, partY * boxHeight, boxWidth, boxHeight);

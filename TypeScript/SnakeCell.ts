@@ -1,6 +1,8 @@
 export interface SnakeCell {
     x: number;
     y: number;
+
+    dir?: Direction;
 }
 
 export namespace SnakeCell {

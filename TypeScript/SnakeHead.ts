@@ -9,16 +9,16 @@ const enumValues = Object.values(Step).filter(v => typeof v === 'number');
 let currentStep = enumValues[Math.floor(Math.random() * enumValues.length)] as Step;
 let nextStep = currentStep
 
-export function getOffsets(): [number, number] {
+export function getOffsets(): Direction {
 	switch (currentStep) {
 		case Step.Up:
-			return [0, -1];
+			return { x: 0, y: -1 };
 		case Step.Down:
-			return [0, 1];
+			return { x: 0, y: 1 };
 		case Step.Left:
-			return [-1, 0];
+			return { x: -1, y: 0 };
 		case Step.Right:
-			return [1, 0];
+			return { x: 1, y: 0 };
 	}
 }
 

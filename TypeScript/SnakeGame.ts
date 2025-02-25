@@ -13,6 +13,8 @@ requestAnimationFrame(mainCanvasLoop);
 
 function createInitialData() {
     snake = [createCell()];
+    snake[0] = calcNewHead();
+
     food = createCell();
 }
 
@@ -33,7 +35,7 @@ function mainCanvasLoop(timestamp: number): void {
 }
 
 function updateHeadPosition(): void {
-    const newHead = calcNewHead()
+    const newHead = calcNewHead();
 
     if (newHead.x === food.x && newHead.y === food.y) {
         while (
@@ -59,13 +61,15 @@ function createCell(): SnakeCell {
 }
 
 function calcNewHead() {
-    const [stepX, stepY] = SnakeHead.getOffsets()
+    const previousHeadDirection = SnakeHead.getOffsets()
+
+    const newHeadX = (snake[0].x + previousHeadDirection.x + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
+    const newHeadY = (snake[0].y + previousHeadDirection.y + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;
+
     SnakeHead.updateCurrentStep();
+    const currentHeadDirection = SnakeHead.getOffsets()
 
-    const newHeadX = (snake[0].x + stepX + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth;
-    const newHeadY = (snake[0].y + stepY + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight;
-
-    return { x: newHeadX, y: newHeadY };
+    return { x: newHeadX, y: newHeadY, dir: currentHeadDirection };
 }
 
 function isGameOver(newHead: SnakeCell): boolean {

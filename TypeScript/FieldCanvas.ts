@@ -8,11 +8,9 @@ export const fieldHeight = 5;
 
 const boxWidth = canvas.width / fieldWidth;
 const halfBoxWidth = boxWidth / 2;
-const quarterBoxWidth = boxWidth / 4;
 
 const boxHeight = canvas.height / fieldHeight;
 const halfBoxHeight = boxHeight / 2;
-const quarterBoxHeight = boxHeight / 4;
 
 export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number = 0): void {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -20,7 +18,7 @@ export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number
     drawGrid();
 
     ctx.fillStyle = "red";
-    ctx.fillRect(food.x * boxWidth, food.y * boxHeight, boxWidth, boxHeight);
+    drawCell(food.x, food.y);
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
         drawPartSnake(snake[partSnakeIndex], stepPercentage)
@@ -37,11 +35,17 @@ function drawPartSnake(snakeCell: SnakeCell, stepPercentage: number, outsideX: n
     const partY = snakeCell.y + snakeCell.dir.y * stepPercentage + outsideY;
 
     ctx.fillStyle = "green";
-    ctx.fillRect(partX * boxWidth, partY * boxHeight, boxWidth, boxHeight);
+    drawCell(partX, partY);
     ctx.fillStyle = "rgb(128, 0, 0)";
+    drawCell(partX, partY, 0.5);
+}
+
+function drawCell(partX: number, partY: number, sizePercentage: number = 1) {
     ctx.fillRect(
-        partX * boxWidth + quarterBoxWidth, partY * boxHeight + quarterBoxHeight,
-        halfBoxWidth, halfBoxHeight
+        partX * boxWidth + halfBoxWidth - halfBoxWidth * sizePercentage,
+        partY * boxHeight + halfBoxHeight - halfBoxHeight * sizePercentage,
+        boxWidth * sizePercentage,
+        boxHeight * sizePercentage
     );
 }
 

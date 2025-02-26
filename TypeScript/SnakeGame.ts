@@ -2,6 +2,8 @@ import * as SnakeHead from "./SnakeHead";
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./SnakeCell";
 
+const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement;
+
 const FRAME_DURATION = 300;
 let lastTime = 0;
 
@@ -16,6 +18,8 @@ function createInitialData() {
     snake[0] = calcNewHead();
 
     food = createCell();
+
+    scoreLabel.textContent = "Score: " + snake.length
 }
 
 function mainCanvasLoop(timestamp: number): void {
@@ -54,6 +58,7 @@ function updateHeadPosition(): void {
     }
 
     snake.unshift(newHead);
+    scoreLabel.textContent = "Score: " + snake.length
 }
 
 function createCell(): SnakeCell {

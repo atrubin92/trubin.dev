@@ -25,25 +25,25 @@ export function getOffsets(): Direction {
 export function changeStep(eventKey: string) {
 	switch (eventKey) {
 		case "ArrowUp":
-			if (nextStep !== Step.Down) {
+			if (currentStep !== Step.Down) {
 				nextStep = Step.Up;
 			}
 			break;
 
 		case "ArrowDown":
-			if (nextStep !== Step.Up) {
+			if (currentStep !== Step.Up) {
 				nextStep = Step.Down;
 			}
 			break;
 
 		case "ArrowLeft":
-			if (nextStep !== Step.Right) {
+			if (currentStep !== Step.Right) {
 				nextStep = Step.Left;
 			}
 			break;
 
 		case "ArrowRight":
-			if (nextStep !== Step.Left) {
+			if (currentStep !== Step.Left) {
 				nextStep = Step.Right;
 			}
 			break;

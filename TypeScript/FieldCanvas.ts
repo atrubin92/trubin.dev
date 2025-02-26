@@ -20,24 +20,31 @@ export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number
     ctx.fillStyle = "red";
     drawCell(food.x, food.y);
 
+    const snakeCellFixedScale = 0.7
+
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
-        drawPartSnake(snake[partSnakeIndex], stepPercentage)
-        drawPartSnake(
-            snake[partSnakeIndex], stepPercentage,
-            -snake[partSnakeIndex].dir.x * fieldWidth,
-            -snake[partSnakeIndex].dir.y * fieldHeight
-        )
+        const snakeCellScale = (1 - snakeCellFixedScale) * (snake.length - partSnakeIndex) / snake.length + snakeCellFixedScale
+        drawSnakeCellwithOutsidePart(snake[partSnakeIndex], stepPercentage, snakeCellScale)
     }
 }
 
-function drawPartSnake(snakeCell: SnakeCell, stepPercentage: number, outsideX: number = 0, outsideY: number = 0) {
-    const partX = snakeCell.x + snakeCell.dir.x * stepPercentage + outsideX;
-    const partY = snakeCell.y + snakeCell.dir.y * stepPercentage + outsideY;
+function drawSnakeCellwithOutsidePart(snakeCell: SnakeCell, stepPercentage: number, snakeCellScale: number) {
+    let partX = snakeCell.x + snakeCell.dir.x * stepPercentage;
+    let partY = snakeCell.y + snakeCell.dir.y * stepPercentage;
 
+    drawSnakeCell(partX, partY, snakeCellScale);
+
+    partX -= snakeCell.dir.x * fieldWidth;
+    partY -= snakeCell.dir.y * fieldHeight;
+
+    drawSnakeCell(partX, partY, snakeCellScale);
+}
+
+function drawSnakeCell(partX: number, partY: number, snakeCellScale: number) {
     ctx.fillStyle = "green";
-    drawCell(partX, partY);
+    drawCell(partX, partY, snakeCellScale);
     ctx.fillStyle = "rgb(128, 0, 0)";
-    drawCell(partX, partY, 0.5);
+    drawCell(partX, partY, 0.5 * snakeCellScale);
 }
 
 function drawCell(partX: number, partY: number, sizePercentage: number = 1) {

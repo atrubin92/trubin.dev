@@ -11,6 +11,12 @@ frameDurationInput.addEventListener('change', () => {
     }
 });
 
+frameDurationInput.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+    }
+});
+
 export function setSnakeLength(newSnakeLength: number) {
     if (newSnakeLength >= 0) {
         snakeLength = newSnakeLength;

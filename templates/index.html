@@ -35,7 +35,7 @@
     }
 
     #scoreLabel,
-    #frameDurationLabel {
+    #frameDurationContainer {
       font-size: 18px;
       color: #333;
     }
@@ -46,7 +46,10 @@
   <div id="gameContainer">
     <div id="settingsContainer">
       <div id="scoreLabel">Score: 0</div>
-      <div id="frameDurationLabel">Frame Duration: 300</div>
+      <div id="frameDurationContainer">
+        <label for="frameDurationInput">Frame Duration:</label>
+        <input type="number" id="frameDurationInput" value="300" min="50" max="2000" step="50" style="width: 70px;" />
+      </div>
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
   </div>

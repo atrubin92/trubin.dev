@@ -1,8 +1,15 @@
 const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement;
-const frameDurationLabel = document.getElementById("frameDurationLabel") as HTMLDivElement;
+const frameDurationInput = document.getElementById('frameDurationInput') as HTMLInputElement;
 
 let snakeLength = 0
-export const frameDuration = 300
+export let frameDuration = 300
+
+frameDurationInput.addEventListener('change', () => {
+    const newValue = parseInt(frameDurationInput.value, 10);
+    if (!isNaN(newValue)) {
+        frameDuration = newValue;
+    }
+});
 
 export function setSnakeLength(newSnakeLength: number) {
     if (newSnakeLength >= 0) {
@@ -13,5 +20,5 @@ export function setSnakeLength(newSnakeLength: number) {
 
 export function displaySetting() {
     scoreLabel.textContent = "Score: " + snakeLength
-    frameDurationLabel.textContent = "Frame Duration: " + frameDuration
+    frameDurationInput.textContent = frameDuration.toString()
 }

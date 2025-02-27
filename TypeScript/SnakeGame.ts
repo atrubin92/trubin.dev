@@ -1,10 +1,8 @@
 import * as SnakeHead from "./SnakeHead";
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./SnakeCell";
+import * as Settings from "./Settings";
 
-const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement;
-
-const FRAME_DURATION = 300;
 let lastTime = 0;
 
 let snake: SnakeCell[];
@@ -19,19 +17,19 @@ function createInitialData() {
 
     food = createCell();
 
-    scoreLabel.textContent = "Score: " + snake.length
+    Settings.displaySetting();
 }
 
 function mainCanvasLoop(timestamp: number): void {
     const timeSinceLastFrame = timestamp - lastTime;
 
-    if (timeSinceLastFrame >= FRAME_DURATION) {
+    if (timeSinceLastFrame >= Settings.frameDuration) {
         updateHeadPosition();
         FieldCanvas.draw(snake, food);
 
-        lastTime = Math.floor(timestamp / FRAME_DURATION) * FRAME_DURATION
+        lastTime = Math.floor(timestamp / Settings.frameDuration) * Settings.frameDuration
     } else {
-        const stepPercentage = timeSinceLastFrame / FRAME_DURATION;
+        const stepPercentage = timeSinceLastFrame / Settings.frameDuration;
         FieldCanvas.draw(snake, food, stepPercentage);
     }
 
@@ -58,7 +56,8 @@ function updateHeadPosition(): void {
     }
 
     snake.unshift(newHead);
-    scoreLabel.textContent = "Score: " + snake.length
+
+    Settings.setSnakeLength(snake.length);
 }
 
 function createCell(): SnakeCell {

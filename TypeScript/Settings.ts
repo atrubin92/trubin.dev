@@ -17,6 +17,15 @@ frameDurationInput.addEventListener('keydown', (event) => {
     }
 });
 
+frameDurationInput.addEventListener("input", () => {
+    const value = parseInt(frameDurationInput.value, 10);
+    if (value > 2000) {
+        frameDurationInput.style.backgroundColor = "red";
+    } else {
+        frameDurationInput.style.backgroundColor = "";
+    }
+});
+
 export function setSnakeLength(newSnakeLength: number) {
     if (newSnakeLength >= 0) {
         snakeLength = newSnakeLength;

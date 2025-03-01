@@ -24,11 +24,11 @@ export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
         const snakeCellScale = (1 - snakeCellFixedScale) * (snake.length - partSnakeIndex) / snake.length + snakeCellFixedScale
-        drawSnakeCellwithOutsidePart(snake[partSnakeIndex], stepPercentage, snakeCellScale)
+        drawWrappedSnakeCell(snake[partSnakeIndex], stepPercentage, snakeCellScale)
     }
 }
 
-function drawSnakeCellwithOutsidePart(snakeCell: SnakeCell, stepPercentage: number, snakeCellScale: number) {
+function drawWrappedSnakeCell(snakeCell: SnakeCell, stepPercentage: number, snakeCellScale: number) {
     let partX = snakeCell.x + snakeCell.dir.x * stepPercentage;
     let partY = snakeCell.y + snakeCell.dir.y * stepPercentage;
 
@@ -57,6 +57,7 @@ function drawCell(partX: number, partY: number, sizePercentage: number = 1) {
 }
 
 function drawGrid() {
+    ctx.strokeStyle = 'blue';
     for (let cellCenterX = halfBoxWidth; cellCenterX < canvas.width; cellCenterX += boxWidth) {
         drawLine(cellCenterX, 0, cellCenterX, canvas.height)
     }
@@ -70,6 +71,5 @@ function drawLine(x1: number, y1: number, x2: number, y2: number) {
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
-    ctx.strokeStyle = 'blue';
     ctx.stroke();
 }

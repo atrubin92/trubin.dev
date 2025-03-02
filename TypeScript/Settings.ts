@@ -1,5 +1,6 @@
 const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement;
 const frameDurationInput = document.getElementById('frameDurationInput') as HTMLInputElement;
+const startPauseButton = document.getElementById("startPauseButton") as HTMLButtonElement;
 
 let snakeLength = 0
 export let frameDuration = 300
@@ -23,6 +24,14 @@ frameDurationInput.addEventListener("input", () => {
         frameDurationInput.style.backgroundColor = "red";
     } else {
         frameDurationInput.style.backgroundColor = "";
+    }
+});
+
+startPauseButton.addEventListener("click", () => {
+    if (startPauseButton.innerText === "Start") {
+        startPauseButton.innerText = "Pause";
+    } else {
+        startPauseButton.innerText = "Start";
     }
 });
 

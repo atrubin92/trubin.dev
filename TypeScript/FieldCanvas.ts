@@ -3,8 +3,8 @@ import { SnakeCell } from "./SnakeCell";
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-export const fieldWidth = 7;
-export const fieldHeight = 5;
+export const fieldWidth = 10;
+export const fieldHeight = 10;
 
 const boxWidth = canvas.width / fieldWidth;
 const halfBoxWidth = boxWidth / 2;

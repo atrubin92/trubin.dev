@@ -4,6 +4,7 @@ import { SnakeCell } from "./SnakeCell";
 import * as Settings from "./Settings";
 
 let lastTime = 0;
+let currentFrameDuration = Settings.frameDuration;
 
 let snake: SnakeCell[];
 let food: SnakeCell;
@@ -21,17 +22,19 @@ function createInitialData() {
 }
 
 function mainCanvasLoop(timestamp: number): void {
-    const timeSinceLastFrame = timestamp - lastTime;
+    let timeSinceLastFrame = timestamp - lastTime;
 
-    if (timeSinceLastFrame >= Settings.frameDuration) {
+    if (timeSinceLastFrame >= currentFrameDuration) {
         updateHeadPosition();
-        FieldCanvas.draw(snake, food);
 
-        lastTime = Math.floor(timestamp / Settings.frameDuration) * Settings.frameDuration
-    } else {
-        const stepPercentage = timeSinceLastFrame / Settings.frameDuration;
-        FieldCanvas.draw(snake, food, stepPercentage);
+        lastTime = timestamp - Math.min(timeSinceLastFrame - currentFrameDuration, Settings.frameDuration / 10);
+        currentFrameDuration = Settings.frameDuration;
+
+        timeSinceLastFrame = timestamp - lastTime;
     }
+
+    const stepPercentage = timeSinceLastFrame / currentFrameDuration;
+    FieldCanvas.draw(snake, food, stepPercentage);
 
     requestAnimationFrame(mainCanvasLoop);
 }

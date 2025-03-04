@@ -2,9 +2,7 @@ import * as SnakeHead from "./SnakeHead";
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./SnakeCell";
 import * as Settings from "./Settings";
-
-let lastTime = 0;
-let currentFrameDuration = Settings.frameDuration;
+import * as StepProgress from "./StepProgress";
 
 let snake: SnakeCell[];
 let food: SnakeCell;
@@ -22,18 +20,11 @@ function createInitialData() {
 }
 
 function mainCanvasLoop(timestamp: number): void {
-    let timeSinceLastFrame = timestamp - lastTime;
-
-    if (timeSinceLastFrame >= currentFrameDuration) {
+    if (StepProgress.completeStep(timestamp)) {
         updateHeadPosition();
-
-        lastTime = timestamp - Math.min(timeSinceLastFrame - currentFrameDuration, Settings.frameDuration / 10);
-        currentFrameDuration = Settings.frameDuration;
-
-        timeSinceLastFrame = timestamp - lastTime;
     }
 
-    const stepPercentage = timeSinceLastFrame / currentFrameDuration;
+    const stepPercentage = StepProgress.calculateProgress(timestamp)
     FieldCanvas.draw(snake, food, stepPercentage);
 
     requestAnimationFrame(mainCanvasLoop);

@@ -3,9 +3,9 @@ const stepDurationInput = document.getElementById('stepDurationInput') as HTMLIn
 export let stepDuration = 300
 
 stepDurationInput.addEventListener('change', () => {
-    const newValue = parseInt(stepDurationInput.value, 10);
-    if (!isNaN(newValue)) {
-        stepDuration = newValue;
+    const value = parseInt(stepDurationInput.value, 10);
+    if (isValidStepDuration(value)) {
+        stepDuration = value;
     }
 });
 
@@ -17,12 +17,16 @@ stepDurationInput.addEventListener('keydown', (event) => {
 
 stepDurationInput.addEventListener("input", () => {
     const value = parseInt(stepDurationInput.value, 10);
-    if (value > 2000) {
-        stepDurationInput.style.backgroundColor = "red";
-    } else {
+    if (isValidStepDuration(value)) {
         stepDurationInput.style.backgroundColor = "";
+    } else {
+        stepDurationInput.style.backgroundColor = "red";
     }
 });
+
+function isValidStepDuration(value: number): boolean {
+    return !isNaN(value) && 50 <= value && value <= 2_000
+}
 
 export function displaySetting() {
     stepDurationInput.textContent = stepDuration.toString()

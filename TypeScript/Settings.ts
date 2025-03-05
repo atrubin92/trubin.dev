@@ -3,8 +3,6 @@ import * as StepDurationSetting from "./settings/StepDurationSetting";
 const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement;
 const startPauseButton = document.getElementById("startPauseButton") as HTMLButtonElement;
 
-let snakeLength = 0
-
 export function getStepDuration() {
     return StepDurationSetting.stepDuration;
 };
@@ -17,14 +15,12 @@ startPauseButton.addEventListener("click", () => {
     }
 });
 
-export function setSnakeLength(newSnakeLength: number) {
-    if (newSnakeLength >= 0) {
-        snakeLength = newSnakeLength;
-        displaySetting();
+export function displaySnakeLength(snakeLength: number) {
+    if (0 <= snakeLength) {
+        scoreLabel.textContent = "Score: " + snakeLength
     }
 }
 
-export function displaySetting() {
-    scoreLabel.textContent = "Score: " + snakeLength
+export function displaySettings() {
     StepDurationSetting.displaySetting()
 }

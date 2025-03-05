@@ -16,7 +16,7 @@ function createInitialData() {
 
     food = createCell();
 
-    Settings.displaySetting();
+    Settings.displaySettings();
 }
 
 function mainCanvasLoop(timestamp: number): void {
@@ -51,7 +51,7 @@ function updateHeadPosition(): void {
 
     snake.unshift(newHead);
 
-    Settings.setSnakeLength(snake.length);
+    Settings.displaySnakeLength(snake.length);
 }
 
 function createCell(): SnakeCell {

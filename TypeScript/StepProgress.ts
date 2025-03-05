@@ -1,19 +1,19 @@
 import * as Settings from "./Settings";
 
-let lastTime = 0;
-let currentStepDuration = Settings.frameDuration;
+let previousStepEndTime = 0;
+let currentStepDuration = Settings.stepDuration;
 
 export function calculateProgress(timestamp: number): number {
     completeStep(timestamp)
-    return (timestamp - lastTime) / currentStepDuration
+    return (timestamp - previousStepEndTime) / currentStepDuration
 }
 
 export function completeStep(timestamp: number): boolean {
-    const timeSinceLastFrame = timestamp - lastTime
+    const timeSincePreviousStep = timestamp - previousStepEndTime
 
-    if (timeSinceLastFrame >= currentStepDuration) {
-        lastTime = timestamp - Math.min(timeSinceLastFrame - currentStepDuration, Settings.frameDuration / 10)
-        currentStepDuration = Settings.frameDuration
+    if (timeSincePreviousStep >= currentStepDuration) {
+        previousStepEndTime = timestamp - Math.min(timeSincePreviousStep - currentStepDuration, Settings.stepDuration / 10)
+        currentStepDuration = Settings.stepDuration
 
         return true
     }

@@ -22,8 +22,14 @@ export function getOffsets(): Direction {
 	}
 }
 
-export function changeStep(eventKey: string) {
-	switch (eventKey) {
+export function updateCurrentStep() {
+	currentStep = nextStep;
+}
+
+document.addEventListener("keydown", changeDirection);
+
+function changeDirection(event: KeyboardEvent): void {
+	switch (event.key) {
 		case "ArrowUp":
 			if (currentStep !== Step.Down) {
 				nextStep = Step.Up;
@@ -48,8 +54,4 @@ export function changeStep(eventKey: string) {
 			}
 			break;
 	}
-}
-
-export function updateCurrentStep() {
-	currentStep = nextStep;
 }

@@ -1,6 +1,6 @@
 import { SnakeCell } from "./SnakeCell"
 import * as SnakeHead from "./SnakeHead"
-import * as FieldCanvas from "./FieldCanvas"
+import * as Settings from "./Settings";
 
 let snake: SnakeCell[]
 
@@ -12,8 +12,8 @@ export function createInitialData() {
 export function calcNewHead() {
     const previousHeadDirection = SnakeHead.getOffsets()
 
-    const newHeadX = (snake[0].x + previousHeadDirection.x + FieldCanvas.fieldWidth) % FieldCanvas.fieldWidth
-    const newHeadY = (snake[0].y + previousHeadDirection.y + FieldCanvas.fieldHeight) % FieldCanvas.fieldHeight
+    const newHeadX = (snake[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
+    const newHeadY = (snake[0].y + previousHeadDirection.y + Settings.getFieldHeight()) % Settings.getFieldHeight()
 
     SnakeHead.updateCurrentStep()
     const currentHeadDirection = SnakeHead.getOffsets()
@@ -32,15 +32,15 @@ export function pop() {
     snake.pop()
 }
 
-function createCell(): SnakeCell {
-    return SnakeCell.create(FieldCanvas.fieldWidth, FieldCanvas.fieldHeight)
-}
-
 export function getSnakeCopy(): SnakeCell[] {
     return snake.map(cell => ({ ...cell }))
 }
 
 export function contain(newPart: SnakeCell): boolean {
     return snake.some(part => part.x === newPart.x && part.y === newPart.y)
+}
+
+function createCell(): SnakeCell {
+    return SnakeCell.create(Settings.getFieldWidth(), Settings.getFieldHeight())
 }
 

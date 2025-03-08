@@ -1,15 +1,13 @@
 import { SnakeCell } from "./SnakeCell";
+import * as Settings from "./Settings";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-export const fieldWidth = 10;
-export const fieldHeight = 10;
-
-const boxWidth = canvas.width / fieldWidth;
+const boxWidth = canvas.width / Settings.getFieldWidth();
 const halfBoxWidth = boxWidth / 2;
 
-const boxHeight = canvas.height / fieldHeight;
+const boxHeight = canvas.height / Settings.getFieldHeight();
 const halfBoxHeight = boxHeight / 2;
 
 export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number = 0): void {
@@ -34,8 +32,8 @@ function drawWrappedSnakeCell(snakeCell: SnakeCell, stepPercentage: number, snak
 
     drawSnakeCell(partX, partY, snakeCellScale);
 
-    partX -= snakeCell.dir.x * fieldWidth;
-    partY -= snakeCell.dir.y * fieldHeight;
+    partX -= snakeCell.dir.x * Settings.getFieldWidth()
+    partY -= snakeCell.dir.y * Settings.getFieldHeight()
 
     drawSnakeCell(partX, partY, snakeCellScale);
 }

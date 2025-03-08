@@ -53,7 +53,7 @@ function updateHeadPosition(): void {
 }
 
 function createCell(): SnakeCell {
-    return SnakeCell.create(FieldCanvas.fieldWidth, FieldCanvas.fieldHeight);
+    return SnakeCell.create(Settings.getFieldWidth(), Settings.getFieldHeight());
 }
 
 function isGameOver(newHead: SnakeCell): boolean {

@@ -12,7 +12,7 @@ requestAnimationFrame(mainCanvasLoop);
 function createInitialData() {
     SnakeModel.createInitialData()
 
-    food = createCell();
+    food = SnakeCell.create();
 
     Settings.displaySettings();
 }
@@ -36,7 +36,7 @@ function updateHeadPosition(): void {
             SnakeModel.contain(food) ||
             newHead.x === food.x && newHead.y === food.y
         ) {
-            food = createCell();
+            food = SnakeCell.create();
         }
     } else {
         SnakeModel.pop();
@@ -50,10 +50,6 @@ function updateHeadPosition(): void {
     SnakeModel.unshift(newHead);
 
     Settings.displaySnakeLength(SnakeModel.getLength());
-}
-
-function createCell(): SnakeCell {
-    return SnakeCell.create(Settings.getFieldWidth(), Settings.getFieldHeight());
 }
 
 function isGameOver(newHead: SnakeCell): boolean {

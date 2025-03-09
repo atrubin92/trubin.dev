@@ -5,7 +5,7 @@ import * as Settings from "./Settings";
 let snake: SnakeCell[]
 
 export function createInitialData() {
-    snake = [createCell()]
+    snake = [SnakeCell.create()]
     snake[0] = calcNewHead()
 }
 
@@ -38,9 +38,5 @@ export function getSnakeCopy(): SnakeCell[] {
 
 export function contain(newPart: SnakeCell): boolean {
     return snake.some(part => part.x === newPart.x && part.y === newPart.y)
-}
-
-function createCell(): SnakeCell {
-    return SnakeCell.create(Settings.getFieldWidth(), Settings.getFieldHeight())
 }
 

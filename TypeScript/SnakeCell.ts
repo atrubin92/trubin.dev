@@ -1,3 +1,5 @@
+import * as Settings from "./Settings";
+
 export interface SnakeCell {
     x: number;
     y: number;
@@ -6,9 +8,9 @@ export interface SnakeCell {
 }
 
 export namespace SnakeCell {
-    export function create(xLimit: number, yLimit: number): SnakeCell {
-        const x = Math.floor(Math.random() * xLimit);
-        const y = Math.floor(Math.random() * yLimit);
+    export function create(): SnakeCell {
+        const x = Math.floor(Math.random() * Settings.getFieldWidth());
+        const y = Math.floor(Math.random() * Settings.getFieldHeight());
 
         return { x, y };
     }

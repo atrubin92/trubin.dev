@@ -39,6 +39,23 @@
       font-size: 18px;
       color: #333;
     }
+
+    #gameStateContainer {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .input-cell-size {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .input-cell-size label {
+      margin-bottom: 2px;
+    }
   </style>
 </head>
 
@@ -50,7 +67,17 @@
         <label for="stepDurationInput">Step Duration:</label>
         <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" style="width: 70px;" />
       </div>
-      <button id="startPauseButton">Start</button>
+      <div id="gameStateContainer">
+        <button id="startPauseButton">Start</button>
+        <div class="input-cell-size">
+          <label for="canvasWidthInput">Cells by Width:</label>
+          <input type="number" id="canvasHeightInput" value="10" min="1" max="40" step="1" style="width: 70px;" />
+        </div>
+        <div class="input-cell-size">
+          <label for="canvasHeightInput">Cells by Height:</label>
+          <input type="number" id="canvasHeightInput" value="10" min="1" max="40" step="1" style="width: 70px;" />
+        </div>
+      </div>
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
   </div>

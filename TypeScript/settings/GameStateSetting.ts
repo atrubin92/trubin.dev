@@ -1,9 +1,16 @@
 export enum GameState {
-	Start,
-	Pause
+    NOT_STARTED,
+    IN_PROGRESS,
+    PAUSED
 }
 
 const startPauseButton = document.getElementById("startPauseButton") as HTMLButtonElement
+
+let gameState = GameState.NOT_STARTED
+
+export function getGameState(): GameState {
+    return gameState
+}
 
 startPauseButton.addEventListener("click", () => {
     if (startPauseButton.innerText === "Start") {

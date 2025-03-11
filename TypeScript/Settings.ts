@@ -14,6 +14,10 @@ export function getFieldHeight() {
     return fieldHeight
 }
 
+export function getGameState(): GameStateSetting.GameState {
+    return GameStateSetting.getGameState()
+}
+
 export function displaySnakeLength(snakeLength: number) {
     if (0 <= snakeLength) {
         scoreLabel.textContent = "Score: " + snakeLength

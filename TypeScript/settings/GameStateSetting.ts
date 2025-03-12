@@ -4,7 +4,7 @@ export enum GameState {
     PAUSED
 }
 
-const startPauseButton = document.getElementById("startPauseButton") as HTMLButtonElement
+const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 
 let gameState = GameState.NOT_STARTED
 
@@ -23,7 +23,7 @@ export function resetGameState() {
     updateGameStateButton()
 }
 
-startPauseButton.addEventListener("click", () => {
+gameStateButton.addEventListener("click", () => {
     switch (gameState) {
         case GameState.NOT_STARTED:
             gameState = GameState.IN_PROGRESS
@@ -39,5 +39,5 @@ startPauseButton.addEventListener("click", () => {
 })
 
 function updateGameStateButton() {
-    startPauseButton.innerText = buttonTextMap[gameState]
+    gameStateButton.innerText = buttonTextMap[gameState]
 }

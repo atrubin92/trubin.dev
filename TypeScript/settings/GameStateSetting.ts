@@ -1,8 +1,4 @@
-export enum GameState {
-    NOT_STARTED,
-    IN_PROGRESS,
-    PAUSED
-}
+import { GameState } from "./GameState"
 
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 

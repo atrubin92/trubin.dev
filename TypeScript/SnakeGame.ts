@@ -3,6 +3,7 @@ import { SnakeCell } from "./SnakeCell";
 import * as Settings from "./Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
+import { GameState } from "./settings/GameState";
 
 let food: SnakeCell;
 
@@ -18,6 +19,11 @@ function createInitialData() {
 }
 
 function mainCanvasLoop(timestamp: number): void {
+    if (Settings.getGameState() != GameState.IN_PROGRESS){
+        requestAnimationFrame(mainCanvasLoop);
+        return
+    }
+
     if (StepProgress.completeStep(timestamp)) {
         updateHeadPosition();
     }
@@ -43,6 +49,7 @@ function updateHeadPosition(): void {
     }
 
     if (isGameOver(newHead)) {
+        Settings.gemeOver()
         createInitialData();
         return;
     }

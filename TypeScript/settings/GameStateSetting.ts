@@ -37,3 +37,8 @@ gameStateButton.addEventListener("click", () => {
 function updateGameStateButton() {
     gameStateButton.innerText = buttonTextMap[gameState]
 }
+
+export function gameOver() {
+    gameState = GameState.NOT_STARTED
+    updateGameStateButton()
+}

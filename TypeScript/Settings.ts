@@ -30,3 +30,7 @@ export function getStepDuration() {
 export function displaySettings() {
     StepDurationSetting.displaySetting()
 }
+
+export function gemeOver() {
+    GameStateSetting.gameOver()
+}

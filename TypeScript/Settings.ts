@@ -1,18 +1,16 @@
 import * as StepDurationSetting from "./settings/StepDurationSetting"
 import * as GameStateSetting from "./settings/GameStateSetting"
+import * as FieldSizeSetting from "./settings/FieldSizeSetting"
 import { GameState } from "./settings/GameState"
 
 const scoreLabel = document.getElementById("scoreLabel") as HTMLDivElement
 
-const fieldWidth = 10
-const fieldHeight = 10
-
 export function getFieldWidth() {
-    return fieldWidth
+    return FieldSizeSetting.getFieldWidth()
 }
 
 export function getFieldHeight() {
-    return fieldHeight
+    return FieldSizeSetting.getFieldHeight()
 }
 
 export function getGameState(): GameState {

@@ -4,13 +4,19 @@ import * as Settings from "./Settings";
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-const boxWidth = canvas.width / Settings.getFieldWidth();
-const halfBoxWidth = boxWidth / 2;
+let boxWidth = canvas.width / Settings.getFieldWidth();
+let halfBoxWidth = boxWidth / 2;
 
-const boxHeight = canvas.height / Settings.getFieldHeight();
-const halfBoxHeight = boxHeight / 2;
+let boxHeight = canvas.height / Settings.getFieldHeight();
+let halfBoxHeight = boxHeight / 2;
 
 export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number = 0): void {
+    boxWidth = canvas.width / Settings.getFieldWidth();
+    halfBoxWidth = boxWidth / 2;
+
+    boxHeight = canvas.height / Settings.getFieldHeight();
+    halfBoxHeight = boxHeight / 2;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawGrid();

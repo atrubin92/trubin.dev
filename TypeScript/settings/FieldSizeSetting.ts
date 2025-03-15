@@ -20,8 +20,8 @@ function setupCellInput(
         inputElement.style.backgroundColor = isValidCellSize(value) ? "" : "red";
     });
 
-    inputElement.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+    inputElement.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
             event.preventDefault();
         }
     });
@@ -33,3 +33,11 @@ function isValidCellSize(value: number): boolean {
 
 setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue));
 setupCellInput(cellHeightInput, (newValue) => (cellHeight = newValue));
+
+export function getFieldWidth(): number {
+    return cellWidth
+}
+
+export function getFieldHeight(): number {
+    return cellHeight
+}

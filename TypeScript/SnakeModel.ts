@@ -2,7 +2,7 @@ import { SnakeCell } from "./SnakeCell"
 import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
 
-let snake: SnakeCell[]
+let snake: SnakeCell[] = []
 
 export function createInitialData() {
     snake = [SnakeCell.create()]

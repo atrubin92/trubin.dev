@@ -7,7 +7,6 @@ import { GameState } from "./settings/GameState";
 
 let food: SnakeCell;
 
-createInitialData();
 requestAnimationFrame(mainCanvasLoop);
 
 function createInitialData() {
@@ -19,9 +18,12 @@ function createInitialData() {
 }
 
 function mainCanvasLoop(timestamp: number): void {
-    if (Settings.getGameState() != GameState.IN_PROGRESS){
+    if (Settings.getGameState() != GameState.IN_PROGRESS) {
         requestAnimationFrame(mainCanvasLoop);
         return
+    }
+    if (SnakeModel.getLength() == 0) {
+        createInitialData();
     }
 
     if (StepProgress.completeStep(timestamp)) {

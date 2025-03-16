@@ -5,9 +5,9 @@ export enum Step {
 	Right
 }
 
-const enumValues = Object.values(Step).filter(v => typeof v === 'number');
-let currentStep = enumValues[Math.floor(Math.random() * enumValues.length)] as Step;
-let nextStep = currentStep
+let currentStep: Step = Step.Up
+let nextStep: Step = Step.Up
+reset()
 
 export function getOffsets(): Direction {
 	switch (currentStep) {
@@ -24,6 +24,12 @@ export function getOffsets(): Direction {
 
 export function updateCurrentStep() {
 	currentStep = nextStep;
+}
+
+export function reset() {
+	const enumValues = Object.values(Step).filter(v => typeof v === 'number');
+	currentStep = enumValues[Math.floor(Math.random() * enumValues.length)] as Step;
+	nextStep = currentStep
 }
 
 document.addEventListener("keydown", changeDirection);

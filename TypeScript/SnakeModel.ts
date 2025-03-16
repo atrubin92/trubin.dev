@@ -9,6 +9,11 @@ export function createInitialData() {
     snake[0].dir = SnakeHead.getOffsets()
 }
 
+export function reset() {
+    SnakeHead.reset()
+    snake = []
+}
+
 export function calcNewHead() {
     const previousHeadDirection = SnakeHead.getOffsets()
 

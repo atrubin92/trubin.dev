@@ -38,10 +38,10 @@ function drawFood(food?: SnakeCell) {
 }
 
 function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
-    const snakeCellFixedScale = 0.7
+    const snakeScaleDiff = 0.3
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
-        const snakeCellScale = (1 - snakeCellFixedScale) * (snake.length - partSnakeIndex) / snake.length + snakeCellFixedScale
+        const snakeCellScale = 1 - snakeScaleDiff * (partSnakeIndex) / snake.length
         drawWrappedSnakeCell(snake[partSnakeIndex], stepPercentage, snakeCellScale)
     }
 }

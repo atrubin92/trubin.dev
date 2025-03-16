@@ -27,11 +27,7 @@ function mainCanvasLoop(timestamp: number): void {
             if (SnakeModel.getLength() === 0) {
                 createInitialData();
             }
-            let isDrawField = true;
-            if (StepProgress.completeStep(timestamp)) {
-                isDrawField = updateHeadPosition()
-            }
-            if (isDrawField) {
+            if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress(timestamp);
                 FieldCanvas.draw(SnakeModel.getSnakeCopy(), food, stepPercentage);
             }

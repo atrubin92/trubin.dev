@@ -29,19 +29,16 @@ function calcBoxSize() {
 }
 
 function drawFood(food?: SnakeCell) {
-    if (food == null) {
-        return
-    }
+    if (!food) return
 
-    ctx.fillStyle = "red"
-    drawCell(food.x, food.y)
+    drawCell(food.x, food.y, "red")
 }
 
 function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
     const snakeScaleDiff = 0.3
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
-        const snakeCellScale = 1 - snakeScaleDiff * (partSnakeIndex) / snake.length
+        const snakeCellScale = 1 - snakeScaleDiff * partSnakeIndex / snake.length
         drawWrappedSnakeCell(snake[partSnakeIndex], stepPercentage, snakeCellScale)
     }
 }
@@ -59,19 +56,18 @@ function drawWrappedSnakeCell(snakeCell: SnakeCell, stepPercentage: number, snak
 }
 
 function drawSnakeCell(partX: number, partY: number, snakeCellScale: number) {
-    ctx.fillStyle = "green";
-    drawCell(partX, partY, snakeCellScale);
-    ctx.fillStyle = "rgb(128, 0, 0)";
-    drawCell(partX, partY, 0.5 * snakeCellScale);
+    drawCell(partX, partY, "green", snakeCellScale)
+    drawCell(partX, partY, "rgb(128, 0, 0)", 0.5 * snakeCellScale)
 }
 
-function drawCell(partX: number, partY: number, sizePercentage: number = 1) {
+function drawCell(partX: number, partY: number, color: string, sizePercentage: number = 1) {
+    ctx.fillStyle = color
     ctx.fillRect(
         partX * boxWidth + halfBoxWidth - halfBoxWidth * sizePercentage,
         partY * boxHeight + halfBoxHeight - halfBoxHeight * sizePercentage,
         boxWidth * sizePercentage,
         boxHeight * sizePercentage
-    );
+    )
 }
 
 function drawGrid() {

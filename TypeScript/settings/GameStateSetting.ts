@@ -1,4 +1,5 @@
 import { GameState } from "./GameState"
+import * as FieldSize from "./FieldSizeSetting";
 
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 
@@ -36,6 +37,7 @@ gameStateButton.addEventListener("click", () => {
 
 function updateGameStateButton() {
     gameStateButton.innerText = buttonTextMap[gameState]
+    FieldSize.setInputsDisabled(gameState !== GameState.NOT_STARTED);
 }
 
 export function gameOver() {

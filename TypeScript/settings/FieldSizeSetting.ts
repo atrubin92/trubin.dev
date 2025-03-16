@@ -1,3 +1,16 @@
+export function getFieldWidth(): number {
+    return cellWidth
+}
+
+export function getFieldHeight(): number {
+    return cellHeight
+}
+
+export function setInputsDisabled(disabled: boolean) {
+    cellWidthInput.disabled = disabled;
+    cellHeightInput.disabled = disabled;
+}
+
 const cellWidthInput = document.getElementById("cellWidthInput") as HTMLInputElement;
 const cellHeightInput = document.getElementById("cellHeightInput") as HTMLInputElement;
 
@@ -33,11 +46,3 @@ function isValidCellSize(value: number): boolean {
 
 setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue));
 setupCellInput(cellHeightInput, (newValue) => (cellHeight = newValue));
-
-export function getFieldWidth(): number {
-    return cellWidth
-}
-
-export function getFieldHeight(): number {
-    return cellHeight
-}

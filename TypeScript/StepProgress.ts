@@ -1,22 +1,35 @@
 import * as Settings from "./Settings";
 
-let previousStepEndTime = 0;
-let currentStepDuration = Settings.getStepDuration();
+let stepTime = 0
 
-export function calculateProgress(timestamp: number): number {
-    completeStep(timestamp)
-    return (timestamp - previousStepEndTime) / currentStepDuration
+let previousTimestamp = 0
+let stepDuration = Settings.getStepDuration()
+
+let isPause = true
+
+export function calculateProgress(): number {
+    return stepTime / stepDuration
 }
 
 export function completeStep(timestamp: number): boolean {
-    const timeSincePreviousStep = timestamp - previousStepEndTime
+    if (isPause) {
+        isPause = false
+        previousTimestamp = timestamp
+    }
 
-    if (timeSincePreviousStep >= currentStepDuration) {
-        previousStepEndTime = timestamp - Math.min(timeSincePreviousStep - currentStepDuration, Settings.getStepDuration() / 10)
-        currentStepDuration = Settings.getStepDuration()
+    stepTime += timestamp - previousTimestamp
+    previousTimestamp = timestamp
+
+    if (stepTime >= stepDuration) {
+        stepTime -= stepDuration
+        stepDuration = Settings.getStepDuration()
 
         return true
     }
 
     return false
+}
+
+export function pause() {
+    isPause = true
 }

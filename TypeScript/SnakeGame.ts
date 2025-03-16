@@ -20,7 +20,12 @@ function createInitialData() {
 function mainCanvasLoop(timestamp: number): void {
     switch (Settings.getGameState()) {
         case GameState.NOT_STARTED:
-            FieldCanvas.draw([], null, 0);
+            FieldCanvas.draw([], null, 0)
+            StepProgress.pause()
+            break;
+
+        case GameState.PAUSED:
+            StepProgress.pause()
             break;
 
         case GameState.IN_PROGRESS:
@@ -28,7 +33,7 @@ function mainCanvasLoop(timestamp: number): void {
                 createInitialData();
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
-                const stepPercentage = StepProgress.calculateProgress(timestamp);
+                const stepPercentage = StepProgress.calculateProgress();
                 FieldCanvas.draw(SnakeModel.getSnakeCopy(), food, stepPercentage);
             }
             break;

@@ -18,21 +18,22 @@ function createInitialData() {
 }
 
 function mainCanvasLoop(timestamp: number): void {
-    if (Settings.getGameState() != GameState.IN_PROGRESS) {
-        FieldCanvas.draw([], null, 0);
-        requestAnimationFrame(mainCanvasLoop);
-        return
-    }
-    if (SnakeModel.getLength() == 0) {
-        createInitialData();
-    }
+    switch (Settings.getGameState()) {
+        case GameState.NOT_STARTED:
+            FieldCanvas.draw([], null, 0);
+            break;
 
-    if (StepProgress.completeStep(timestamp)) {
-        updateHeadPosition();
+        case GameState.IN_PROGRESS:
+            if (SnakeModel.getLength() === 0) {
+                createInitialData();
+            }
+            if (StepProgress.completeStep(timestamp)) {
+                updateHeadPosition();
+            }
+            const stepPercentage = StepProgress.calculateProgress(timestamp);
+            FieldCanvas.draw(SnakeModel.getSnakeCopy(), food, stepPercentage);
+            break;
     }
-
-    const stepPercentage = StepProgress.calculateProgress(timestamp)
-    FieldCanvas.draw(SnakeModel.getSnakeCopy(), food, stepPercentage);
 
     requestAnimationFrame(mainCanvasLoop);
 }

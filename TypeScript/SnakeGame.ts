@@ -63,7 +63,7 @@ function updateHeadPosition(): boolean {
 
     SnakeModel.unshift(newHead);
 
-    Settings.displaySnakeLength(SnakeModel.getLength());
+    Settings.displayScore(SnakeModel.getLength());
 
     return true;
 }

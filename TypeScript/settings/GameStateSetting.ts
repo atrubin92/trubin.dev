@@ -3,36 +3,38 @@ import * as FieldSize from "./FieldSizeSetting";
 
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 
-let gameState = GameState.NOT_STARTED
-
 const buttonTextMap = {
     [GameState.NOT_STARTED]: "Start",
     [GameState.IN_PROGRESS]: "Pause",
     [GameState.PAUSED]: "Resume"
-};
+}
+
+let gameState = GameState.NOT_STARTED
 
 export function getGameState(): GameState {
     return gameState
 }
 
 export function resetGameState() {
-    gameState = GameState.NOT_STARTED
-    updateGameStateButton()
+    updateGameState(GameState.NOT_STARTED)
+}
+
+export function gameOver() {
+    updateGameState(GameState.NOT_STARTED)
 }
 
 gameStateButton.addEventListener("click", () => {
     switch (gameState) {
         case GameState.NOT_STARTED:
-            gameState = GameState.IN_PROGRESS
+            updateGameState(GameState.IN_PROGRESS)
             break;
         case GameState.IN_PROGRESS:
-            gameState = GameState.PAUSED
+            updateGameState(GameState.PAUSED)
             break;
         case GameState.PAUSED:
-            gameState = GameState.IN_PROGRESS
+            updateGameState(GameState.IN_PROGRESS)
             break;
     }
-    updateGameStateButton()
 })
 
 function updateGameStateButton() {
@@ -40,7 +42,19 @@ function updateGameStateButton() {
     FieldSize.setInputsDisabled(gameState !== GameState.NOT_STARTED);
 }
 
-export function gameOver() {
-    gameState = GameState.NOT_STARTED
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden && gameState == GameState.IN_PROGRESS) {
+        updateGameState(GameState.PAUSED)
+    }
+})
+
+window.addEventListener("blur", () => {
+    if (gameState == GameState.IN_PROGRESS) {
+        updateGameState(GameState.PAUSED)
+    }
+})
+
+function updateGameState(newGameState: GameState) {
+    gameState = newGameState
     updateGameStateButton()
 }

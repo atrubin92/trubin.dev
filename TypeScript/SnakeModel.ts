@@ -6,7 +6,7 @@ let snake: SnakeCell[] = []
 
 export function createInitialData() {
     snake = [SnakeCell.create()]
-    snake[0] = calcNewHead()
+    snake[0].dir = SnakeHead.getOffsets()
 }
 
 export function calcNewHead() {

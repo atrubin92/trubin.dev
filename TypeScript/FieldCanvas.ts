@@ -4,26 +4,40 @@ import * as Settings from "./Settings";
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-let boxWidth = canvas.width / Settings.getFieldWidth();
-let halfBoxWidth = boxWidth / 2;
+let boxWidth = 0
+let halfBoxWidth = 0
 
-let boxHeight = canvas.height / Settings.getFieldHeight();
-let halfBoxHeight = boxHeight / 2;
+let boxHeight = 0
+let halfBoxHeight = 0
 
-export function draw(snake: SnakeCell[], food: SnakeCell, stepPercentage: number = 0): void {
+export function draw(snake: SnakeCell[], food?: SnakeCell, stepPercentage: number = 0) {
+    calcBoxSize()
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    drawGrid()
+    drawFood(food)
+    drawSnake(snake, stepPercentage)
+}
+
+function calcBoxSize() {
     boxWidth = canvas.width / Settings.getFieldWidth();
     halfBoxWidth = boxWidth / 2;
 
     boxHeight = canvas.height / Settings.getFieldHeight();
     halfBoxHeight = boxHeight / 2;
+}
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawFood(food?: SnakeCell) {
+    if (food == null) {
+        return
+    }
 
-    drawGrid();
+    ctx.fillStyle = "red"
+    drawCell(food.x, food.y)
+}
 
-    ctx.fillStyle = "red";
-    drawCell(food.x, food.y);
-
+function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
     const snakeCellFixedScale = 0.7
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {

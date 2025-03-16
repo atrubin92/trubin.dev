@@ -19,6 +19,7 @@ function createInitialData() {
 
 function mainCanvasLoop(timestamp: number): void {
     if (Settings.getGameState() != GameState.IN_PROGRESS) {
+        FieldCanvas.draw([], null, 0);
         requestAnimationFrame(mainCanvasLoop);
         return
     }

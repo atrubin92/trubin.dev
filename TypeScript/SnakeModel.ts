@@ -1,12 +1,12 @@
-import { SnakeCell } from "./SnakeCell"
+import { SnakeCell } from "./entiries/SnakeCell"
 import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
+import { FieldCell } from "./entiries/FieldCell";
 
 let snake: SnakeCell[] = []
 
 export function createInitialData() {
-    snake = [SnakeCell.create()]
-    snake[0].dir = SnakeHead.getOffsets()
+    snake = [SnakeCell.create(SnakeHead.getOffsets())]
 }
 
 export function reset() {
@@ -41,7 +41,6 @@ export function getSnakeCopy(): SnakeCell[] {
     return snake.map(cell => ({ ...cell }))
 }
 
-export function contain(newPart: SnakeCell): boolean {
+export function contain(newPart: FieldCell): boolean {
     return snake.some(part => part.x === newPart.x && part.y === newPart.y)
 }
-

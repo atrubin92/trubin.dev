@@ -1,18 +1,19 @@
 import * as FieldCanvas from "./FieldCanvas";
-import { SnakeCell } from "./SnakeCell";
+import { SnakeCell } from "./entiries/SnakeCell";
 import * as Settings from "./Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import { GameState } from "./settings/GameState";
+import { FieldCell } from "./entiries/FieldCell";
 
-let food: SnakeCell;
+let food: FieldCell
 
 requestAnimationFrame(mainCanvasLoop);
 
 function createInitialData() {
     SnakeModel.createInitialData()
 
-    food = SnakeCell.create();
+    food = FieldCell.create();
 
     Settings.displaySettings();
 }
@@ -50,7 +51,7 @@ function updateHeadPosition(): boolean {
             SnakeModel.contain(food) ||
             newHead.x === food.x && newHead.y === food.y
         ) {
-            food = SnakeCell.create();
+            food = FieldCell.create()
         }
     } else {
         SnakeModel.pop();

@@ -3,17 +3,15 @@ import { SnakeCell } from "./entiries/SnakeCell";
 import * as Settings from "./Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
+import * as FoodModel from "./FoodModel";
 import { GameState } from "./settings/GameState";
 import { FieldCell } from "./entiries/FieldCell";
-
-let food: FieldCell
 
 requestAnimationFrame(mainCanvasLoop);
 
 function createInitialData() {
     SnakeModel.createInitialData()
-
-    food = FieldCell.create();
+    FoodModel.createInitialData()
 
     Settings.displaySettings();
 }
@@ -35,7 +33,7 @@ function mainCanvasLoop(timestamp: number): void {
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress();
-                FieldCanvas.draw(SnakeModel.getSnakeCopy(), food, stepPercentage);
+                FieldCanvas.draw(SnakeModel.getSnakeCopy(), FoodModel.getFoodCopy(), stepPercentage);
             }
             break;
     }
@@ -46,12 +44,12 @@ function mainCanvasLoop(timestamp: number): void {
 function updateHeadPosition(): boolean {
     const newHead = SnakeModel.calcNewHead();
 
-    if (newHead.x === food.x && newHead.y === food.y) {
+    if (newHead.x === FoodModel.getFoodCopy().x && newHead.y === FoodModel.getFoodCopy().y) {
         while (
-            SnakeModel.contain(food) ||
-            newHead.x === food.x && newHead.y === food.y
+            SnakeModel.contain(FoodModel.getFoodCopy()) ||
+            newHead.x === FoodModel.getFoodCopy().x && newHead.y === FoodModel.getFoodCopy().y
         ) {
-            food = FieldCell.create()
+            FoodModel.createInitialData()
         }
     } else {
         SnakeModel.pop();

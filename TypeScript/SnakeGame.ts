@@ -33,7 +33,7 @@ function mainCanvasLoop(timestamp: number): void {
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress();
-                FieldCanvas.draw(SnakeModel.getSnakeCopy(), FoodModel.getFoodCopy(), stepPercentage);
+                FieldCanvas.draw(SnakeModel.getSnakeCopy(), FoodModel.getFoodArrayCopy(), stepPercentage);
             }
             break;
     }
@@ -42,26 +42,23 @@ function mainCanvasLoop(timestamp: number): void {
 }
 
 function updateHeadPosition(): boolean {
-    const newHead = SnakeModel.calcNewHead();
+    const newSnakeHead = SnakeModel.calcNewHead();
 
-    if (newHead.x === FoodModel.getFoodCopy().x && newHead.y === FoodModel.getFoodCopy().y) {
-        while (
-            SnakeModel.contain(FoodModel.getFoodCopy()) ||
-            newHead.x === FoodModel.getFoodCopy().x && newHead.y === FoodModel.getFoodCopy().y
-        ) {
+    if (FoodModel.contain(newSnakeHead)) {
+        while (SnakeModel.contain(FoodModel.getFoodArrayCopy()) || FoodModel.contain(newSnakeHead)) {
             FoodModel.createInitialData()
         }
     } else {
         SnakeModel.pop();
     }
 
-    if (isGameOver(newHead)) {
+    if (isGameOver(newSnakeHead)) {
         Settings.gemeOver()
         SnakeModel.reset();
         return false;
     }
 
-    SnakeModel.unshift(newHead);
+    SnakeModel.unshift(newSnakeHead);
 
     Settings.displayScore(SnakeModel.getLength());
 

@@ -1,4 +1,4 @@
-import { BasicCell } from "./entiries/BasicCell";
+import { SimpleCell } from "./entiries/SimpleCell";
 import { SnakeCell } from "./entiries/SnakeCell";
 import * as Settings from "./Settings";
 
@@ -11,7 +11,7 @@ let halfBoxWidth = 0
 let boxHeight = 0
 let halfBoxHeight = 0
 
-export function draw(snake: SnakeCell[], food?: BasicCell, stepPercentage: number = 0) {
+export function draw(snake: SnakeCell[], food?: SimpleCell, stepPercentage: number = 0) {
     calcBoxSize()
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -29,7 +29,7 @@ function calcBoxSize() {
     halfBoxHeight = boxHeight / 2;
 }
 
-function drawFood(food?: BasicCell) {
+function drawFood(food?: SimpleCell) {
     if (!food) return
 
     drawCell(food.x, food.y, "red")

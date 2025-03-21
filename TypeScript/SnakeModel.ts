@@ -3,44 +3,47 @@ import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
 import { FieldCell } from "./entiries/FieldCell";
 
-let snake: SnakeCell[] = []
+let snakeCellArray: SnakeCell[] = []
 
 export function createInitialData() {
-    snake = [SnakeCell.create(SnakeHead.getOffsets())]
+    const newFieldCell = FieldCell.create()
+    snakeCellArray = [new SnakeCell(newFieldCell.x, newFieldCell.y, SnakeHead.getOffsets())]
 }
 
 export function reset() {
     SnakeHead.reset()
-    snake = []
+    snakeCellArray = []
 }
 
-export function calcNewHead() {
+export function calcNewHead():SnakeCell {
     const previousHeadDirection = SnakeHead.getOffsets()
 
-    const newHeadX = (snake[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
-    const newHeadY = (snake[0].y + previousHeadDirection.y + Settings.getFieldHeight()) % Settings.getFieldHeight()
+    const newHeadX = (snakeCellArray[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
+    const newHeadY = (snakeCellArray[0].y + previousHeadDirection.y + Settings.getFieldHeight()) % Settings.getFieldHeight()
 
     SnakeHead.updateCurrentStep()
     const currentHeadDirection = SnakeHead.getOffsets()
 
-    return { x: newHeadX, y: newHeadY, dir: currentHeadDirection }
+    return new SnakeCell(newHeadX, newHeadY, currentHeadDirection)
 }
 
 export function getLength(): number {
-    return snake.length
+    return snakeCellArray.length
 }
 export function unshift(newHead: SnakeCell) {
-    snake.unshift(newHead)
+    snakeCellArray.unshift(newHead)
 }
 
 export function pop() {
-    snake.pop()
+    snakeCellArray.pop()
 }
 
 export function getSnakeCopy(): SnakeCell[] {
-    return snake.map(cell => ({ ...cell }))
+    return snakeCellArray.map(snakeCell => 
+            new SnakeCell(snakeCell.x, snakeCell.y, snakeCell.dir)
+        )
 }
 
 export function contain(newPart: FieldCell): boolean {
-    return snake.some(part => part.x === newPart.x && part.y === newPart.y)
+    return snakeCellArray.some(part => part.x === newPart.x && part.y === newPart.y)
 }

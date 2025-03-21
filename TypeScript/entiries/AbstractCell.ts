@@ -1,4 +1,6 @@
-abstract class AbstractCell implements ICell {
+import { ICell } from "./ICell"
+
+export abstract class AbstractCell implements ICell {
     x: number
     y: number
 

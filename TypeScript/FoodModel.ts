@@ -1,15 +1,19 @@
 import { FieldCell } from "./entiries/FieldCell";
+import { FoodCell } from "./entiries/FoodCell";
 
-let foodArray: FieldCell[] = []
+let foodCellArray: FoodCell[] = []
 
 export function createInitialData() {
-    foodArray = [FieldCell.create()]
+    const newFieldCell = FieldCell.create()
+    foodCellArray = [new FoodCell(newFieldCell.x, newFieldCell.y)]
 }
 
-export function getFoodArrayCopy(): FieldCell {
-    return foodArray.map(foodItem => ({ ...foodItem }))[0]
+export function getFoodArrayCopy(): FoodCell {
+    return foodCellArray.map(foodCell => 
+        new FoodCell(foodCell.x, foodCell.y)
+    )[0]
 }
 
 export function contain(newCell: FieldCell): boolean {
-    return foodArray.some(foodItem => foodItem.x === newCell.x && foodItem.y === newCell.y)
+    return foodCellArray.some(foodItem => foodItem.x === newCell.x && foodItem.y === newCell.y)
 }

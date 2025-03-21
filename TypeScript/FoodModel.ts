@@ -1,5 +1,6 @@
 import { FieldCell } from "./entiries/FieldCell";
 import { FoodCell } from "./entiries/FoodCell";
+import { ICell } from "./entiries/ICell";
 
 let foodCellArray: FoodCell[] = []
 
@@ -14,6 +15,6 @@ export function getFoodArrayCopy(): FoodCell {
     )[0]
 }
 
-export function contain(newCell: FieldCell): boolean {
-    return foodCellArray.some(foodItem => foodItem.x === newCell.x && foodItem.y === newCell.y)
+export function contain(anotherCell: ICell): boolean {
+    return foodCellArray.some(foodItem => foodItem.equals(anotherCell))
 }

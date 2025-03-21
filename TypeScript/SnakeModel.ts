@@ -2,6 +2,7 @@ import { SnakeCell } from "./entiries/SnakeCell"
 import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
 import { FieldCell } from "./entiries/FieldCell";
+import { ICell } from "./entiries/ICell";
 
 let snakeCellArray: SnakeCell[] = []
 
@@ -39,11 +40,11 @@ export function pop() {
 }
 
 export function getSnakeCopy(): SnakeCell[] {
-    return snakeCellArray.map(snakeCell => 
-            new SnakeCell(snakeCell.x, snakeCell.y, snakeCell.dir)
+    return snakeCellArray.map(snakeCellItem => 
+            new SnakeCell(snakeCellItem.x, snakeCellItem.y, snakeCellItem.dir)
         )
 }
 
-export function contain(newPart: FieldCell): boolean {
-    return snakeCellArray.some(part => part.x === newPart.x && part.y === newPart.y)
+export function contain(anotherCell: ICell): boolean {
+    return snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
 }

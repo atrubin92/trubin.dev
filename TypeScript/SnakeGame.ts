@@ -5,7 +5,6 @@ import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import * as FoodModel from "./FoodModel";
 import { GameState } from "./settings/GameState";
-import { FieldCell } from "./entiries/FieldCell";
 
 requestAnimationFrame(mainCanvasLoop);
 

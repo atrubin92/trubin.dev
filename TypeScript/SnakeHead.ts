@@ -9,7 +9,7 @@ let currentStep: Step = Step.Up
 let nextStep: Step = Step.Up
 reset()
 
-export function getOffsets(): Direction {
+export function getDirection(): Direction {
 	switch (currentStep) {
 		case Step.Up:
 			return { x: 0, y: -1 };

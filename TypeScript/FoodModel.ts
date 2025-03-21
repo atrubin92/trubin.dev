@@ -9,7 +9,7 @@ export function createInitialData() {
     foodCellArray = [new FoodCell(newFieldCell.x, newFieldCell.y)]
 }
 
-export function getFoodArrayCopy(): FoodCell {
+export function getFoodCellArrayCopy(): FoodCell {
     return foodCellArray.map(foodCell => 
         new FoodCell(foodCell.x, foodCell.y)
     )[0]

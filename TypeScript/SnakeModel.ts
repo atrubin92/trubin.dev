@@ -8,7 +8,7 @@ let snakeCellArray: SnakeCell[] = []
 
 export function createInitialData() {
     const newFieldCell = FieldCell.create()
-    snakeCellArray = [new SnakeCell(newFieldCell.x, newFieldCell.y, SnakeHead.getOffsets())]
+    snakeCellArray = [new SnakeCell(newFieldCell.x, newFieldCell.y, SnakeHead.getDirection())]
 }
 
 export function reset() {
@@ -17,13 +17,13 @@ export function reset() {
 }
 
 export function calcNewHead():SnakeCell {
-    const previousHeadDirection = SnakeHead.getOffsets()
+    const previousHeadDirection = SnakeHead.getDirection()
 
     const newHeadX = (snakeCellArray[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
     const newHeadY = (snakeCellArray[0].y + previousHeadDirection.y + Settings.getFieldHeight()) % Settings.getFieldHeight()
 
     SnakeHead.updateCurrentStep()
-    const currentHeadDirection = SnakeHead.getOffsets()
+    const currentHeadDirection = SnakeHead.getDirection()
 
     return new SnakeCell(newHeadX, newHeadY, currentHeadDirection)
 }
@@ -39,7 +39,7 @@ export function pop() {
     snakeCellArray.pop()
 }
 
-export function getSnakeCopy(): SnakeCell[] {
+export function getSnakeCellArrayCopy(): SnakeCell[] {
     return snakeCellArray.map(snakeCellItem => 
             new SnakeCell(snakeCellItem.x, snakeCellItem.y, snakeCellItem.dir)
         )

@@ -32,7 +32,7 @@ function mainCanvasLoop(timestamp: number): void {
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress();
-                FieldCanvas.draw(SnakeModel.getSnakeCellArrayCopy(), FoodModel.getFoodCellArrayCopy(), stepPercentage);
+                FieldCanvas.draw(SnakeModel.getSnakeCellArrayCopy(), FoodModel.getFoodCellArrayCopy()[0], stepPercentage);
             }
             break;
     }
@@ -44,7 +44,7 @@ function updateHeadPosition(): boolean {
     const newSnakeHead = SnakeModel.calcNewHead();
 
     if (FoodModel.contain(newSnakeHead)) {
-        while (SnakeModel.contain(FoodModel.getFoodCellArrayCopy()) || FoodModel.contain(newSnakeHead)) {
+        while (SnakeModel.containsAny(FoodModel.getFoodCellArrayCopy()) || FoodModel.contain(newSnakeHead)) {
             FoodModel.createInitialData()
         }
     } else {

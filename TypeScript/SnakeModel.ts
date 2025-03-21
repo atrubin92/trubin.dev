@@ -16,7 +16,7 @@ export function reset() {
     snakeCellArray = []
 }
 
-export function calcNewHead():SnakeCell {
+export function calcNewHead(): SnakeCell {
     const previousHeadDirection = SnakeHead.getDirection()
 
     const newHeadX = (snakeCellArray[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
@@ -40,11 +40,17 @@ export function pop() {
 }
 
 export function getSnakeCellArrayCopy(): SnakeCell[] {
-    return snakeCellArray.map(snakeCellItem => 
-            new SnakeCell(snakeCellItem.x, snakeCellItem.y, snakeCellItem.dir)
-        )
+    return snakeCellArray.map(snakeCellItem =>
+        new SnakeCell(snakeCellItem.x, snakeCellItem.y, snakeCellItem.dir)
+    )
 }
 
 export function contain(anotherCell: ICell): boolean {
     return snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
+}
+
+export function containsAny(anotherCellArray: ICell[]): boolean {
+    return anotherCellArray.some(anotherCell => 
+        snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
+    );
 }

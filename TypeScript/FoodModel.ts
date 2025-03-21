@@ -1,17 +1,17 @@
 import { FieldCell } from "./entiries/FieldCell";
-import { FoodCell } from "./entiries/FoodCell";
+import { BasicCell } from "./entiries/BasicCell";
 import { ICell } from "./entiries/ICell";
 
-let foodCellArray: FoodCell[] = []
+let foodCellArray: BasicCell[] = []
 
 export function createInitialData() {
     const newFieldCell = FieldCell.create()
-    foodCellArray = [new FoodCell(newFieldCell.x, newFieldCell.y)]
+    foodCellArray = [new BasicCell(newFieldCell.x, newFieldCell.y)]
 }
 
-export function getFoodCellArrayCopy(): FoodCell[] {
+export function getFoodCellArrayCopy(): BasicCell[] {
     return foodCellArray.map(foodCell =>
-        new FoodCell(foodCell.x, foodCell.y)
+        new BasicCell(foodCell.x, foodCell.y)
     )
 }
 

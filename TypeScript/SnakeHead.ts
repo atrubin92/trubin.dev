@@ -1,3 +1,6 @@
+import { getGameState } from "./Settings";
+import { GameState } from "./settings/GameState";
+
 export enum Step {
 	Up,
 	Down,
@@ -35,6 +38,8 @@ export function reset() {
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(event: KeyboardEvent): void {
+	if (getGameState() != GameState.IN_PROGRESS) return
+
 	switch (event.key) {
 		case "ArrowUp":
 			if (currentStep !== Step.Down) {

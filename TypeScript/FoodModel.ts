@@ -4,10 +4,14 @@ import { findEmptyCell } from "./utils/EmptyCellUtil";
 
 const foodCellArray: SimpleCell[] = []
 
+const foodCount = 3
+
 export function createInitialData() {
-    const emptyCell = findEmptyCell()
     foodCellArray.length = 0
-    foodCellArray.push(new SimpleCell(emptyCell.x, emptyCell.y))
+    while (foodCellArray.length < foodCount) {
+        const emptyCell = findEmptyCell()
+        foodCellArray.push(new SimpleCell(emptyCell.x, emptyCell.y))
+    }
 }
 
 export function getFoodCellArrayCopy(): SimpleCell[] {
@@ -16,6 +20,13 @@ export function getFoodCellArrayCopy(): SimpleCell[] {
     )
 }
 
-export function contain(anotherCell: ICell): boolean {
-    return foodCellArray.some(foodItem => foodItem.equals(anotherCell))
+export function replace(anotherCell: ICell) {
+    const replacedIndex = foodCellArray.findIndex(cell => cell.equals(anotherCell))
+    if (replacedIndex == -1) {
+        return false
+    }
+
+    const emptyCell = findEmptyCell()
+    foodCellArray[replacedIndex] = new SimpleCell(emptyCell.x, emptyCell.y)
+    return true
 }

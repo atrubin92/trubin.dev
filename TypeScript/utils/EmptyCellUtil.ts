@@ -1,8 +1,8 @@
-import { ICell } from "../entiries/ICell";
+import { ICell } from "../entiries/cell/ICell";
 import { getSnakeCellArrayCopy } from "../SnakeModel";
 import { getFoodCellArrayCopy } from "../FoodModel";
 import * as Setting from "../Settings";
-import { SimpleCell } from "../entiries/SimpleCell";
+import { SimpleCell } from "../entiries/cell/SimpleCell";
 
 export function findEmptyCell(): ICell {
     const emptyCellArray = createEmptyCellArray()    

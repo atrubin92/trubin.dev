@@ -1,5 +1,5 @@
-import { SimpleCell } from "./entiries/SimpleCell";
-import { SnakeCell } from "./entiries/SnakeCell";
+import { SimpleCell } from "./entiries/cell/SimpleCell";
+import { SnakeCell } from "./entiries/cell/SnakeCell";
 import * as Settings from "./Settings";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;

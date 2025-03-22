@@ -1,7 +1,7 @@
-import { SnakeCell } from "./entiries/SnakeCell"
+import { SnakeCell } from "./entiries/cell/SnakeCell"
 import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
-import { ICell } from "./entiries/ICell";
+import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
 
 let snakeCellArray: SnakeCell[] = []

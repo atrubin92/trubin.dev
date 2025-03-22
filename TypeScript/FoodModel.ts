@@ -1,5 +1,5 @@
-import { SimpleCell } from "./entiries/SimpleCell";
-import { ICell } from "./entiries/ICell";
+import { SimpleCell } from "./entiries/cell/SimpleCell";
+import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
 
 let foodCellArray: SimpleCell[] = []

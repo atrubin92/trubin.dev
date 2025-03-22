@@ -1,5 +1,5 @@
 import { getGameState } from "./settings/Settings";
-import { GameState } from "./settings/GameState";
+import { GameState } from "./entiries/GameState";
 
 export enum Step {
 	Up,

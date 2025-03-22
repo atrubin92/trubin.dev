@@ -4,7 +4,7 @@ import * as Settings from "./settings/Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import * as FoodModel from "./FoodModel";
-import { GameState } from "./settings/GameState";
+import { GameState } from "./entiries/GameState";
 
 requestAnimationFrame(mainCanvasLoop);
 

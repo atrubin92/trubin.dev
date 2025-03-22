@@ -5,9 +5,17 @@ import * as Setting from "../Settings";
 import { SimpleCell } from "../entiries/SimpleCell";
 
 export function findEmptyCell(): ICell {
-    const width = Setting.getFieldWidth();
-    const height = Setting.getFieldHeight();
+    const emptyCellArray = createEmptyCellArray()    
 
+    if (emptyCellArray.length === 0) {
+        throw new Error("No empty cells available!");
+    }
+
+    const randomIndex = Math.floor(Math.random() * emptyCellArray.length);
+    return emptyCellArray[randomIndex];
+}
+
+function createOccupiedCellSet(): Set<string> {
     const snakeCells: ICell[] = getSnakeCellArrayCopy();
     const foodCells: ICell[] = getFoodCellArrayCopy();
 
@@ -15,23 +23,27 @@ export function findEmptyCell(): ICell {
         snakeCells.concat(foodCells).map(cellToKey)
     );
 
-    const emptyCells: ICell[] = [];
+    return occupiedCells
+}
+
+function createEmptyCellArray(): ICell[] {
+    const occupiedCellSet = createOccupiedCellSet()
+
+    const width = Setting.getFieldWidth();
+    const height = Setting.getFieldHeight();
+
+    const emptyCellArray: ICell[] = [];
 
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
             const key = coordinateToKey(x, y);
-            if (!occupiedCells.has(key)) {
-                emptyCells.push(new SimpleCell(x, y));
+            if (!occupiedCellSet.has(key)) {
+                emptyCellArray.push(new SimpleCell(x, y));
             }
         }
     }
 
-    if (emptyCells.length === 0) {
-        throw new Error("No empty cells available!");
-    }
-
-    const randomIndex = Math.floor(Math.random() * emptyCells.length);
-    return emptyCells[randomIndex];
+    return emptyCellArray
 }
 
 function cellToKey(cell: ICell): string {

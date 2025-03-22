@@ -32,7 +32,7 @@ function mainCanvasLoop(timestamp: number): void {
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress();
-                FieldCanvas.draw(SnakeModel.getSnakeCellArrayCopy(), FoodModel.getFoodCellArrayCopy()[0], stepPercentage);
+                FieldCanvas.draw(SnakeModel.getSnakeCellArrayCopy(), FoodModel.getFoodCellArrayCopy(), stepPercentage);
             }
             break;
     }

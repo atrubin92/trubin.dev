@@ -4,16 +4,17 @@ import * as Settings from "./Settings";
 import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
 
-let snakeCellArray: SnakeCell[] = []
+const snakeCellArray: SnakeCell[] = []
 
 export function createInitialData() {
     const emptyCell = findEmptyCell()
-    snakeCellArray = [new SnakeCell(emptyCell.x, emptyCell.y, SnakeHead.getDirection())]
+    snakeCellArray.length = 0
+    snakeCellArray.push(new SnakeCell(emptyCell.x, emptyCell.y, SnakeHead.getDirection()))
 }
 
 export function reset() {
     SnakeHead.reset()
-    snakeCellArray = []
+    snakeCellArray.length = 0
 }
 
 export function calcNewHead(): SnakeCell {
@@ -50,7 +51,7 @@ export function contain(anotherCell: ICell): boolean {
 }
 
 export function containsAny(anotherCellArray: ICell[]): boolean {
-    return anotherCellArray.some(anotherCell => 
+    return anotherCellArray.some(anotherCell =>
         snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
     );
 }

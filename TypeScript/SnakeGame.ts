@@ -1,6 +1,6 @@
 import * as FieldCanvas from "./FieldCanvas";
 import { SnakeCell } from "./entiries/cell/SnakeCell";
-import * as Settings from "./Settings";
+import * as Settings from "./settings/Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import * as FoodModel from "./FoodModel";

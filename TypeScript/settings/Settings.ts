@@ -1,8 +1,8 @@
-import * as StepDurationSetting from "./settings/StepDurationSetting"
-import * as GameStateSetting from "./settings/GameStateSetting"
-import * as FieldSizeSetting from "./settings/FieldSizeSetting"
-import * as ScoreSetting from "./settings/ScoreSetting"
-import { GameState } from "./settings/GameState"
+import * as StepDurationSetting from "./StepDurationSetting"
+import * as GameStateSetting from "./GameStateSetting"
+import * as FieldSizeSetting from "./FieldSizeSetting"
+import * as ScoreSetting from "./ScoreSetting"
+import { GameState } from "./GameState"
 
 export function getFieldWidth() {
     return FieldSizeSetting.getFieldWidth()

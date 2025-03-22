@@ -1,4 +1,4 @@
-import * as Settings from "./Settings";
+import * as Settings from "./settings/Settings";
 
 let stepTime = 0
 

@@ -1,6 +1,6 @@
 import { SimpleCell } from "./entiries/cell/SimpleCell";
 import { SnakeCell } from "./entiries/cell/SnakeCell";
-import * as Settings from "./Settings";
+import * as Settings from "./settings/Settings";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;

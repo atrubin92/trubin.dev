@@ -1,6 +1,6 @@
 import { SnakeCell } from "./entiries/cell/SnakeCell"
 import * as SnakeHead from "./SnakeHead"
-import * as Settings from "./Settings";
+import * as Settings from "./settings/Settings";
 import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
 

@@ -1,4 +1,4 @@
-import { getGameState } from "./Settings";
+import { getGameState } from "./settings/Settings";
 import { GameState } from "./settings/GameState";
 
 export enum Step {

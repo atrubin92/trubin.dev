@@ -1,5 +1,5 @@
 import { GameState } from "../entiries/GameState"
-import * as FieldSize from "./FieldSizeSetting";
+import * as FieldSize from "./_FieldSizeSetting";
 
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 

@@ -1,8 +1,8 @@
-import { ICell } from "./ICell";
+import { ICell } from "../entiries/ICell";
 import { getSnakeCellArrayCopy } from "../SnakeModel";
 import { getFoodCellArrayCopy } from "../FoodModel";
 import * as Setting from "../Settings";
-import { SimpleCell } from "./SimpleCell";
+import { SimpleCell } from "../entiries/SimpleCell";
 
 export function findEmptyCell(): ICell {
     const width = Setting.getFieldWidth();

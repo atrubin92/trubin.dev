@@ -1,14 +1,14 @@
 import { SnakeCell } from "./entiries/SnakeCell"
 import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./Settings";
-import { FieldCell } from "./entiries/FieldCell";
 import { ICell } from "./entiries/ICell";
+import { findEmptyCell } from "./utils/EmptyCellUtil";
 
 let snakeCellArray: SnakeCell[] = []
 
 export function createInitialData() {
-    const newFieldCell = FieldCell.create()
-    snakeCellArray = [new SnakeCell(newFieldCell.x, newFieldCell.y, SnakeHead.getDirection())]
+    const emptyCell = findEmptyCell()
+    snakeCellArray = [new SnakeCell(emptyCell.x, emptyCell.y, SnakeHead.getDirection())]
 }
 
 export function reset() {

@@ -1,12 +1,12 @@
-import { FieldCell } from "./entiries/FieldCell";
 import { SimpleCell } from "./entiries/SimpleCell";
 import { ICell } from "./entiries/ICell";
+import { findEmptyCell } from "./utils/EmptyCellUtil";
 
 let foodCellArray: SimpleCell[] = []
 
 export function createInitialData() {
-    const newFieldCell = FieldCell.create()
-    foodCellArray = [new SimpleCell(newFieldCell.x, newFieldCell.y)]
+    const emptyCell = findEmptyCell()
+    foodCellArray = [new SimpleCell(emptyCell.x, emptyCell.y)]
 }
 
 export function getFoodCellArrayCopy(): SimpleCell[] {

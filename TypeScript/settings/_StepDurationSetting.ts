@@ -9,7 +9,6 @@ export function displayStepDuration() {
 const stepDurationInput = document.getElementById('stepDurationInput') as HTMLInputElement;
 
 let stepDuration = 300
-displayStepDuration()
 
 stepDurationInput.addEventListener('change', () => {
     const value = parseInt(stepDurationInput.value, 10);

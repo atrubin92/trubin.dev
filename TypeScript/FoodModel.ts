@@ -1,13 +1,14 @@
 import { SimpleCell } from "./entiries/cell/SimpleCell";
 import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
+import * as Settings from "./settings/Settings";
 
 const foodCellArray: SimpleCell[] = []
 
-const foodCount = 3
-
 export function createInitialData() {
     foodCellArray.length = 0
+    const foodCount = Settings.getFoodCount()
+
     while (foodCellArray.length < foodCount) {
         const emptyCell = findEmptyCell()
         foodCellArray.push(new SimpleCell(emptyCell.x, emptyCell.y))

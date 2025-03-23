@@ -2,6 +2,7 @@ import * as StepDurationSetting from "./_StepDurationSetting"
 import * as GameStateSetting from "./_GameStateSetting"
 import * as FieldSizeSetting from "./_FieldSizeSetting"
 import * as ScoreSetting from "./_ScoreSetting"
+import * as FoodCountSetting from "./_FoodCountSetting"
 import { GameState } from "../entiries/GameState"
 
 export function getFieldWidth() {

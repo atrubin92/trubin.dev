@@ -1,5 +1,6 @@
 import { GameState } from "../entiries/GameState"
 import * as FieldSize from "./_FieldSizeSetting";
+import * as FoodCount from "./_FoodCountSetting";
 
 export function getGameState(): GameState {
     return gameState
@@ -35,7 +36,11 @@ gameStateButton.addEventListener("click", () => {
 
 function updateGameStateButton() {
     gameStateButton.innerText = buttonTextMap[gameState]
-    FieldSize.setInputsDisabled(gameState !== GameState.NOT_STARTED);
+
+    const inputsDisabled = gameState !== GameState.NOT_STARTED
+
+    FieldSize.setInputsDisabled(inputsDisabled)
+    FoodCount.setInputDisabled(inputsDisabled)
 }
 
 document.addEventListener("visibilitychange", () => {

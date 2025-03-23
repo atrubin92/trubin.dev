@@ -17,6 +17,10 @@ export function getGameState(): GameState {
     return GameStateSetting.getGameState()
 }
 
+export function gemeOver() {
+    GameStateSetting.gameOver()
+}
+
 export function displayScore(snakeValue: number) {
     ScoreSetting.displayScore(snakeValue)
 }
@@ -35,8 +39,4 @@ export function getFoodCount() {
 
 export function displayFoodCount() {
     FoodCountSetting.displayFoodCount()
-}
-
-export function gemeOver() {
-    GameStateSetting.gameOver()
 }

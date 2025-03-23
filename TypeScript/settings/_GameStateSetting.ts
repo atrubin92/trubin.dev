@@ -1,6 +1,14 @@
 import { GameState } from "../entiries/GameState"
 import * as FieldSize from "./_FieldSizeSetting";
 
+export function getGameState(): GameState {
+    return gameState
+}
+
+export function gameOver() {
+    updateGameState(GameState.NOT_STARTED)
+}
+
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 
 const buttonTextMap = {
@@ -10,18 +18,6 @@ const buttonTextMap = {
 }
 
 let gameState = GameState.NOT_STARTED
-
-export function getGameState(): GameState {
-    return gameState
-}
-
-export function resetGameState() {
-    updateGameState(GameState.NOT_STARTED)
-}
-
-export function gameOver() {
-    updateGameState(GameState.NOT_STARTED)
-}
 
 gameStateButton.addEventListener("click", () => {
     switch (gameState) {

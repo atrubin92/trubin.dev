@@ -11,8 +11,6 @@ requestAnimationFrame(mainCanvasLoop);
 function createInitialData() {
     SnakeModel.createInitialData()
     FoodModel.createInitialData()
-
-    Settings.displaySettings();
 }
 
 function mainCanvasLoop(timestamp: number): void {

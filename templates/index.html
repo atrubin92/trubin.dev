@@ -68,16 +68,37 @@
   <div id="gameContainer">
     <div id="settingsContainer">
       <div id="scoreLabel">Score: 0</div>
+      <button id="gameStateButton" style="width: 100px;">Start</button>
       <div id="stepDurationContainer">
         <label for="stepDurationInput">Step Duration:</label>
         <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" style="width: 70px;" />
+      </div>
+      <div id="cellTypeContainer">
+        <label style="font-size: 18px; color: #333;">Cell Type:</label>
+        <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+          <label>
+            <input type="radio" name="cellType" value="square" checked />
+            <canvas width="20" height="20" id="previewSquare"></canvas>
+          </label>
+          <label>
+            <input type="radio" name="cellType" value="rounded" />
+            <canvas width="20" height="20" id="previewRounded"></canvas>
+          </label>
+          <label>
+            <input type="radio" name="cellType" value="circle" />
+            <canvas width="20" height="20" id="previewCircle"></canvas>
+          </label>
+          <label>
+            <input type="radio" name="cellType" value="star" />
+            <canvas width="20" height="20" id="previewStar"></canvas>
+          </label>
+        </div>
       </div>
       <div id="foodCountContainer">
         <label for="foodCountInput">Food Count:</label>
         <input type="number" id="foodCountInput" value="1" min="1" max="10" step="1" style="width: 70px;" />
       </div>
       <div id="gameStateContainer">
-        <button id="gameStateButton" style="width: 100px;">Start</button>
         <div class="input-cell-size">
           <label for="cellWidthInput">Cells by Width:</label>
           <input type="number" id="cellWidthInput" value="10" min="1" max="40" step="1" style="width: 70px;" />

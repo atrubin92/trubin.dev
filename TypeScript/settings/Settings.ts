@@ -22,7 +22,7 @@ export function displayScore(snakeValue: number) {
 }
 
 export function getStepDuration() {
-    return StepDurationSetting.stepDuration;
+    return StepDurationSetting.getStepDuration()
 }
 
 export function displayStepDuration() {
@@ -30,11 +30,11 @@ export function displayStepDuration() {
 }
 
 export function getFoodCount() {
-    return FoodCountSetting.foodCount;
+    return FoodCountSetting.getFoodCount()
 }
 
 export function displayFoodCount() {
-    FoodCountSetting.foodCount;
+    FoodCountSetting.displayFoodCount()
 }
 
 export function gemeOver() {

@@ -1,7 +1,15 @@
+export function getFoodCount() {
+    return foodCount
+}
+
+export function displayFoodCount() {
+    foodCountInput.textContent = foodCount.toString()
+}
+
 const foodCountInput = document.getElementById('foodCountInput') as HTMLInputElement;
 
-export let foodCount = 3
-displayFoodCountSetting()
+let foodCount = 3
+displayFoodCount()
 
 foodCountInput.addEventListener('change', () => {
     const value = parseInt(foodCountInput.value, 10);
@@ -27,8 +35,4 @@ foodCountInput.addEventListener("input", () => {
 
 function isValidFoodCount(value: number): boolean {
     return !isNaN(value) && 1 <= value && value <= 100
-}
-
-export function displayFoodCountSetting() {
-    foodCountInput.textContent = foodCount.toString()
 }

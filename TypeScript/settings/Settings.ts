@@ -29,14 +29,6 @@ export function getStepDuration() {
     return StepDurationSetting.getStepDuration()
 }
 
-export function displayStepDuration() {
-    StepDurationSetting.displayStepDuration()
-}
-
 export function getFoodCount() {
     return FoodCountSetting.getFoodCount()
-}
-
-export function displayFoodCount() {
-    FoodCountSetting.displayFoodCount()
 }

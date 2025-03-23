@@ -2,13 +2,10 @@ export function getStepDuration(): number {
     return stepDuration
 }
 
-export function displayStepDuration() {
-    stepDurationInput.textContent = stepDuration.toString()
-}
+let stepDuration = 300
 
 const stepDurationInput = document.getElementById('stepDurationInput') as HTMLInputElement;
-
-let stepDuration = 300
+stepDurationInput.value = stepDuration.toString()
 
 stepDurationInput.addEventListener('change', () => {
     const value = parseInt(stepDurationInput.value, 10);

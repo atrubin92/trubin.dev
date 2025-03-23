@@ -11,11 +11,14 @@ export function setInputsDisabled(disabled: boolean) {
     cellHeightInput.disabled = disabled;
 }
 
-const cellWidthInput = document.getElementById("cellWidthInput") as HTMLInputElement;
-const cellHeightInput = document.getElementById("cellHeightInput") as HTMLInputElement;
-
 let cellWidth = 10;
 let cellHeight = 10;
+
+const cellWidthInput = document.getElementById("cellWidthInput") as HTMLInputElement;
+cellWidthInput.value = cellWidth.toString();
+
+const cellHeightInput = document.getElementById("cellHeightInput") as HTMLInputElement;
+cellHeightInput.value = cellHeight.toString();
 
 function setupCellInput(
     inputElement: HTMLInputElement,

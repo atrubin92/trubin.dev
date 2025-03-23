@@ -2,17 +2,14 @@ export function getFoodCount() {
     return foodCount
 }
 
-export function displayFoodCount() {
-    foodCountInput.textContent = foodCount.toString()
-}
-
 export function setInputDisabled(disabled: boolean) {
     foodCountInput.disabled = disabled
 }
 
-const foodCountInput = document.getElementById('foodCountInput') as HTMLInputElement;
+let foodCount = 3
 
-let foodCount = 1
+const foodCountInput = document.getElementById('foodCountInput') as HTMLInputElement;
+foodCountInput.value = foodCount.toString()
 
 foodCountInput.addEventListener('change', () => {
     const value = parseInt(foodCountInput.value, 10);

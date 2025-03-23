@@ -8,11 +8,6 @@ import { GameState } from "./entiries/GameState";
 
 requestAnimationFrame(mainCanvasLoop);
 
-function createInitialData() {
-    SnakeModel.createInitialData()
-    FoodModel.createInitialData()
-}
-
 function mainCanvasLoop(timestamp: number): void {
     switch (Settings.getGameState()) {
         case GameState.NOT_STARTED:
@@ -36,6 +31,11 @@ function mainCanvasLoop(timestamp: number): void {
     }
 
     requestAnimationFrame(mainCanvasLoop);
+}
+
+function createInitialData() {
+    SnakeModel.createInitialData()
+    FoodModel.createInitialData()
 }
 
 function updateHeadPosition(): boolean {

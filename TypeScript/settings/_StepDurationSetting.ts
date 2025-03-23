@@ -1,6 +1,7 @@
 const stepDurationInput = document.getElementById('stepDurationInput') as HTMLInputElement;
 
 export let stepDuration = 300
+displayStepDuration()
 
 stepDurationInput.addEventListener('change', () => {
     const value = parseInt(stepDurationInput.value, 10);
@@ -28,6 +29,6 @@ function isValidStepDuration(value: number): boolean {
     return !isNaN(value) && 50 <= value && value <= 2_000
 }
 
-export function displaySetting() {
+export function displayStepDuration() {
     stepDurationInput.textContent = stepDuration.toString()
 }

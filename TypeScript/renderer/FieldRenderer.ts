@@ -2,6 +2,7 @@ import { SimpleCell } from "../entiries/cell/SimpleCell";
 import { SnakeCell } from "../entiries/cell/SnakeCell";
 import * as Settings from "../settings/Settings";
 import { drawGrid } from "./_GridRenderer";
+import { drawFood } from "./_FoodRenderer";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -12,14 +13,6 @@ export function draw(snakeArray: SnakeCell[], foodArray: SimpleCell[], stepPerce
     drawGrid()
     drawFood(foodArray)
     drawSnake(snakeArray, stepPercentage)
-}
-
-function drawFood(foodArray: SimpleCell[]) {
-    if (!foodArray) return
-
-    for (const foodItem of foodArray) {
-        drawCell(foodItem.x, foodItem.y, "red")
-    }
 }
 
 function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {

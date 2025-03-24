@@ -1,9 +1,7 @@
 import { SnakeCell } from "../entiries/cell/SnakeCell";
 import { getBoxWidth, getBoxHeight, getHalfBoxWidth, getHalfBoxHeight } from "../settings/Settings";
 import { getFieldWidth, getFieldHeight } from "../settings/Settings";
-
-const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-const ctx = canvas.getContext("2d")!;
+import { context } from "_CanvasContext";
 
 export function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
     const snakeScaleDiff = 0.3
@@ -32,8 +30,8 @@ function drawSnakeCell(partX: number, partY: number, snakeCellScale: number) {
 }
 
 function drawCell(partX: number, partY: number, color: string, sizePercentage: number = 1) {
-    ctx.fillStyle = color
-    ctx.fillRect(
+    context.fillStyle = color
+    context.fillRect(
         partX * getBoxWidth() + getHalfBoxWidth() - getHalfBoxWidth() * sizePercentage,
         partY * getBoxHeight() + getHalfBoxHeight() - getHalfBoxHeight() * sizePercentage,
         getBoxWidth() * sizePercentage,

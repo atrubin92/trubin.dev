@@ -1,8 +1,6 @@
 import { SimpleCell } from "../entiries/cell/SimpleCell";
 import * as Settings from "../settings/Settings";
-
-const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-const ctx = canvas.getContext("2d")!;
+import { context } from "_CanvasContext"
 
 export function drawFood(foodArray: SimpleCell[]) {
     if (!foodArray) return
@@ -19,8 +17,8 @@ function drawCell(partX: number, partY: number, color: string, sizePercentage: n
     const halfBoxWidth = Settings.getHalfBoxWidth()
     const halfBoxHeight = Settings.getHalfBoxHeight()
 
-    ctx.fillStyle = color
-    ctx.fillRect(
+    context.fillStyle = color
+    context.fillRect(
         partX * boxWidth + halfBoxWidth - halfBoxWidth * sizePercentage,
         partY * boxHeight + halfBoxHeight - halfBoxHeight * sizePercentage,
         boxWidth * sizePercentage,

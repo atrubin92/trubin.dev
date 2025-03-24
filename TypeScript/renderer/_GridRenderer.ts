@@ -1,7 +1,5 @@
 import * as Settings from "../settings/Settings";
-
-const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-const ctx = canvas.getContext("2d")!;
+import { canvasWidth, canvasHeight, context } from "_CanvasContext";
 
 export function drawGrid() {
     const boxWidth = Settings.getBoxWidth()
@@ -10,20 +8,20 @@ export function drawGrid() {
     const halfBoxWidth = Settings.getHalfBoxWidth()
     const halfBoxHeight = Settings.getHalfBoxHeight()
 
-    ctx.strokeStyle = "blue";
+    context.strokeStyle = "blue";
 
-    for (let cellCenterX = halfBoxWidth; cellCenterX < canvas.width; cellCenterX += boxWidth) {
-        drawLine(cellCenterX, 0, cellCenterX, canvas.height);
+    for (let cellCenterX = halfBoxWidth; cellCenterX < canvasWidth(); cellCenterX += boxWidth) {
+        drawLine(cellCenterX, 0, cellCenterX, canvasHeight());
     }
 
-    for (let cellCenterY = halfBoxHeight; cellCenterY < canvas.height; cellCenterY += boxHeight) {
-        drawLine(0, cellCenterY, canvas.width, cellCenterY);
+    for (let cellCenterY = halfBoxHeight; cellCenterY < canvasHeight(); cellCenterY += boxHeight) {
+        drawLine(0, cellCenterY, canvasWidth(), cellCenterY);
     }
 }
 
 function drawLine(x1: number, y1: number, x2: number, y2: number) {
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
 }

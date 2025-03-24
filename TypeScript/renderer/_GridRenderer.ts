@@ -1,20 +1,14 @@
-import * as Settings from "../settings/Settings";
-import { canvasWidth, canvasHeight, context } from "_CanvasContext";
+import { canvasWidth, canvasHeight, context } from "./_CanvasContext";
+import { getBoxWidth, getBoxHeight, getHalfBoxWidth, getHalfBoxHeight } from "../settings/Settings";
 
 export function drawGrid() {
-    const boxWidth = Settings.getBoxWidth()
-    const boxHeight = Settings.getBoxHeight()
-
-    const halfBoxWidth = Settings.getHalfBoxWidth()
-    const halfBoxHeight = Settings.getHalfBoxHeight()
-
     context.strokeStyle = "blue";
 
-    for (let cellCenterX = halfBoxWidth; cellCenterX < canvasWidth(); cellCenterX += boxWidth) {
+    for (let cellCenterX = getHalfBoxWidth(); cellCenterX < canvasWidth(); cellCenterX += getBoxWidth()) {
         drawLine(cellCenterX, 0, cellCenterX, canvasHeight());
     }
 
-    for (let cellCenterY = halfBoxHeight; cellCenterY < canvasHeight(); cellCenterY += boxHeight) {
+    for (let cellCenterY = getHalfBoxHeight(); cellCenterY < canvasHeight(); cellCenterY += getBoxHeight()) {
         drawLine(0, cellCenterY, canvasWidth(), cellCenterY);
     }
 }

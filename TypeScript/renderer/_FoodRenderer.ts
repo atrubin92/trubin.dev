@@ -1,6 +1,6 @@
 import { SimpleCell } from "../entiries/cell/SimpleCell";
-import * as Settings from "../settings/Settings";
-import { context } from "_CanvasContext"
+import { getBoxWidth, getBoxHeight } from "../settings/Settings";
+import { context } from "./_CanvasContext"
 
 export function drawFood(foodArray: SimpleCell[]) {
     if (!foodArray) return
@@ -10,18 +10,7 @@ export function drawFood(foodArray: SimpleCell[]) {
     }
 }
 
-function drawCell(partX: number, partY: number, color: string, sizePercentage: number = 1) {
-    const boxWidth = Settings.getBoxWidth()
-    const boxHeight = Settings.getBoxHeight()
-
-    const halfBoxWidth = Settings.getHalfBoxWidth()
-    const halfBoxHeight = Settings.getHalfBoxHeight()
-
+function drawCell(partX: number, partY: number, color: string) {
     context.fillStyle = color
-    context.fillRect(
-        partX * boxWidth + halfBoxWidth - halfBoxWidth * sizePercentage,
-        partY * boxHeight + halfBoxHeight - halfBoxHeight * sizePercentage,
-        boxWidth * sizePercentage,
-        boxHeight * sizePercentage
-    )
+    context.fillRect(partX * getBoxWidth(), partY * getBoxHeight(), getBoxWidth(), getBoxHeight())
 }

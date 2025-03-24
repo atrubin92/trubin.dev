@@ -3,8 +3,10 @@ import * as GameStateSetting from "./_GameStateSetting"
 import * as FieldSizeSetting from "./_FieldSizeSetting"
 import * as ScoreSetting from "./_ScoreSetting"
 import * as FoodCountSetting from "./_FoodCountSetting"
-import * as BoxSize from "./_BoxSizeSetting"
+import * as BoxSizeSetting from "./_BoxSizeSetting"
+import * as SnakeCellTypeSetting from "./_SnakeCellTypeSetting"
 import { GameState } from "../entiries/GameState"
+import { SnakeCellType } from "../entiries/SnakeCellType"
 
 export function getFieldWidth() {
     return FieldSizeSetting.getFieldWidth()
@@ -35,17 +37,21 @@ export function getFoodCount() {
 }
 
 export function getBoxWidth(): number {
-    return BoxSize.getBoxWidth()
+    return BoxSizeSetting.getBoxWidth()
 }
 
 export function getBoxHeight(): number {
-    return BoxSize.getBoxHeight()
+    return BoxSizeSetting.getBoxHeight()
 }
 
 export function getHalfBoxWidth(): number {
-    return BoxSize.getHalfBoxWidth()
+    return BoxSizeSetting.getHalfBoxWidth()
 }
 
 export function getHalfBoxHeight(): number {
-    return BoxSize.getHalfBoxHeight()
+    return BoxSizeSetting.getHalfBoxHeight()
+}
+
+export function getCurrentSnakeCellType(): SnakeCellType {
+    return SnakeCellTypeSetting.getCurrentSnakeCellType()
 }

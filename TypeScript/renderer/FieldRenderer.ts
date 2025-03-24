@@ -6,28 +6,12 @@ import { drawGrid } from "./_GridRenderer";
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-let boxWidth = 0
-let halfBoxWidth = 0
-
-let boxHeight = 0
-let halfBoxHeight = 0
-
 export function draw(snakeArray: SnakeCell[], foodArray: SimpleCell[], stepPercentage: number = 0) {
-    calcBoxSize()
-
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    drawGrid(ctx, canvas.width, canvas.height, boxWidth, boxHeight)
+    drawGrid()
     drawFood(foodArray)
     drawSnake(snakeArray, stepPercentage)
-}
-
-function calcBoxSize() {
-    boxWidth = canvas.width / Settings.getFieldWidth();
-    halfBoxWidth = boxWidth / 2;
-
-    boxHeight = canvas.height / Settings.getFieldHeight();
-    halfBoxHeight = boxHeight / 2;
 }
 
 function drawFood(foodArray: SimpleCell[]) {
@@ -65,6 +49,12 @@ function drawSnakeCell(partX: number, partY: number, snakeCellScale: number) {
 }
 
 function drawCell(partX: number, partY: number, color: string, sizePercentage: number = 1) {
+    const boxWidth = Settings.getBoxWidth()
+    const boxHeight = Settings.getBoxHeight()
+
+    const halfBoxWidth = Settings.getHalfBoxWidth()
+    const halfBoxHeight = Settings.getHalfBoxHeight()
+
     ctx.fillStyle = color
     ctx.fillRect(
         partX * boxWidth + halfBoxWidth - halfBoxWidth * sizePercentage,

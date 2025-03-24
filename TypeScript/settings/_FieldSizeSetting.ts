@@ -1,3 +1,5 @@
+import * as BoxSize from "./_BoxSizeSetting"
+
 export function getFieldWidth(): number {
     return cellWidth
 }
@@ -19,6 +21,7 @@ cellWidthInput.value = cellWidth.toString();
 
 const cellHeightInput = document.getElementById("cellHeightInput") as HTMLInputElement;
 cellHeightInput.value = cellHeight.toString();
+BoxSize.updateBoxSize()
 
 function setupCellInput(
     inputElement: HTMLInputElement,
@@ -28,6 +31,7 @@ function setupCellInput(
         const value = parseInt(inputElement.value, 10);
         if (isValidCellSize(value)) {
             onValidValueChange(value);
+            BoxSize.updateBoxSize()
         }
     });
 

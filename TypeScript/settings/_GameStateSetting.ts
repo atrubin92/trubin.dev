@@ -1,5 +1,6 @@
 import { GameState } from "../entiries/GameState"
 import * as FieldSize from "./_FieldSizeSetting";
+import * as BoxSize from "./_BoxSizeSetting";
 import * as FoodCount from "./_FoodCountSetting";
 
 export function getGameState(): GameState {
@@ -23,6 +24,7 @@ let gameState = GameState.NOT_STARTED
 gameStateButton.addEventListener("click", () => {
     switch (gameState) {
         case GameState.NOT_STARTED:
+            BoxSize.updateBoxSize()
             updateGameState(GameState.IN_PROGRESS)
             break;
         case GameState.IN_PROGRESS:

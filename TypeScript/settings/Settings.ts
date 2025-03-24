@@ -3,6 +3,7 @@ import * as GameStateSetting from "./_GameStateSetting"
 import * as FieldSizeSetting from "./_FieldSizeSetting"
 import * as ScoreSetting from "./_ScoreSetting"
 import * as FoodCountSetting from "./_FoodCountSetting"
+import * as BoxSize from "./_BoxSizeSetting"
 import { GameState } from "../entiries/GameState"
 
 export function getFieldWidth() {
@@ -31,4 +32,20 @@ export function getStepDuration() {
 
 export function getFoodCount() {
     return FoodCountSetting.getFoodCount()
+}
+
+export function getBoxWidth(): number {
+    return BoxSize.getBoxWidth()
+}
+
+export function getBoxHeight(): number {
+    return BoxSize.getBoxHeight()
+}
+
+export function getHalfBoxWidth(): number {
+    return BoxSize.getHalfBoxWidth()
+}
+
+export function getHalfBoxHeight(): number {
+    return BoxSize.getHalfBoxHeight()
 }

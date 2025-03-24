@@ -1,6 +1,6 @@
 export enum SnakeCellType {
-    Square = "square",
-    Rounded = "rounded",
-    Circle = "circle",
-    Star = "star"
+    SQUARE = "square",
+    ROUNDED = "rounded",
+    CIRCLE = "circle",
+    STAR = "star"
 }

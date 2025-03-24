@@ -52,6 +52,6 @@ export function getHalfBoxHeight(): number {
     return BoxSizeSetting.getHalfBoxHeight()
 }
 
-export function getCurrentSnakeCellType(): SnakeCellType {
-    return SnakeCellTypeSetting.getCurrentSnakeCellType()
+export function getSnakeCellType(): SnakeCellType {
+    return SnakeCellTypeSetting.getSnakeCellType()
 }

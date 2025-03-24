@@ -1,10 +1,10 @@
 import { SnakeCellType } from "../entiries/SnakeCellType";
 
-export function getCurrentSnakeCellType(): SnakeCellType {
+export function getSnakeCellType(): SnakeCellType {
     return currentSnakeCellType;
 }
 
-let currentSnakeCellType: SnakeCellType = SnakeCellType.Square;
+let currentSnakeCellType: SnakeCellType = SnakeCellType.SQUARE;
 
 const radios = document.querySelectorAll<HTMLInputElement>('input[name="cellType"]');
 

@@ -1,6 +1,7 @@
-import { SimpleCell } from "./entiries/cell/SimpleCell";
-import { SnakeCell } from "./entiries/cell/SnakeCell";
-import * as Settings from "./settings/Settings";
+import { SimpleCell } from "../entiries/cell/SimpleCell";
+import { SnakeCell } from "../entiries/cell/SnakeCell";
+import * as Settings from "../settings/Settings";
+import { drawGrid } from "./_GridRenderer";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -16,7 +17,7 @@ export function draw(snakeArray: SnakeCell[], foodArray: SimpleCell[], stepPerce
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    drawGrid()
+    drawGrid(ctx, canvas.width, canvas.height, boxWidth, boxHeight)
     drawFood(foodArray)
     drawSnake(snakeArray, stepPercentage)
 }
@@ -71,22 +72,4 @@ function drawCell(partX: number, partY: number, color: string, sizePercentage: n
         boxWidth * sizePercentage,
         boxHeight * sizePercentage
     )
-}
-
-function drawGrid() {
-    ctx.strokeStyle = 'blue';
-    for (let cellCenterX = halfBoxWidth; cellCenterX < canvas.width; cellCenterX += boxWidth) {
-        drawLine(cellCenterX, 0, cellCenterX, canvas.height)
-    }
-
-    for (let cellCenterY = halfBoxHeight; cellCenterY < canvas.height; cellCenterY += boxHeight) {
-        drawLine(0, cellCenterY, canvas.width, cellCenterY)
-    }
-}
-
-function drawLine(x1: number, y1: number, x2: number, y2: number) {
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
 }

@@ -1,4 +1,4 @@
-import * as FieldCanvas from "./FieldCanvas";
+import * as FieldCanvas from "./renderer/FieldRenderer";
 import { SnakeCell } from "./entiries/cell/SnakeCell";
 import * as Settings from "./settings/Settings";
 import * as StepProgress from "./StepProgress";

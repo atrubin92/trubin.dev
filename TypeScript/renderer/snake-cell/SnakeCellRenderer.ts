@@ -2,6 +2,7 @@ import { SnakeCellType } from "../../entiries/SnakeCellType";
 import { getSnakeCellType } from "../../settings/Settings";
 import * as SquareSnakeCellRenderer from "./_SquareSnakeCellRenderer";
 import * as CircleSnakeCellRenderer from "./_CircleSnakeCellRenderer";
+import * as RoundedSnakeCellRenderer from "./_RoundedSnakeCellRenderer";
 
 export function drawSnakeCell(partX: number, partY: number, snakeCellScale: number) {
     const colorArray: string[] = ["green", "rgb(128, 0, 0)", "blue", "red"]
@@ -20,7 +21,7 @@ function drawPartSnakeCell(partX: number, partY: number, color: string, sizePerc
             SquareSnakeCellRenderer.drawCell(partX, partY, color, sizePercentage)
             break;
         case SnakeCellType.ROUNDED:
-            //NOT_IMPLEMENTED.drawCell(partX, partY, color, sizePercentage)
+            RoundedSnakeCellRenderer.drawCell(partX, partY, color, sizePercentage)
             break;
         case SnakeCellType.CIRCLE:
             CircleSnakeCellRenderer.drawCell(partX, partY, color, sizePercentage)

@@ -1,9 +1,9 @@
 export class DrawCellParams {
     context!: CanvasRenderingContext2D;
-    row!: number;
-    column!: number;
+    cellX!: number;
+    cellY!: number;
     color!: string;
-    sizePercentage!: number;
+    sizeScale!: number;
 
     private _boxWidth!: number;
     private _boxHeight!: number;

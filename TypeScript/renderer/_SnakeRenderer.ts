@@ -12,13 +12,13 @@ export function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
 }
 
 function drawWrappedSnakeCell(snakeCell: SnakeCell, stepPercentage: number, snakeCellScale: number) {
-    let partX = snakeCell.x + snakeCell.dir.x * stepPercentage;
-    let partY = snakeCell.y + snakeCell.dir.y * stepPercentage;
+    let cellX = snakeCell.x + snakeCell.dir.x * stepPercentage;
+    let cellY = snakeCell.y + snakeCell.dir.y * stepPercentage;
 
-    drawSnakeCell(partX, partY, snakeCellScale);
+    drawSnakeCell(cellX, cellY, snakeCellScale);
 
-    partX -= snakeCell.dir.x * getFieldWidth()
-    partY -= snakeCell.dir.y * getFieldHeight()
+    cellX -= snakeCell.dir.x * getFieldWidth()
+    cellY -= snakeCell.dir.y * getFieldHeight()
 
-    drawSnakeCell(partX, partY, snakeCellScale);
+    drawSnakeCell(cellX, cellY, snakeCellScale);
 }

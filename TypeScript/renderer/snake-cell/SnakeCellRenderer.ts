@@ -1,33 +1,27 @@
 import { SnakeCellType } from "../../entiries/SnakeCellType";
-import { getBoxWidth, getBoxHeight, getSnakeCellType } from "../../settings/Settings";
 import * as SquareSnakeCellRenderer from "./_SquareSnakeCellRenderer";
 import * as RoundedSnakeCellRenderer from "./_RoundedSnakeCellRenderer";
 import * as CircleSnakeCellRenderer from "./_CircleSnakeCellRenderer";
 import * as StarSnakeCellRenderer from "./_StarSnakeCellRenderer";
 import { DrawCellParams } from "../../entiries/DrawCellParams";
-import { context } from "../_CanvasContext";
 
-export function drawSnakeCell(cellX: number, cellY: number, snakeCellScale: number) {
-    const drawCellParams = new DrawCellParams()
-    drawCellParams.context = context
-    drawCellParams.cellX = cellX
-    drawCellParams.cellY = cellY
-    drawCellParams.boxWidth = getBoxWidth()
-    drawCellParams.boxHeight = getBoxHeight()
+export function drawSnakeCell(drawCellParams: DrawCellParams) {
+    const initialSizeScale = drawCellParams.sizeScale
 
     const colorArray: string[] = ["green", "rgb(128, 0, 0)", "blue", "red"]
     for (let colorIndex = 0; colorIndex < colorArray.length; colorIndex++) {
         const colorPartScale = 1 - colorIndex / colorArray.length
 
         drawCellParams.color = colorArray[colorIndex]
-        drawCellParams.sizeScale = snakeCellScale * colorPartScale
+        drawCellParams.sizeScale = initialSizeScale * colorPartScale
 
-        drawPartSnakeCell(drawCellParams, getSnakeCellType())
+        drawSpecificSnakeCell(drawCellParams)
     }
+    drawCellParams.sizeScale = initialSizeScale
 }
 
-export function drawPartSnakeCell(drawCellParams: DrawCellParams, snakeCellType: SnakeCellType) {
-    switch (snakeCellType) {
+function drawSpecificSnakeCell(drawCellParams: DrawCellParams) {
+    switch (drawCellParams.snakeCellType) {
         case SnakeCellType.SQUARE:
             SquareSnakeCellRenderer.drawCell(drawCellParams)
             break;

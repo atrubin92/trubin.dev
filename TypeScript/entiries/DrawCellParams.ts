@@ -1,5 +1,8 @@
+import { SnakeCellType } from "./SnakeCellType";
+
 export class DrawCellParams {
     context!: CanvasRenderingContext2D;
+    snakeCellType: SnakeCellType;
     cellX!: number;
     cellY!: number;
     color!: string;

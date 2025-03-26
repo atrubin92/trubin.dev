@@ -4,8 +4,6 @@ export function getSnakeCellType(): SnakeCellType {
     return currentSnakeCellType;
 }
 
-initCellTypeCanvas()
-
 let currentSnakeCellType: SnakeCellType = SnakeCellType.SQUARE;
 
 const radios = document.querySelectorAll<HTMLInputElement>('input[name="cellType"]');
@@ -25,14 +23,3 @@ radios.forEach(radio => {
         }
     });
 });
-
-function initCellTypeCanvas(){
-    const previewCanvasIdArray = ["previewSquare", "previewRounded", "previewCircle", "previewStar"]
-
-    for (let canvasIdIndex = 0; canvasIdIndex < previewCanvasIdArray.length; canvasIdIndex++) {
-        const canvasId = previewCanvasIdArray[canvasIdIndex];
-        const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-
-        //TODO: implement the drawing the preview
-    }
-}

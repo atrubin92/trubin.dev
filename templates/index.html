@@ -45,6 +45,12 @@
       color: #333;
     }
 
+    #cellTypeContainer label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     #gameStateContainer {
       display: flex;
       gap: 10px;
@@ -75,22 +81,22 @@
       </div>
       <div id="cellTypeContainer">
         <label style="font-size: 18px; color: #333;">Cell Type:</label>
-        <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+        <div style="display: flex; gap: 20px; align-items: center; margin-top: 2px;">
           <label>
             <input type="radio" name="cellType" value="square" checked />
-            <canvas width="20" height="20" id="previewSquare"></canvas>
+            <canvas width="30" height="30" id="previewSquare"></canvas>
           </label>
           <label>
             <input type="radio" name="cellType" value="rounded" />
-            <canvas width="20" height="20" id="previewRounded"></canvas>
+            <canvas width="30" height="30" id="previewRounded"></canvas>
           </label>
           <label>
             <input type="radio" name="cellType" value="circle" />
-            <canvas width="20" height="20" id="previewCircle"></canvas>
+            <canvas width="30" height="30" id="previewCircle"></canvas>
           </label>
           <label>
             <input type="radio" name="cellType" value="star" />
-            <canvas width="20" height="20" id="previewStar"></canvas>
+            <canvas width="30" height="30" id="previewStar"></canvas>
           </label>
         </div>
       </div>

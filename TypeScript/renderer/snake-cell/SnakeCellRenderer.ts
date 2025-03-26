@@ -34,7 +34,7 @@ function drawPartSnakeCell(
 ) {
     switch (getSnakeCellType()) {
         case SnakeCellType.SQUARE:
-            SquareSnakeCellRenderer.drawCell(cellX, cellY, color, sizePercentage)
+            SquareSnakeCellRenderer.drawCell(drawCellParams)
             break;
         case SnakeCellType.ROUNDED:
             RoundedSnakeCellRenderer.drawCell(drawCellParams)

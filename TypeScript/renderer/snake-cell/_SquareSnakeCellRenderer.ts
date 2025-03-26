@@ -1,12 +1,19 @@
-import { getBoxWidth, getBoxHeight, getHalfBoxWidth, getHalfBoxHeight } from "../../settings/Settings";
-import { context } from "../_CanvasContext";
+import { DrawCellParams } from "../../entiries/DrawCellParams";
 
-export function drawCell(partX: number, partY: number, color: string, sizePercentage: number) {
+export function drawCell(drawCellParams: DrawCellParams) {
+    const {
+        context,
+        cellX, cellY,
+        boxWidth, boxHeight,
+        halfBoxWidth, halfBoxHeight,
+        color, sizeScale
+    } = drawCellParams;
+
     context.fillStyle = color
     context.fillRect(
-        partX * getBoxWidth() + getHalfBoxWidth() * (1 - sizePercentage),
-        partY * getBoxHeight() + getHalfBoxHeight() * (1 - sizePercentage),
-        getBoxWidth() * sizePercentage,
-        getBoxHeight() * sizePercentage
+        cellX * boxWidth + halfBoxWidth * (1 - sizeScale),
+        cellY * boxHeight + halfBoxHeight * (1 - sizeScale),
+        boxWidth * sizeScale,
+        boxHeight * sizeScale
     )
 }

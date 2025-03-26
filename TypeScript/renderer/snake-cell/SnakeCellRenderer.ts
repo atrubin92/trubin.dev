@@ -17,21 +17,16 @@ export function drawSnakeCell(cellX: number, cellY: number, snakeCellScale: numb
 
     const colorArray: string[] = ["green", "rgb(128, 0, 0)", "blue", "red"]
     for (let colorIndex = 0; colorIndex < colorArray.length; colorIndex++) {
-        const colorItem = colorArray[colorIndex]
         const colorPartScale = 1 - colorIndex / colorArray.length
-        const layerScale = snakeCellScale * colorPartScale
 
         drawCellParams.color = colorArray[colorIndex]
-        drawCellParams.sizeScale = layerScale;
+        drawCellParams.sizeScale = snakeCellScale * colorPartScale
 
-        drawPartSnakeCell(cellX, cellY, colorItem, layerScale, drawCellParams)
+        drawPartSnakeCell(drawCellParams)
     }
 }
 
-function drawPartSnakeCell(
-    cellX: number, cellY: number, color: string, sizePercentage: number,
-    drawCellParams: DrawCellParams
-) {
+function drawPartSnakeCell(drawCellParams: DrawCellParams) {
     switch (getSnakeCellType()) {
         case SnakeCellType.SQUARE:
             SquareSnakeCellRenderer.drawCell(drawCellParams)
@@ -43,7 +38,7 @@ function drawPartSnakeCell(
             CircleSnakeCellRenderer.drawCell(drawCellParams)
             break;
         case SnakeCellType.STAR:
-            StarSnakeCellRenderer.drawCell(cellX, cellY, color, sizePercentage)
+            StarSnakeCellRenderer.drawCell(drawCellParams)
             break;
     }
 }

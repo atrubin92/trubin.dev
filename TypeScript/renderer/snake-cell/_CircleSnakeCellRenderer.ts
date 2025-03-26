@@ -6,14 +6,14 @@ export function drawCell(drawCellParams: DrawCellParams) {
         cellX, cellY,
         boxWidth, boxHeight,
         halfBoxWidth, halfBoxHeight,
-        color, sizeScale: sizePercentage
+        color, sizeScale
     } = drawCellParams;
 
     const centerX = cellX * boxWidth + halfBoxWidth
     const centerY = cellY * boxHeight + halfBoxHeight
 
-    const radiusX = halfBoxWidth * sizePercentage
-    const radiusY = halfBoxHeight * sizePercentage
+    const radiusX = halfBoxWidth * sizeScale
+    const radiusY = halfBoxHeight * sizeScale
 
     context.fillStyle = color
     context.beginPath()

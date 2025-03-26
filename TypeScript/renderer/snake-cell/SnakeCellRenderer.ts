@@ -37,7 +37,7 @@ function drawPartSnakeCell(
             SquareSnakeCellRenderer.drawCell(cellX, cellY, color, sizePercentage)
             break;
         case SnakeCellType.ROUNDED:
-            RoundedSnakeCellRenderer.drawCell(cellX, cellY, color, sizePercentage)
+            RoundedSnakeCellRenderer.drawCell(drawCellParams)
             break;
         case SnakeCellType.CIRCLE:
             CircleSnakeCellRenderer.drawCell(drawCellParams)

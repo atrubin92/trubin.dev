@@ -1,12 +1,19 @@
-import { getBoxWidth, getBoxHeight, getHalfBoxWidth, getHalfBoxHeight } from "../../settings/Settings";
-import { context } from "../_CanvasContext";
+import { DrawCellParams } from "../../entiries/DrawCellParams";
 
-export function drawCell(partX: number, partY: number, color: string, sizePercentage: number) {
-    const width = getBoxWidth() * sizePercentage;
-    const height = getBoxHeight() * sizePercentage;
+export function drawCell(drawCellParams: DrawCellParams) {
+    const {
+        context,
+        cellX, cellY,
+        boxWidth, boxHeight,
+        halfBoxWidth, halfBoxHeight,
+        color, sizeScale
+    } = drawCellParams;
 
-    const x = partX * getBoxWidth() + getHalfBoxWidth() - width / 2;
-    const y = partY * getBoxHeight() + getHalfBoxHeight() - height / 2;
+    const width = boxWidth * sizeScale
+    const height = boxHeight * sizeScale
+
+    const x = cellX * boxWidth + halfBoxWidth - width / 2;
+    const y = cellY * boxHeight + halfBoxHeight - height / 2;
 
     const radius = Math.min(width / 3, height / 3);
 

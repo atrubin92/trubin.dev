@@ -22,12 +22,12 @@ export function drawSnakeCell(cellX: number, cellY: number, snakeCellScale: numb
         drawCellParams.color = colorArray[colorIndex]
         drawCellParams.sizeScale = snakeCellScale * colorPartScale
 
-        drawPartSnakeCell(drawCellParams)
+        drawPartSnakeCell(drawCellParams, getSnakeCellType())
     }
 }
 
-function drawPartSnakeCell(drawCellParams: DrawCellParams) {
-    switch (getSnakeCellType()) {
+export function drawPartSnakeCell(drawCellParams: DrawCellParams, snakeCellType: SnakeCellType) {
+    switch (snakeCellType) {
         case SnakeCellType.SQUARE:
             SquareSnakeCellRenderer.drawCell(drawCellParams)
             break;

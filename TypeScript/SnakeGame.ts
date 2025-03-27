@@ -4,9 +4,8 @@ import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import * as FoodModel from "./FoodModel";
 import { GameState } from "./entiries/GameState";
-import { initCellTypeCanvas } from "./SnakeCellTypePreview";
+import { drawCellTypeCanvas } from "./SnakeCellTypePreview";
 
-initCellTypeCanvas()
 
 requestAnimationFrame(mainCanvasLoop);
 
@@ -30,6 +29,7 @@ function mainCanvasLoop(timestamp: number): void {
             break;
     }
 
+    drawCellTypeCanvas()
     FieldCanvas.draw(
         SnakeModel.getSnakeCellArrayCopy(),
         FoodModel.getFoodCellArrayCopy(),

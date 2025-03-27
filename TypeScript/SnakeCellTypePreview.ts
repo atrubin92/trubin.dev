@@ -2,7 +2,7 @@ import { DrawCellParams } from "./entiries/DrawCellParams";
 import { SnakeCellType } from "./entiries/SnakeCellType";
 import { drawSnakeCell } from "./renderer/snake-cell/SnakeCellRenderer";
 
-export function initCellTypeCanvas() {
+export function drawCellTypeCanvas() {
     const previewMap: Record<string, SnakeCellType> = {
         previewSquare: SnakeCellType.SQUARE,
         previewRounded: SnakeCellType.ROUNDED,

@@ -49,9 +49,3 @@ export function getSnakeCellArrayCopy(): SnakeCell[] {
 export function contains(anotherCell: ICell): boolean {
     return snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
 }
-
-export function containsAny(anotherCellArray: ICell[]): boolean {
-    return anotherCellArray.some(anotherCell =>
-        snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
-    );
-}

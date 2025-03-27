@@ -13,7 +13,6 @@ requestAnimationFrame(mainCanvasLoop);
 function mainCanvasLoop(timestamp: number): void {
     switch (Settings.getGameState()) {
         case GameState.NOT_STARTED:
-            FieldCanvas.draw([], null, 0)
             StepProgress.pause()
             break;
 
@@ -26,12 +25,16 @@ function mainCanvasLoop(timestamp: number): void {
             if (StepProgress.completeStep(timestamp) && !moveSnake()) {
                 Settings.gemeOver()
                 SnakeModel.reset()
-            } else {
-                const stepPercentage = StepProgress.calculateProgress();
-                FieldCanvas.draw(SnakeModel.getSnakeCellArrayCopy(), FoodModel.getFoodCellArrayCopy(), stepPercentage);
+                FoodModel.reset()
             }
             break;
     }
+
+    FieldCanvas.draw(
+        SnakeModel.getSnakeCellArrayCopy(),
+        FoodModel.getFoodCellArrayCopy(),
+        StepProgress.calculateProgress()
+    );
 
     requestAnimationFrame(mainCanvasLoop);
 }
@@ -40,6 +43,7 @@ function createInitialData() {
     if (SnakeModel.getLength() === 0) {
         SnakeModel.createInitialData()
         FoodModel.createInitialData()
+        Settings.displayScore(SnakeModel.getLength());
     }
 }
 

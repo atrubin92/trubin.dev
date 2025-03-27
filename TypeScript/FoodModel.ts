@@ -31,3 +31,7 @@ export function tryEatFood(anotherCell: ICell) {
     foodCellArray[replacedIndex] = new SimpleCell(emptyCell.x, emptyCell.y)
     return true
 }
+
+export function reset() {
+    foodCellArray.length = 0
+}

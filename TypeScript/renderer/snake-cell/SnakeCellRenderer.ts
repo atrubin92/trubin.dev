@@ -1,14 +1,15 @@
-import { SnakeCellType } from "../../entiries/SnakeCellType";
 import * as SquareSnakeCellRenderer from "./_SquareSnakeCellRenderer";
 import * as RoundedSnakeCellRenderer from "./_RoundedSnakeCellRenderer";
 import * as CircleSnakeCellRenderer from "./_CircleSnakeCellRenderer";
 import * as StarSnakeCellRenderer from "./_StarSnakeCellRenderer";
+import { getCellColorArray } from "../../settings/Settings";
+import { SnakeCellType } from "../../entiries/SnakeCellType";
 import { DrawCellParams } from "../../entiries/DrawCellParams";
 
 export function drawSnakeCell(drawCellParams: DrawCellParams) {
     const initialSizeScale = drawCellParams.sizeScale
 
-    const colorArray: string[] = ["green", "rgb(128, 0, 0)", "blue", "red"]
+    const colorArray: string[] = getCellColorArray()
     for (let colorIndex = 0; colorIndex < colorArray.length; colorIndex++) {
         const colorPartScale = 1 - colorIndex / colorArray.length
 

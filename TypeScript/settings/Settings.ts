@@ -5,6 +5,7 @@ import * as ScoreSetting from "./_ScoreSetting"
 import * as FoodCountSetting from "./_FoodCountSetting"
 import * as BoxSizeSetting from "./_BoxSizeSetting"
 import * as SnakeCellTypeSetting from "./_SnakeCellTypeSetting"
+import * as CellColorSetting from "./_CellColorSetting";
 import { GameState } from "../entiries/GameState"
 import { SnakeCellType } from "../entiries/SnakeCellType"
 
@@ -54,4 +55,8 @@ export function getHalfBoxHeight(): number {
 
 export function getSnakeCellType(): SnakeCellType {
     return SnakeCellTypeSetting.getSnakeCellType()
+}
+
+export function getCellColorArray(): string[] {
+    return CellColorSetting.getCellColorArray()
 }

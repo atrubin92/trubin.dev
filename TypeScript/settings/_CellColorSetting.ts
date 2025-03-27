@@ -31,3 +31,8 @@ function addColorPicker(defaultColor = "#008000") {
 addColorPicker();
 
 addColorButton.addEventListener("click", () => addColorPicker());
+
+export function getCellColorArray(): string[] {
+    return Array.from(document.querySelectorAll<HTMLInputElement>(".snakeColorInput"))
+        .map(input => input.value);
+}

@@ -29,14 +29,28 @@ function addColorPicker(defaultColor = "#008000") {
     removeButton.style.border = "none";
     removeButton.style.background = "transparent";
     removeButton.style.cursor = "pointer";
-    
+
     removeButton.addEventListener("click", () => {
-        colorWrapper.remove();
+        if (colorList.children.length > 1) {
+            colorWrapper.remove();
+            updateRemoveButtons();
+        }
     });
 
     colorWrapper.appendChild(colorInput);
     colorWrapper.appendChild(removeButton);
     colorList.appendChild(colorWrapper);
+
+    updateRemoveButtons();
+}
+
+function updateRemoveButtons() {
+    const removeButtons = colorList.querySelectorAll("button");
+    removeButtons.forEach(button => {
+        button.disabled = colorList.children.length === 1;
+        button.style.opacity = colorList.children.length === 1 ? "0.5" : "1";
+        button.style.cursor = colorList.children.length === 1 ? "default" : "pointer";
+    });
 }
 
 function getRandomColor(): string {

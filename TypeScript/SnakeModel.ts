@@ -32,11 +32,11 @@ export function calcNewHead(): SnakeCell {
 export function getLength(): number {
     return snakeCellArray.length
 }
-export function unshift(newHead: SnakeCell) {
+export function addHead(newHead: SnakeCell) {
     snakeCellArray.unshift(newHead)
 }
 
-export function pop() {
+export function removeTail() {
     snakeCellArray.pop()
 }
 
@@ -46,7 +46,7 @@ export function getSnakeCellArrayCopy(): SnakeCell[] {
     )
 }
 
-export function contain(anotherCell: ICell): boolean {
+export function contains(anotherCell: ICell): boolean {
     return snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
 }
 

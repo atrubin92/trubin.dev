@@ -21,7 +21,7 @@ export function getFoodCellArrayCopy(): SimpleCell[] {
     )
 }
 
-export function replace(anotherCell: ICell) {
+export function tryEatFood(anotherCell: ICell) {
     const replacedIndex = foodCellArray.findIndex(cell => cell.equals(anotherCell))
     if (replacedIndex == -1) {
         return false

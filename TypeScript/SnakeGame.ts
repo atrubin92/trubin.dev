@@ -24,7 +24,8 @@ function mainCanvasLoop(timestamp: number): void {
 
         case GameState.IN_PROGRESS:
             if (SnakeModel.getLength() === 0) {
-                createInitialData();
+                SnakeModel.createInitialData()
+                FoodModel.createInitialData()
             }
             if (!StepProgress.completeStep(timestamp) || updateHeadPosition()) {
                 const stepPercentage = StepProgress.calculateProgress();
@@ -36,31 +37,21 @@ function mainCanvasLoop(timestamp: number): void {
     requestAnimationFrame(mainCanvasLoop);
 }
 
-function createInitialData() {
-    SnakeModel.createInitialData()
-    FoodModel.createInitialData()
-}
-
 function updateHeadPosition(): boolean {
     const newSnakeHead = SnakeModel.calcNewHead();
 
-    if (!FoodModel.replace(newSnakeHead)) {
-        SnakeModel.pop();
-    }
-
-    if (isGameOver(newSnakeHead)) {
+    if (SnakeModel.contains(newSnakeHead)) {
         Settings.gemeOver()
         SnakeModel.reset();
         return false;
     }
 
-    SnakeModel.unshift(newSnakeHead);
+    if (!FoodModel.tryEatFood(newSnakeHead)) {
+        SnakeModel.removeTail();
+    }
+    SnakeModel.addHead(newSnakeHead);
 
     Settings.displayScore(SnakeModel.getLength());
 
     return true;
-}
-
-function isGameOver(newHead: SnakeCell): boolean {
-    return SnakeModel.contain(newHead)
 }

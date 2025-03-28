@@ -1,18 +1,20 @@
-const colorList = document.getElementById("colorList") as HTMLDivElement;
-const addColorButton = document.getElementById("addColorButton") as HTMLButtonElement;
-
 export function getCellColorArray(): string[] {
     return Array.from(document.querySelectorAll<HTMLInputElement>(".snakeColorInput"))
         .map(input => input.value);
 }
 
-for (let i = 0; i < 5; i++) {
-    addColorPicker(getRandomColor());
+const colorList = document.getElementById("colorList") as HTMLDivElement;
+const addColorButton = document.getElementById("addColorButton") as HTMLButtonElement;
+
+const INITIAL_COLOR_COUNT = 3;
+
+for (let i = 0; i < INITIAL_COLOR_COUNT; i++) {
+    addColorPicker();
 }
 
 addColorButton.addEventListener("click", () => addColorPicker());
 
-function addColorPicker(defaultColor = "#008000") {
+function addColorPicker() {
     const colorWrapper = document.createElement("div");
     colorWrapper.style.display = "flex";
     colorWrapper.style.alignItems = "center";
@@ -21,7 +23,7 @@ function addColorPicker(defaultColor = "#008000") {
 
     const colorInput = document.createElement("input");
     colorInput.type = "color";
-    colorInput.value = defaultColor;
+    colorInput.value = getRandomColor();
     colorInput.classList.add("snakeColorInput");
 
     const removeButton = document.createElement("button");

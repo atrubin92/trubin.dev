@@ -6,6 +6,11 @@ import * as FoodModel from "./FoodModel";
 import { GameState } from "./entiries/GameState";
 import { drawCellTypeCanvas } from "./SnakeCellTypePreview";
 
+window.addEventListener("keydown", (event) => {
+    if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+        event.preventDefault();
+    }
+});
 
 requestAnimationFrame(mainCanvasLoop);
 

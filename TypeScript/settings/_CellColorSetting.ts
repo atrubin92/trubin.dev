@@ -43,6 +43,7 @@ function addColorPicker() {
     colorWrapper.appendChild(removeButton);
     colorList.appendChild(colorWrapper);
 
+    colorInput.focus();
     updateRemoveButtons();
 }
 

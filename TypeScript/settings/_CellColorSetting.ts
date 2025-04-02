@@ -6,7 +6,9 @@ export function getCellColorArray(): string[] {
 const colorList = document.getElementById("colorList") as HTMLDivElement;
 const addColorButton = document.getElementById("addColorButton") as HTMLButtonElement;
 
-const INITIAL_COLOR_COUNT = 3;
+const MIN_COLOR_COUNT = 1;
+const MAX_COLOR_COUNT = 5;
+const INITIAL_COLOR_COUNT = 2;
 
 for (let i = 0; i < INITIAL_COLOR_COUNT; i++) {
     addColorPicker();
@@ -15,6 +17,8 @@ for (let i = 0; i < INITIAL_COLOR_COUNT; i++) {
 addColorButton.addEventListener("click", () => addColorPicker());
 
 function addColorPicker() {
+    if (colorList.children.length >= MAX_COLOR_COUNT) return;
+
     const colorWrapper = document.createElement("div");
     colorWrapper.style.display = "flex";
     colorWrapper.style.alignItems = "center";
@@ -49,11 +53,18 @@ function addColorPicker() {
 
 function updateRemoveButtons() {
     const removeButtons = colorList.querySelectorAll("button");
+    const isOnlyMinColorsLeft = colorList.children.length === MIN_COLOR_COUNT;
+    const isReachedMaxColors = colorList.children.length === MAX_COLOR_COUNT;
+
     removeButtons.forEach(button => {
-        button.disabled = colorList.children.length === 1;
+        button.disabled = isOnlyMinColorsLeft;
         button.style.opacity = colorList.children.length === 1 ? "0.5" : "1";
         button.style.cursor = colorList.children.length === 1 ? "default" : "pointer";
     });
+
+    addColorButton.disabled = isReachedMaxColors;
+    addColorButton.style.opacity = isReachedMaxColors ? "0.5" : "1";
+    addColorButton.style.cursor = isReachedMaxColors ? "default" : "pointer";
 }
 
 function getRandomColor(): string {

@@ -19,29 +19,9 @@ addColorButton.addEventListener("click", () => addColorPicker());
 function addColorPicker() {
     if (colorList.children.length >= MAX_COLOR_COUNT) return;
 
-    const colorWrapper = document.createElement("div");
-    colorWrapper.style.display = "flex";
-    colorWrapper.style.alignItems = "center";
-    colorWrapper.style.gap = "5px";
-    colorWrapper.style.marginTop = "5px";
-
-    const colorInput = document.createElement("input");
-    colorInput.type = "color";
-    colorInput.value = getRandomColor();
-    colorInput.classList.add("snakeColorInput");
-
-    const removeButton = document.createElement("button");
-    removeButton.innerText = "❌";
-    removeButton.style.border = "none";
-    removeButton.style.background = "transparent";
-    removeButton.style.cursor = "pointer";
-
-    removeButton.addEventListener("click", () => {
-        if (colorList.children.length > 1) {
-            colorWrapper.remove();
-            updateRemoveButtons();
-        }
-    });
+    const colorWrapper = createColorWrapper();
+    const colorInput = createColorInput();
+    const removeButton = createRemoveButton(colorWrapper);
 
     colorWrapper.appendChild(colorInput);
     colorWrapper.appendChild(removeButton);
@@ -49,6 +29,40 @@ function addColorPicker() {
 
     colorInput.focus();
     updateRemoveButtons();
+}
+
+function createColorWrapper() {
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "center";
+    wrapper.style.gap = "5px";
+    wrapper.style.marginTop = "5px";
+    return wrapper;
+}
+
+function createColorInput() {
+    const input = document.createElement("input");
+    input.type = "color";
+    input.value = getRandomColor();
+    input.classList.add("snakeColorInput");
+    return input;
+}
+
+function createRemoveButton(wrapper) {
+    const button = document.createElement("button");
+    button.innerText = "❌";
+    button.style.border = "none";
+    button.style.background = "transparent";
+    button.style.cursor = "pointer";
+
+    button.addEventListener("click", () => {
+        if (colorList.children.length > 1) {
+            wrapper.remove();
+            updateRemoveButtons();
+        }
+    });
+
+    return button;
 }
 
 function updateRemoveButtons() {

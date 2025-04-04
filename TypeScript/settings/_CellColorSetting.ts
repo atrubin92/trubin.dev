@@ -8,7 +8,7 @@ const addColorButton = document.getElementById("addColorButton") as HTMLButtonEl
 
 const MIN_COLOR_COUNT = 1;
 const MAX_COLOR_COUNT = 5;
-const INITIAL_COLOR_COUNT = 2;
+const INITIAL_COLOR_COUNT = 3;
 
 for (let i = 0; i < INITIAL_COLOR_COUNT; i++) {
     addColorPicker();

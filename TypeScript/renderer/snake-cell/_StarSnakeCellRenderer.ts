@@ -9,11 +9,16 @@ export function drawCell(drawCellParams: DrawCellParams) {
         color, sizeScale
     } = drawCellParams;
 
+    const innerRadiusScale = 0.6
+
     const centerX = cellX * boxWidth + halfBoxWidth
     const centerY = cellY * boxHeight + halfBoxHeight
 
-    const outerRadius = Math.min(halfBoxWidth, halfBoxHeight) * sizeScale
-    const innerRadius = outerRadius * 0.6;
+    const outerWidthRadius = halfBoxWidth * sizeScale
+    const outerHeightRadius = halfBoxHeight * sizeScale
+    const innerWidthRadius = outerWidthRadius * innerRadiusScale
+    const innerHeightRadius = outerHeightRadius * innerRadiusScale
+
     const spikes = 8;
 
     const step = Math.PI / spikes;
@@ -21,14 +26,15 @@ export function drawCell(drawCellParams: DrawCellParams) {
 
     context.beginPath();
     context.moveTo(
-        centerX + Math.cos(rotation) * outerRadius,
-        centerY + Math.sin(rotation) * outerRadius
+        centerX + Math.cos(rotation) * outerWidthRadius,
+        centerY + Math.sin(rotation) * outerHeightRadius
     );
 
     for (let i = 0; i < spikes * 2; i++) {
-        const radius = i % 2 === 0 ? outerRadius : innerRadius;
-        const x = centerX + Math.cos(rotation) * radius;
-        const y = centerY + Math.sin(rotation) * radius;
+        const widthRadius = i % 2 === 0 ? outerWidthRadius : innerWidthRadius;
+        const hegihtRadius = i % 2 === 0 ? outerHeightRadius : innerHeightRadius;
+        const x = centerX + Math.cos(rotation) * widthRadius;
+        const y = centerY + Math.sin(rotation) * hegihtRadius;
         context.lineTo(x, y);
         rotation += step;
     }

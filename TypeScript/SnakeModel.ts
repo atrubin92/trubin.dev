@@ -46,6 +46,8 @@ export function getSnakeCellArrayCopy(): SnakeCell[] {
     )
 }
 
-export function contains(anotherCell: ICell): boolean {
-    return snakeCellArray.some(snakeCellItem => snakeCellItem.equals(anotherCell))
+export function containsWithoutTail(anotherCell: ICell): boolean {
+    return snakeCellArray
+        .slice(0, -1)
+        .some(snakeCellItem => snakeCellItem.equals(anotherCell))
 }

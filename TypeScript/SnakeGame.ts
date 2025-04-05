@@ -55,7 +55,7 @@ function createInitialData() {
 function moveSnake(): boolean {
     const newSnakeHead = SnakeModel.calcNewHead();
 
-    if (SnakeModel.contains(newSnakeHead)) {
+    if (SnakeModel.containsWithoutTail(newSnakeHead)) {
         return false;
     }
 

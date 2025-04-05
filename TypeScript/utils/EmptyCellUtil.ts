@@ -8,7 +8,7 @@ export function findEmptyCell(): ICell {
     const emptyCellArray = createEmptyCellArray()    
 
     if (emptyCellArray.length === 0) {
-        throw new Error("No empty cells available!");
+        return null
     }
 
     const randomIndex = Math.floor(Math.random() * emptyCellArray.length);

@@ -28,7 +28,11 @@ export function tryEatFood(anotherCell: ICell) {
     }
 
     const emptyCell = findEmptyCell()
-    foodCellArray[replacedIndex] = new SimpleCell(emptyCell.x, emptyCell.y)
+    if (emptyCell != null) {
+        foodCellArray[replacedIndex] = new SimpleCell(emptyCell.x, emptyCell.y)
+    } else {
+        foodCellArray.splice(replacedIndex, 1)
+    }
     return true
 }
 

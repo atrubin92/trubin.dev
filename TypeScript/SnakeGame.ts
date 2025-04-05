@@ -48,6 +48,7 @@ function createInitialData() {
     if (SnakeModel.getLength() === 0) {
         SnakeModel.createInitialData()
         FoodModel.createInitialData()
+        StepProgress.initializeStepDuration();
         Settings.displayScore(SnakeModel.getLength());
     }
 }

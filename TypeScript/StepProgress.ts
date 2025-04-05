@@ -1,12 +1,5 @@
 import * as Settings from "./settings/Settings";
 
-let stepTime = 0
-
-let previousTimestamp = 0
-let stepDuration = Settings.getStepDuration()
-
-let isPause = true
-
 export function calculateProgress(): number {
     return stepTime / stepDuration
 }
@@ -33,3 +26,17 @@ export function completeStep(timestamp: number): boolean {
 export function pause() {
     isPause = true
 }
+
+export function initializeStepDuration() {
+    stepDuration = Settings.getStepDuration()
+    pause()
+}
+
+let stepTime = 0
+
+let previousTimestamp = 0
+let stepDuration = 0
+
+let isPause = true
+
+initializeStepDuration()

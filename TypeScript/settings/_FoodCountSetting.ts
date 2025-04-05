@@ -1,9 +1,15 @@
+import * as FieldSize from "./_FieldSizeSetting";
+
 export function getFoodCount() {
     return foodCount
 }
 
 export function setInputDisabled(disabled: boolean) {
     foodCountInput.disabled = disabled
+}
+
+export function updateFoodLimit() {
+    
 }
 
 let foodCount = 3
@@ -34,5 +40,7 @@ foodCountInput.addEventListener("input", () => {
 });
 
 function isValidFoodCount(value: number): boolean {
-    return !isNaN(value) && 1 <= value && value <= 100
+    return !isNaN(value) &&
+        1 <= value &&
+        value <= FieldSize.getFieldWidth() * FieldSize.getFieldHeight()
 }

@@ -1,4 +1,5 @@
 import * as BoxSize from "./_BoxSizeSetting"
+import * as FoodCount from "./_FoodCountSetting"
 
 export function getFieldWidth(): number {
     return cellWidth
@@ -21,7 +22,8 @@ cellWidthInput.value = cellWidth.toString();
 
 const cellHeightInput = document.getElementById("cellHeightInput") as HTMLInputElement;
 cellHeightInput.value = cellHeight.toString();
-BoxSize.updateBoxSize()
+
+updateExternalSettings()
 
 function setupCellInput(
     inputElement: HTMLInputElement,
@@ -31,7 +33,7 @@ function setupCellInput(
         const value = parseInt(inputElement.value, 10);
         if (isValidCellSize(value)) {
             onValidValueChange(value);
-            BoxSize.updateBoxSize()
+            updateExternalSettings()
         }
     });
 
@@ -53,3 +55,8 @@ function isValidCellSize(value: number): boolean {
 
 setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue));
 setupCellInput(cellHeightInput, (newValue) => (cellHeight = newValue));
+
+function updateExternalSettings() {
+    BoxSize.updateBoxSize()
+    FoodCount.updateFoodLimit()
+}

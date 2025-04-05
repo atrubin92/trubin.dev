@@ -1,5 +1,6 @@
 export function getCellColorArray(): string[] {
     return Array.from(document.querySelectorAll<HTMLInputElement>(".snakeColorInput"))
+        .filter((_, index) => index % 2 === 0)
         .map(input => input.value);
 }
 
@@ -20,14 +21,16 @@ function addColorPicker() {
     if (colorList.children.length >= MAX_COLOR_COUNT) return;
 
     const colorWrapper = createColorWrapper();
-    const colorInput = createColorInput();
+    const colorInput1 = createColorInput();
+    const colorInput2 = createColorInput();
     const removeButton = createRemoveButton(colorWrapper);
 
-    colorWrapper.appendChild(colorInput);
+    colorWrapper.appendChild(colorInput1);
+    colorWrapper.appendChild(colorInput2);
     colorWrapper.appendChild(removeButton);
     colorList.appendChild(colorWrapper);
 
-    colorInput.focus();
+    colorInput1.focus();
     updateRemoveButtons();
 }
 
@@ -48,7 +51,7 @@ function createColorInput() {
     return input;
 }
 
-function createRemoveButton(wrapper) {
+function createRemoveButton(wrapper: HTMLDivElement) {
     const button = document.createElement("button");
     button.innerText = "❌";
     button.style.border = "none";
@@ -56,7 +59,7 @@ function createRemoveButton(wrapper) {
     button.style.cursor = "pointer";
 
     button.addEventListener("click", () => {
-        if (colorList.children.length > 1) {
+        if (colorList.children.length > MIN_COLOR_COUNT) {
             wrapper.remove();
             updateRemoveButtons();
         }
@@ -72,8 +75,8 @@ function updateRemoveButtons() {
 
     removeButtons.forEach(button => {
         button.disabled = isOnlyMinColorsLeft;
-        button.style.opacity = colorList.children.length === 1 ? "0.5" : "1";
-        button.style.cursor = colorList.children.length === 1 ? "default" : "pointer";
+        button.style.opacity = isOnlyMinColorsLeft ? "0.5" : "1";
+        button.style.cursor = isOnlyMinColorsLeft ? "default" : "pointer";
     });
 
     addColorButton.disabled = isReachedMaxColors;

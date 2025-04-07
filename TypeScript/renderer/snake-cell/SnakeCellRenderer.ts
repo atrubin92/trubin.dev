@@ -6,15 +6,20 @@ import { getCellColorArray } from "../../settings/Settings";
 import { SnakeCellType } from "../../entiries/SnakeCellType";
 import { DrawCellParams } from "../../entiries/DrawCellParams";
 import { SnakeColor } from "../../entiries/SnakeColor";
+import { interpolateColor } from "../../utils/ColorUtil";
 
 export function drawSnakeCell(drawCellParams: DrawCellParams) {
     const initialSizeScale = drawCellParams.sizeScale
 
     const colorArray: SnakeColor[] = getCellColorArray()
     for (let colorIndex = 0; colorIndex < colorArray.length; colorIndex++) {
-        const colorPartScale = 1 - colorIndex / colorArray.length
+        drawCellParams.color = interpolateColor(
+            colorArray[colorIndex].head,
+            colorArray[colorIndex].tail,
+            drawCellParams.colorProgress
+        )
 
-        drawCellParams.color = colorArray[colorIndex].head
+        const colorPartScale = 1 - colorIndex / colorArray.length
         drawCellParams.sizeScale = initialSizeScale * colorPartScale
 
         drawSpecificSnakeCell(drawCellParams)

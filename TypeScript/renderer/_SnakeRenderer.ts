@@ -16,6 +16,9 @@ export function drawSnake(snake: SnakeCell[], stepPercentage: number = 0) {
 
     for (let partSnakeIndex = snake.length - 1; partSnakeIndex >= 0; partSnakeIndex--) {
         drawCellParams.sizeScale = 1 - snakeScaleDiff * partSnakeIndex / snake.length
+        drawCellParams.colorProgress = snake.length !== 1
+            ? partSnakeIndex / (snake.length - 1)
+            : 0;
         drawWrappedSnakeCell(drawCellParams, snake[partSnakeIndex], stepPercentage)
     }
 }

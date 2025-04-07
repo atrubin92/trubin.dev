@@ -21,6 +21,7 @@ export function drawCellTypeCanvas() {
         drawCellParams.boxWidth = canvas.width
         drawCellParams.boxHeight = canvas.height
         drawCellParams.sizeScale = 1
+        drawCellParams.colorProgress = 0
 
         drawSnakeCell(drawCellParams)
     }

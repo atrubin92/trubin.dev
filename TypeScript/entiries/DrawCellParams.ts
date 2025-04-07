@@ -7,6 +7,7 @@ export class DrawCellParams {
     cellY!: number;
     color!: string;
     sizeScale!: number;
+    colorProgress!: number;
 
     private _boxWidth!: number;
     private _boxHeight!: number;

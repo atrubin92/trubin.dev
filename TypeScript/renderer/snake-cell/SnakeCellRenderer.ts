@@ -5,15 +5,16 @@ import * as StarSnakeCellRenderer from "./_StarSnakeCellRenderer";
 import { getCellColorArray } from "../../settings/Settings";
 import { SnakeCellType } from "../../entiries/SnakeCellType";
 import { DrawCellParams } from "../../entiries/DrawCellParams";
+import { SnakeColor } from "../../entiries/SnakeColor";
 
 export function drawSnakeCell(drawCellParams: DrawCellParams) {
     const initialSizeScale = drawCellParams.sizeScale
 
-    const colorArray: string[] = getCellColorArray()
+    const colorArray: SnakeColor[] = getCellColorArray()
     for (let colorIndex = 0; colorIndex < colorArray.length; colorIndex++) {
         const colorPartScale = 1 - colorIndex / colorArray.length
 
-        drawCellParams.color = colorArray[colorIndex]
+        drawCellParams.color = colorArray[colorIndex].head
         drawCellParams.sizeScale = initialSizeScale * colorPartScale
 
         drawSpecificSnakeCell(drawCellParams)

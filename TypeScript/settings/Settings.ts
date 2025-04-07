@@ -8,6 +8,7 @@ import * as SnakeCellTypeSetting from "./_SnakeCellTypeSetting"
 import * as CellColorSetting from "./_CellColorSetting";
 import { GameState } from "../entiries/GameState"
 import { SnakeCellType } from "../entiries/SnakeCellType"
+import { SnakeColor } from "../entiries/SnakeColor"
 
 export function getFieldWidth() {
     return FieldSizeSetting.getFieldWidth()
@@ -57,6 +58,6 @@ export function getSnakeCellType(): SnakeCellType {
     return SnakeCellTypeSetting.getSnakeCellType()
 }
 
-export function getCellColorArray(): string[] {
-    return CellColorSetting.getCellColorArray()
+export function getCellColorArray(): SnakeColor[] {
+    return CellColorSetting.getSnakeColorArray()
 }

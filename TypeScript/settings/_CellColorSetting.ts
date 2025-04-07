@@ -1,7 +1,14 @@
-export function getCellColorArray(): string[] {
-    return Array.from(document.querySelectorAll<HTMLInputElement>(".snakeColorInput"))
-        .filter((_, index) => index % 2 === 0)
-        .map(input => input.value);
+import { SnakeColor } from "../entiries/SnakeColor"
+
+export function getSnakeColorArray(): SnakeColor[] {
+    const inputs = Array.from(document.querySelectorAll<HTMLInputElement>(".snakeColorInput"));
+    const colors: SnakeColor[] = [];
+
+    for (let i = 0; i < inputs.length - 1; i += 2) {
+        colors.push(new SnakeColor(inputs[i].value, inputs[i + 1].value));
+    }
+
+    return colors;
 }
 
 const colorList = document.getElementById("colorList") as HTMLDivElement;

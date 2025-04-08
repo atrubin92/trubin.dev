@@ -9,10 +9,21 @@ export function setInputDisabled(disabled: boolean) {
 }
 
 export function updateFoodLimit() {
-    
+    foodCountMax = FieldSize.getFieldWidth() * FieldSize.getFieldHeight() - INITIAL_FREE_CELLS
+    foodCountInput.max = foodCountMax.toString()
+
+    const currentFoodCount = parseInt(foodCountInput.value, 10);
+    if (isNaN(currentFoodCount) || currentFoodCount > foodCountMax) {
+        foodCountInput.value = foodCountMax.toString()
+        foodCount = foodCountMax;
+        foodCountInput.style.backgroundColor = "";
+    }
 }
 
+const INITIAL_FREE_CELLS = 1
+
 let foodCount = 3
+let foodCountMax = 10
 
 const foodCountInput = document.getElementById('foodCountInput') as HTMLInputElement;
 foodCountInput.value = foodCount.toString()
@@ -42,5 +53,5 @@ foodCountInput.addEventListener("input", () => {
 function isValidFoodCount(value: number): boolean {
     return !isNaN(value) &&
         1 <= value &&
-        value <= FieldSize.getFieldWidth() * FieldSize.getFieldHeight()
+        value < FieldSize.getFieldWidth() * FieldSize.getFieldHeight()
 }

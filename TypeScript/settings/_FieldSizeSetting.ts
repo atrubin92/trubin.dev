@@ -14,6 +14,11 @@ export function setInputsDisabled(disabled: boolean) {
     cellHeightInput.disabled = disabled;
 }
 
+export function isValid() {
+    return cellWidthInput.style.backgroundColor != "red"
+        && cellHeightInput.style.backgroundColor != "red"
+}
+
 let cellWidth = 10;
 let cellHeight = 10;
 

@@ -30,6 +30,10 @@ export function updateFoodLimit() {
     }
 }
 
+export function isValid() {
+    return foodCountInput.style.backgroundColor != "red"
+}
+
 const INITIAL_FREE_CELLS = 1
 
 let foodCount = 3

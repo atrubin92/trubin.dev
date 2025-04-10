@@ -23,7 +23,9 @@ let gameState = GameState.NOT_STARTED
 gameStateButton.addEventListener("click", () => {
     switch (gameState) {
         case GameState.NOT_STARTED:
-            updateGameState(GameState.IN_PROGRESS)
+            if (FieldSize.isValid() && FoodCount.isValid()) {
+                updateGameState(GameState.IN_PROGRESS)
+            }
             break;
         case GameState.IN_PROGRESS:
             updateGameState(GameState.PAUSED)

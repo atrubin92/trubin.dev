@@ -19,6 +19,9 @@ export function isValid() {
         && cellHeightInput.style.backgroundColor != "red"
 }
 
+let isCellWidthValid = true;
+let isCellHeightValid = true;
+
 let cellWidth = 10;
 let cellHeight = 10;
 
@@ -32,19 +35,25 @@ updateExternalSettings()
 
 function setupCellInput(
     inputElement: HTMLInputElement,
-    onValidValueChange: (newValue: number) => void
+    onValidValueChange: (newValue: number) => void,
+    validitySetter: (valid: boolean) => void
 ) {
     inputElement.addEventListener("change", () => {
         const value = parseInt(inputElement.value, 10);
-        if (isValidCellSize(value)) {
+        const valid = isValidCellSize(value);
+        validitySetter(valid);
+        if (valid) {
             onValidValueChange(value);
             updateExternalSettings()
         }
     });
 
     inputElement.addEventListener("input", () => {
-        const value = parseInt(inputElement.value, 10);
-        inputElement.style.backgroundColor = isValidCellSize(value) ? "" : "red";
+        const valid = isValidCellSize(parseInt(inputElement.value, 10));
+        validitySetter(valid);
+        inputElement.style.backgroundColor = valid ? "" : "red";
+        updateExternalSettings()
+        //updateGameStartAvailability()
     });
 
     inputElement.addEventListener('keydown', (event) => {
@@ -54,12 +63,12 @@ function setupCellInput(
     });
 }
 
+setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue), (valid) => { isCellWidthValid = valid });
+setupCellInput(cellHeightInput, (newValue) => (cellHeight = newValue), (valid) => { isCellHeightValid = valid });
+
 function isValidCellSize(value: number): boolean {
     return !isNaN(value) && 1 <= value && value <= 40;
 }
-
-setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue));
-setupCellInput(cellHeightInput, (newValue) => (cellHeight = newValue));
 
 function updateExternalSettings() {
     BoxSize.updateBoxSize()

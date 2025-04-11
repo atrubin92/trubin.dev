@@ -1,5 +1,6 @@
 import * as BoxSize from "./_BoxSizeSetting"
 import * as FoodCount from "./_FoodCountSetting"
+import { updateGameStartAvailability } from "./_GameStateSetting"
 
 export function getFieldWidth(): number {
     return cellWidth
@@ -15,8 +16,7 @@ export function setInputsDisabled(disabled: boolean) {
 }
 
 export function isValid() {
-    return cellWidthInput.style.backgroundColor != "red"
-        && cellHeightInput.style.backgroundColor != "red"
+    return isCellWidthValid && isCellHeightValid
 }
 
 let isCellWidthValid = true;
@@ -53,7 +53,7 @@ function setupCellInput(
         validitySetter(valid);
         inputElement.style.backgroundColor = valid ? "" : "red";
         updateExternalSettings()
-        //updateGameStartAvailability()
+        updateGameStartAvailability()
     });
 
     inputElement.addEventListener('keydown', (event) => {

@@ -10,6 +10,12 @@ export function gameOver() {
     updateGameState(GameState.NOT_STARTED)
 }
 
+export function updateGameStartAvailability() {
+    gameStateButton.disabled =
+        gameState == GameState.NOT_STARTED &&
+        (!FieldSize.isValid() || !FoodCount.isValid())
+}
+
 const gameStateButton = document.getElementById("gameStateButton") as HTMLButtonElement
 
 const buttonTextMap = {

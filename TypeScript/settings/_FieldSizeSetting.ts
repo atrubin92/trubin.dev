@@ -49,9 +49,11 @@ function setupCellInput(
     });
 
     inputElement.addEventListener("input", () => {
-        const valid = isValidCellSize(parseInt(inputElement.value, 10));
+        const value = parseInt(inputElement.value, 10);
+        const valid = isValidCellSize(value);
         validitySetter(valid);
         inputElement.style.backgroundColor = valid ? "" : "red";
+        onValidValueChange(value);
         updateExternalSettings()
         updateGameStartAvailability()
     });

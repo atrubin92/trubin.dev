@@ -53,7 +53,7 @@ foodCountInput.addEventListener('change', () => {
 });
 
 foodCountInput.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === '.') {
         event.preventDefault();
     }
 });

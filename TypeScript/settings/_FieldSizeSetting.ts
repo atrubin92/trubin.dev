@@ -1,6 +1,7 @@
 import * as BoxSize from "./_BoxSizeSetting"
 import * as FoodCount from "./_FoodCountSetting"
 import { updateGameStartAvailability } from "./_GameStateSetting"
+import { blockInvalidKeys } from "../utils/NumberInputUtil"
 
 export function getFieldWidth(): number {
     return cellWidth
@@ -58,11 +59,7 @@ function setupCellInput(
         updateGameStartAvailability()
     });
 
-    inputElement.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === '.') {
-            event.preventDefault();
-        }
-    });
+    inputElement.addEventListener('keydown', blockInvalidKeys);
 }
 
 setupCellInput(cellWidthInput, (newValue) => (cellWidth = newValue), (valid) => { isCellWidthValid = valid });

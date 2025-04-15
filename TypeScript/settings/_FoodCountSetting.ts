@@ -1,5 +1,6 @@
 import * as FieldSize from "./_FieldSizeSetting";
 import { updateGameStartAvailability } from "./_GameStateSetting"
+import { blockInvalidKeys } from "../utils/NumberInputUtil"
 
 export function getFoodCount() {
     return foodCount
@@ -52,11 +53,7 @@ foodCountInput.addEventListener('change', () => {
     }
 });
 
-foodCountInput.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === '.') {
-        event.preventDefault();
-    }
-});
+foodCountInput.addEventListener('keydown', blockInvalidKeys);
 
 foodCountInput.addEventListener("input", () => updateFoodCountBackground());
 

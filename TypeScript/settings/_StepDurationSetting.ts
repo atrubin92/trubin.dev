@@ -1,3 +1,5 @@
+import { blockInvalidKeys } from "../utils/NumberInputUtil"
+
 export function getStepDuration(): number {
     return stepDuration
 }
@@ -14,11 +16,7 @@ stepDurationInput.addEventListener('change', () => {
     }
 });
 
-stepDurationInput.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === '.') {
-        event.preventDefault();
-    }
-});
+stepDurationInput.addEventListener('keydown', blockInvalidKeys);
 
 stepDurationInput.addEventListener("input", () => {
     const value = parseInt(stepDurationInput.value, 10);

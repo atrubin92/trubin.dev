@@ -39,25 +39,20 @@ function setupCellInput(
     onValidValueChange: (newValue: number) => void,
     validitySetter: (valid: boolean) => void
 ) {
-    inputElement.addEventListener("change", () => {
+    const updateValue = () => {
         const value = parseInt(inputElement.value, 10);
         const valid = isValidCellSize(value);
         validitySetter(valid);
         if (valid) {
             onValidValueChange(value);
-            updateExternalSettings()
+            updateExternalSettings();
         }
-    });
-
-    inputElement.addEventListener("input", () => {
-        const value = parseInt(inputElement.value, 10);
-        const valid = isValidCellSize(value);
-        validitySetter(valid);
         inputElement.style.backgroundColor = valid ? "" : "red";
-        onValidValueChange(value);
-        updateExternalSettings()
         updateGameStartAvailability()
-    });
+    }
+
+    inputElement.addEventListener("change", updateValue);
+    inputElement.addEventListener("input", updateValue);
 
     inputElement.addEventListener('keydown', blockInvalidKeys);
 }

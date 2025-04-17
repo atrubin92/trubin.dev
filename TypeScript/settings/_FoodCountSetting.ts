@@ -29,6 +29,10 @@ export function updateFoodLimit() {
         foodCountInput.value = foodCountMax.toString()
         foodCount = foodCountMax;
         updateFoodCountBackground()
+    } else if (currentFoodCount == 0 && foodCountInput.min == "1"){
+        foodCountInput.value = "1"
+        foodCount = 1;
+        updateFoodCountBackground()
     }
 }
 

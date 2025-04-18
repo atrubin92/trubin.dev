@@ -62,9 +62,12 @@ foodCountInput.addEventListener('keydown', blockInvalidKeys);
 foodCountInput.addEventListener("input", () => updateFoodCountBackground());
 
 function updateFoodCountBackground() {
+    const INVALID_INPUT_COLOR = "red";
+    const VALID_INPUT_COLOR = "";
+
     const value = parseInt(foodCountInput.value, 10);
     isFoodCountValid = isValidFoodCount(value);
-    foodCountInput.style.backgroundColor = isFoodCountValid ? "" : "red";
+    foodCountInput.style.backgroundColor = isFoodCountValid ? VALID_INPUT_COLOR : INVALID_INPUT_COLOR;
     updateGameStartAvailability();
 }
 

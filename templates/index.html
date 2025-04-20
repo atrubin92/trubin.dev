@@ -80,6 +80,11 @@
         <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" style="width: 70px;" />
       </div>
     </div>
+    <div id="canvasSizeContainer" style="margin-top: 10px;">
+      <label for="canvasSizeSlider" style="font-size: 18px; color: #333;">Canvas Size:</label>
+      <input type="range" id="canvasSizeSlider" min="200" max="800" step="50" value="400" style="width: 100%;" />
+      <span id="canvasSizeValue">400</span> px
+    </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div id="settingsContainer2">
       <div id="cellTypeContainer">

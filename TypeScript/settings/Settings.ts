@@ -6,6 +6,7 @@ import * as FoodCountSetting from "./_FoodCountSetting"
 import * as BoxSizeSetting from "./_BoxSizeSetting"
 import * as SnakeCellTypeSetting from "./_SnakeCellTypeSetting"
 import * as CellColorSetting from "./_CellColorSetting";
+import * as CanvasSizeSetting from "./_CanvasSizeSetting"
 import { GameState } from "../entiries/GameState"
 import { SnakeCellType } from "../entiries/SnakeCellType"
 import { SnakeColor } from "../entiries/SnakeColor"
@@ -38,6 +39,10 @@ export function getFoodCount() {
     return FoodCountSetting.getFoodCount()
 }
 
+export function updateBoxSize() {
+    BoxSizeSetting.updateBoxSize()
+}
+
 export function getBoxWidth(): number {
     return BoxSizeSetting.getBoxWidth()
 }
@@ -60,4 +65,8 @@ export function getSnakeCellType(): SnakeCellType {
 
 export function getCellColorArray(): SnakeColor[] {
     return CellColorSetting.getSnakeColorArray()
+}
+
+export function getCanvasSize(): number {
+    return CanvasSizeSetting.getCanvasSize()
 }

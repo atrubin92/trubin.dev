@@ -1,3 +1,5 @@
+import { getCanvasSize, updateBoxSize } from "../settings/Settings";
+
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
 export const context = canvas.getContext("2d");
 
@@ -15,4 +17,10 @@ export function canvasHeight(): number {
 
 export function clearCanvas(): void {
     context!.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+export function updateCanvasSize(): void {
+    canvas.width = getCanvasSize()
+    canvas.height = getCanvasSize()
+    updateBoxSize()
 }

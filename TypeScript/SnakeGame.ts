@@ -3,14 +3,11 @@ import * as Settings from "./settings/Settings";
 import * as StepProgress from "./StepProgress";
 import * as SnakeModel from "./SnakeModel";
 import * as FoodModel from "./FoodModel";
+import { preventScroll } from "./utils/NumberInputUtil";
 import { GameState } from "./entiries/GameState";
 import { drawCellTypeCanvas } from "./SnakeCellTypePreview";
 
-window.addEventListener("keydown", (event) => {
-    if (["ArrowUp", "ArrowDown"].includes(event.key)) {
-        event.preventDefault();
-    }
-});
+preventScroll()
 
 requestAnimationFrame(mainCanvasLoop);
 

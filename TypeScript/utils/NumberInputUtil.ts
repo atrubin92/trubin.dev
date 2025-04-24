@@ -4,3 +4,12 @@ export function blockInvalidKeys(event: KeyboardEvent): void {
         event.preventDefault();
     }
 }
+
+export function preventScroll(): void {
+    window.addEventListener("keydown", (event: KeyboardEvent) => {
+        const keysToPrevent = ['ArrowUp', 'ArrowDown'];
+        if (keysToPrevent.includes(event.key)) {
+            event.preventDefault();
+        }
+    });
+}

@@ -29,9 +29,13 @@ export function updateFoodLimit() {
         foodCountInput.value = foodCountMax.toString()
         foodCount = foodCountMax;
         updateFoodCountBackground()
-    } else if (currentFoodCount == 0 && foodCountInput.min == "1"){
+    } else if (currentFoodCount == 0 && foodCountInput.min == "1") {
         foodCountInput.value = "1"
         foodCount = 1;
+        updateFoodCountBackground()
+    } else if (isValidFoodCount(currentFoodCount) &&
+        foodCountInput.style.backgroundColor == INVALID_INPUT_COLOR
+    ) {
         updateFoodCountBackground()
     }
 }
@@ -39,6 +43,9 @@ export function updateFoodLimit() {
 export function isValid() {
     return isFoodCountValid
 }
+
+const INVALID_INPUT_COLOR = "red";
+const VALID_INPUT_COLOR = "";
 
 const INITIAL_FREE_CELLS = 1
 
@@ -62,9 +69,6 @@ foodCountInput.addEventListener('keydown', blockInvalidKeys);
 foodCountInput.addEventListener("input", () => updateFoodCountBackground());
 
 function updateFoodCountBackground() {
-    const INVALID_INPUT_COLOR = "red";
-    const VALID_INPUT_COLOR = "";
-
     const value = parseInt(foodCountInput.value, 10);
     isFoodCountValid = isValidFoodCount(value);
     foodCountInput.style.backgroundColor = isFoodCountValid ? VALID_INPUT_COLOR : INVALID_INPUT_COLOR;

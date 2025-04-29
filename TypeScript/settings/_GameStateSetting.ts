@@ -7,7 +7,7 @@ export function getGameState(): GameState {
 }
 
 export function gameOver() {
-    updateGameState(GameState.NOT_STARTED)
+    updateGameState(GameState.GAME_OVER)
 }
 
 export function updateGameStartAvailability() {
@@ -21,7 +21,8 @@ const gameStateButton = document.getElementById("gameStateButton") as HTMLButton
 const buttonTextMap = {
     [GameState.NOT_STARTED]: "Start",
     [GameState.IN_PROGRESS]: "Pause",
-    [GameState.PAUSED]: "Resume"
+    [GameState.PAUSED]: "Resume",
+    [GameState.GAME_OVER]: "Game Over"
 }
 
 let gameState = GameState.NOT_STARTED
@@ -38,6 +39,9 @@ gameStateButton.addEventListener("click", () => {
             break;
         case GameState.PAUSED:
             updateGameState(GameState.IN_PROGRESS)
+            break;
+        case GameState.GAME_OVER:
+            updateGameState(GameState.NOT_STARTED)
             break;
     }
 })

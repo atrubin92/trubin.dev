@@ -14,6 +14,8 @@ requestAnimationFrame(mainCanvasLoop);
 function mainCanvasLoop(timestamp: number): void {
     switch (Settings.getGameState()) {
         case GameState.NOT_STARTED:
+            if (SnakeModel.getLength() > 0) clearData()
+
             StepProgress.pause()
             break;
 
@@ -22,12 +24,15 @@ function mainCanvasLoop(timestamp: number): void {
             break;
 
         case GameState.IN_PROGRESS:
-            createInitialData()
+            if (SnakeModel.getLength() === 0) createInitialData()
+
             if (StepProgress.completeStep(timestamp) && !moveSnake()) {
                 Settings.gemeOver()
-                SnakeModel.reset()
-                FoodModel.reset()
             }
+            break;
+
+        case GameState.GAME_OVER:
+            StepProgress.pause()
             break;
     }
 
@@ -42,12 +47,15 @@ function mainCanvasLoop(timestamp: number): void {
 }
 
 function createInitialData() {
-    if (SnakeModel.getLength() === 0) {
-        SnakeModel.createInitialData()
-        FoodModel.createInitialData()
-        StepProgress.initializeStepDuration();
-        Settings.displayScore(SnakeModel.getLength());
-    }
+    SnakeModel.createInitialData()
+    FoodModel.createInitialData()
+    StepProgress.initializeStepDuration();
+    Settings.displayScore(SnakeModel.getLength());
+}
+
+function clearData() {
+    SnakeModel.reset()
+    FoodModel.reset()
 }
 
 function moveSnake(): boolean {

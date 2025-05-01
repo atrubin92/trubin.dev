@@ -28,6 +28,7 @@ function mainCanvasLoop(timestamp: number): void {
 
             if (StepProgress.completeStep(timestamp) && !moveSnake()) {
                 Settings.gemeOver()
+                StepProgress.gemeOver()
             }
             break;
 

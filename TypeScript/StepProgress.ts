@@ -32,6 +32,11 @@ export function initializeStepDuration() {
     pause()
 }
 
+export function gemeOver() {
+    stepTime = stepDuration * 2 / 3
+    pause()
+}
+
 let stepTime = 0
 
 let previousTimestamp = 0

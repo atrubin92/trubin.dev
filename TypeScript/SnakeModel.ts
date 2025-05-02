@@ -3,6 +3,7 @@ import * as SnakeHead from "./SnakeHead"
 import * as Settings from "./settings/Settings";
 import { ICell } from "./entiries/cell/ICell";
 import { findEmptyCell } from "./utils/EmptyCellUtil";
+import { SimpleCell } from "./entiries/cell/SimpleCell";
 
 const snakeCellArray: SnakeCell[] = []
 
@@ -15,6 +16,15 @@ export function createInitialData() {
 export function reset() {
     SnakeHead.reset()
     snakeCellArray.length = 0
+}
+
+export function isFinalStep(): boolean {
+    const previousHeadDirection = SnakeHead.getDirection()
+
+    const newHeadX = (snakeCellArray[0].x + previousHeadDirection.x + Settings.getFieldWidth()) % Settings.getFieldWidth()
+    const newHeadY = (snakeCellArray[0].y + previousHeadDirection.y + Settings.getFieldHeight()) % Settings.getFieldHeight()
+
+    return containsWithoutTail(new SimpleCell(newHeadX, newHeadY))
 }
 
 export function calcNewHead(): SnakeCell {

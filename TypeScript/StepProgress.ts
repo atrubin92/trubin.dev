@@ -33,9 +33,11 @@ export function initializeStepDuration() {
 }
 
 export function gemeOver() {
-    stepTime = stepDuration * 2 / 3
+    stepTime = stepDuration * finalStepPercentage
     pause()
 }
+
+const finalStepPercentage = 2 / 3
 
 let stepTime = 0
 

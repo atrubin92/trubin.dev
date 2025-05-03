@@ -5,6 +5,12 @@
   <meta charset="utf-8" />
   <title>Snake Game in TypeScript</title>
   <style>
+    :root {
+      --text-color: #333;
+      --font-size-label: 18px;
+      --input-width: 70px;
+    }
+
     body {
       margin: 0;
       background: #f2f2f2;
@@ -13,6 +19,7 @@
       align-items: flex-start;
       height: 100vh;
       padding-top: 20px;
+      color: var(--text-color);
     }
 
     #gameContainer {
@@ -23,110 +30,104 @@
 
     #gameCanvas {
       background: #000;
-      display: block;
       margin: 0 auto;
       border: 2px solid #333;
     }
 
-    #settingsContainer {
+    .settings-container {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin-bottom: 10px;
     }
 
-    #scoreLabel,
-    #stepDurationContainer {
-      font-size: 18px;
-      color: #333;
-    }
-
-    #foodCountContainer {
-      font-size: 18px;
-      color: #333;
-    }
-
-    #cellTypeContainer label {
+    .settings-container2 {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 10px;
     }
 
-    #gameStateContainer {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .input-cell-size {
+    .input-group {
       display: flex;
       flex-direction: column;
       font-size: 14px;
-      color: #333;
     }
 
-    .input-cell-size label {
+    .input-group label {
+      font-size: var(--font-size-label);
       margin-bottom: 2px;
+    }
+
+    .input-group input[type="number"],
+    .input-small {
+      width: var(--input-width);
+    }
+
+    .slider-container {
+      width: 400px;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-top: 2px;
     }
   </style>
 </head>
 
 <body>
   <div id="gameContainer">
-    <div id="settingsContainer">
+    <div class="settings-container">
       <div id="scoreLabel">Score: 0</div>
       <button id="gameStateButton" style="width: 100px;">Start</button>
-      <div id="stepDurationContainer">
+      <div class="input-group">
         <label for="stepDurationInput">Step Duration:</label>
-        <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" style="width: 70px;" />
+        <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" />
       </div>
     </div>
-    <div id="canvasSizeContainer" style="width: 400px; margin: 10px auto; text-align: center;">
-      <label for="canvasSizeSlider" style="font-size: 18px; color: #333;">Canvas Size:</label>
-      <input type="range" id="canvasSizeSlider" min="200" max="800" step="50" value="400" style="width: 100%;" />
+
+    <div class="slider-container">
+      <label for="canvasSizeSlider">Canvas Size:</label>
+      <input type="range" id="canvasSizeSlider" min="200" max="800" step="50" value="400" style="width:100%" />
       <div><span id="canvasSizeValue">400</span> px</div>
     </div>
+
     <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <div id="settingsContainer2">
-      <div id="cellTypeContainer">
-        <label style="font-size: 18px; color: #333;">Cell Type:</label>
-        <div style="display: flex; gap: 20px; align-items: center; margin-top: 2px;">
-          <label>
-            <input type="radio" name="cellType" value="square" checked />
-            <canvas width="30" height="30" id="previewSquare"></canvas>
-          </label>
-          <label>
-            <input type="radio" name="cellType" value="rounded" />
-            <canvas width="30" height="30" id="previewRounded"></canvas>
-          </label>
-          <label>
-            <input type="radio" name="cellType" value="circle" />
-            <canvas width="30" height="30" id="previewCircle"></canvas>
-          </label>
-          <label>
-            <input type="radio" name="cellType" value="star" />
-            <canvas width="30" height="30" id="previewStar"></canvas>
-          </label>
+
+    <div class="settings-container2">
+      <div>
+        <label>Cell Type:</label>
+        <div class="radio-group">
+          <label><input type="radio" name="cellType" value="square" checked /><canvas width="30" height="30" id="previewSquare"></canvas></label>
+          <label><input type="radio" name="cellType" value="rounded" /><canvas width="30" height="30" id="previewRounded"></canvas></label>
+          <label><input type="radio" name="cellType" value="circle" /><canvas width="30" height="30" id="previewCircle"></canvas></label>
+          <label><input type="radio" name="cellType" value="star" /><canvas width="30" height="30" id="previewStar"></canvas></label>
         </div>
       </div>
+
       <div id="snakeColorContainer">
-        <label style="font-size: 18px; color: #333;">Snake Colors:</label>
-        <div id="colorList">
-        </div>
+        <label>Snake Colors:</label>
+        <div id="colorList"></div>
         <button id="addColorButton" type="button">+ Add Color</button>
       </div>
-      <div id="foodCountContainer">
+
+      <div class="input-group">
         <label for="foodCountInput">Food Count:</label>
-        <input type="number" id="foodCountInput" value="1" min="1" max="100" step="1" style="width: 70px;" />
+        <input type="number" id="foodCountInput" value="1" min="1" max="100" step="1" />
       </div>
-      <div id="gameStateContainer">
-        <div class="input-cell-size">
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <div class="input-group">
           <label for="cellWidthInput">Cells by Width:</label>
-          <input type="number" id="cellWidthInput" value="10" min="1" max="40" step="1" style="width: 70px;" />
+          <input type="number" id="cellWidthInput" value="10" min="1" max="40" step="1" />
         </div>
-        <div class="input-cell-size">
+        <div class="input-group">
           <label for="cellHeightInput">Cells by Height:</label>
-          <input type="number" id="cellHeightInput" value="10" min="1" max="40" step="1" style="width: 70px;" />
+          <input type="number" id="cellHeightInput" value="10" min="1" max="40" step="1" />
         </div>
       </div>
     </div>

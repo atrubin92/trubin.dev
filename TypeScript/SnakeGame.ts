@@ -26,9 +26,11 @@ function mainCanvasLoop(timestamp: number): void {
         case GameState.IN_PROGRESS:
             if (SnakeModel.getLength() === 0) createInitialData()
 
-            if (StepProgress.completeStep(timestamp) && !moveSnake()) {
-                Settings.gemeOver()
-                StepProgress.gemeOver()
+            if (StepProgress.completeStep(timestamp, SnakeModel.isFinalStep())) {
+                if (!moveSnake()) {
+                    Settings.gemeOver()
+                    StepProgress.gemeOver()
+                }
             }
             break;
 

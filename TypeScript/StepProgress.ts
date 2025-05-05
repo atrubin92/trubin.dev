@@ -4,7 +4,7 @@ export function calculateProgress(): number {
     return stepTime / stepDuration
 }
 
-export function completeStep(timestamp: number): boolean {
+export function completeStep(timestamp: number, isFinalStep: boolean): boolean {
     if (isPause) {
         isPause = false
         previousTimestamp = timestamp
@@ -13,6 +13,11 @@ export function completeStep(timestamp: number): boolean {
     stepTime += timestamp - previousTimestamp
     previousTimestamp = timestamp
 
+    if (stepTime >= stepDuration * finalStepPercentage && isFinalStep) {
+        stepTime = stepDuration * finalStepPercentage
+
+        return true
+    }
     if (stepTime >= stepDuration) {
         stepTime -= stepDuration
         stepDuration = Settings.getStepDuration()

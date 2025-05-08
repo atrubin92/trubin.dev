@@ -76,6 +76,14 @@
       align-items: center;
       margin-top: 2px;
     }
+
+    .button-primary {
+      width: 100px;
+    }
+
+    .slider-full-width {
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -83,7 +91,7 @@
   <div id="gameContainer">
     <div class="settings-container">
       <div id="scoreLabel">Score: 0</div>
-      <button id="gameStateButton" style="width: 100px;">Start</button>
+      <button id="gameStateButton" class="button-primary">Start</button>
       <div class="input-group">
         <label for="stepDurationInput">Step Duration:</label>
         <input type="number" id="stepDurationInput" value="300" min="50" max="2000" step="50" />
@@ -92,7 +100,7 @@
 
     <div class="slider-container">
       <label for="canvasSizeSlider">Canvas Size:</label>
-      <input type="range" id="canvasSizeSlider" min="200" max="800" step="50" value="400" style="width:100%" />
+      <input type="range" id="canvasSizeSlider" min="200" max="800" step="50" value="400" class="slider-full-width" />
       <div><span id="canvasSizeValue">400</span> px</div>
     </div>
 

@@ -11,7 +11,7 @@ export function getFieldHeight(): number {
     return cellHeight
 }
 
-export function setInputsDisabled(disabled: boolean) {
+export function setInputDisabled(disabled: boolean) {
     cellWidthInput.disabled = disabled;
     cellHeightInput.disabled = disabled;
 }

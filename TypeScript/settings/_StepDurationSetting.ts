@@ -1,5 +1,9 @@
 import { blockInvalidKeys } from "../utils/NumberInputUtil"
 
+export function setInputDisabled(disabled: boolean) {
+    stepDurationInput.disabled = disabled
+}
+
 export function getStepDuration(): number {
     return stepDuration
 }

@@ -22,27 +22,28 @@ function wrapCoordinate(coordinate: number, delta: number, coorDinateMax: number
     return (coordinate + delta + coorDinateMax) % coorDinateMax;
 }
 
-export function isFinalStep(): boolean {
-    const previousHeadDirection = SnakeHead.getDirection()
+function calcNewHeadCoordinates(): SimpleCell {
+    const headDirection = SnakeHead.getDirection()
     const head = snakeCellArray[0]
 
-    const newHeadX = wrapCoordinate(head.x, previousHeadDirection.x, Settings.getFieldWidth())
-    const newHeadY = wrapCoordinate(head.y, previousHeadDirection.y, Settings.getFieldHeight())
+    const newHeadX = wrapCoordinate(head.x, headDirection.x, Settings.getFieldWidth());
+    const newHeadY = wrapCoordinate(head.y, headDirection.y, Settings.getFieldHeight());
 
-    return containsWithoutTail(new SimpleCell(newHeadX, newHeadY))
+    return new SimpleCell(newHeadX, newHeadY);
+}
+
+export function isFinalStep(): boolean {
+    const newHeadCell = calcNewHeadCoordinates();
+    return containsWithoutTail(newHeadCell);
 }
 
 export function calcNewHead(): SnakeCell {
-    const previousHeadDirection = SnakeHead.getDirection()
-    const head = snakeCellArray[0];
-
-    const newHeadX = wrapCoordinate(head.x, previousHeadDirection.x, Settings.getFieldWidth())
-    const newHeadY = wrapCoordinate(head.y, previousHeadDirection.y, Settings.getFieldHeight())
+    const newHeadCell = calcNewHeadCoordinates();
 
     SnakeHead.updateCurrentStep()
-    const currentHeadDirection = SnakeHead.getDirection()
+    const newHeadDirection = SnakeHead.getDirection();
 
-    return new SnakeCell(newHeadX, newHeadY, currentHeadDirection)
+    return new SnakeCell(newHeadCell.x, newHeadCell.y, newHeadDirection);
 }
 
 export function getLength(): number {
